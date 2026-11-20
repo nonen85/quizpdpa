@@ -1,0 +1,2494 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ระบบข้อสอบวัดผลการเรียนรู้ด้านการคุ้มครองข้อมูลส่วนบุคคล (PDPA) 100 ข้อ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Public+Sans:wght@400;500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8f5ef;
+      --surface: #ffffff;
+      --surface-soft: #fcf9f4;
+      --border: #dfd7c8;
+      --border-strong: #cfc3ac;
+      --ink: #2c2b26;
+      --ink-heading: #3c3b34;
+      --muted: #686357;
+      --brand: #5b4cc4;
+      --brand-soft: #eeecfb;
+      --brand-accent: #8477da;
+      --earth: #908269;
+      --earth-soft: #f2ece1;
+      --correct: #18794e;
+      --correct-bg: #eaf7f0;
+      --correct-border: #8eceaa;
+      --wrong: #b42318;
+      --wrong-bg: #fef3f2;
+      --wrong-border: #f5b5ae;
+      --radius-lg: 14px;
+      --radius-md: 10px;
+      --radius-sm: 8px;
+      --shadow: 0 2px 8px rgba(60, 59, 52, 0.06), 0 1px 2px rgba(60, 59, 52, 0.04);
+      --font-heading: 'Kanit', 'Public Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-body: 'Sarabun', 'Public Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-body);
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.65;
+      font-size: 16px;
+    }
+
+    /* Header */
+    .app-header {
+      background: var(--ink-heading);
+      color: #fcf7ed;
+      padding: 28px 20px 24px;
+      border-bottom: 4px solid var(--brand-accent);
+    }
+
+    .header-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .header-eyebrow {
+      display: inline-block;
+      font-family: var(--font-heading);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: rgba(132, 119, 218, 0.25);
+      color: #e4dffd;
+      margin-bottom: 10px;
+    }
+
+    .app-title {
+      font-family: var(--font-heading);
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 600;
+      margin: 0 0 8px;
+      line-height: 1.3;
+      color: #fcf7ed;
+    }
+
+    .app-subtitle {
+      margin: 0;
+      color: #dcd5c7;
+      font-size: 15px;
+      max-width: 880px;
+    }
+
+    .criteria-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .criteria-pill {
+      font-size: 13px;
+      background: rgba(252, 247, 237, 0.1);
+      border: 1px solid rgba(207, 195, 172, 0.28);
+      color: #f5efe4;
+      padding: 4px 12px;
+      border-radius: 6px;
+    }
+
+    /* Sticky Control Bar */
+    .sticky-toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: rgba(252, 249, 244, 0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 2px 6px rgba(60, 59, 52, 0.05);
+    }
+
+    .toolbar-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 12px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .progress-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .progress-text {
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--ink-heading);
+    }
+
+    .progress-track {
+      width: 160px;
+      height: 8px;
+      background: var(--earth-soft);
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--brand);
+      transition: width 0.2s ease;
+    }
+
+    .toolbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: var(--radius-sm);
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: background 0.15s ease, border-color 0.15s ease, transform 0.08s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .btn:focus-visible {
+      outline: 2px solid var(--brand);
+      outline-offset: 2px;
+    }
+
+    .btn-primary {
+      background: var(--brand);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background: #4b3db2;
+    }
+
+    .btn-secondary {
+      background: var(--surface);
+      color: var(--ink-heading);
+      border-color: var(--border-strong);
+    }
+
+    .btn-secondary:hover {
+      background: var(--earth-soft);
+    }
+
+    /* Main Layout */
+    .main-container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 24px 20px 64px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    @media (min-width: 980px) {
+      .main-container {
+        grid-template-columns: 280px 1fr;
+        align-items: start;
+      }
+    }
+
+    /* Sidebar Navigation & Filters */
+    .sidebar {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    @media (min-width: 980px) {
+      .sidebar {
+        position: sticky;
+        top: 72px;
+        max-height: calc(100vh - 92px);
+        overflow-y: auto;
+      }
+    }
+
+    .sidebar-title {
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ink-heading);
+      margin: 0 0 10px;
+    }
+
+    .filter-group {
+      margin-bottom: 16px;
+    }
+
+    .filter-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .filter-select {
+      width: 100%;
+      font-family: var(--font-body);
+      font-size: 14px;
+      padding: 8px 10px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-strong);
+      background: var(--surface-soft);
+      color: var(--ink);
+    }
+
+    .filter-select:focus {
+      outline: 2px solid var(--brand-accent);
+      border-color: var(--brand);
+    }
+
+    .q-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .q-jump {
+      font-family: var(--font-heading);
+      font-size: 12px;
+      height: 32px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--surface-soft);
+      color: var(--ink);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      transition: all 0.12s ease;
+    }
+
+    .q-jump:hover {
+      border-color: var(--brand-accent);
+      background: var(--brand-soft);
+    }
+
+    .q-jump.answered {
+      background: var(--brand);
+      color: #ffffff;
+      border-color: var(--brand);
+    }
+
+    .q-jump.graded-correct {
+      background: var(--correct);
+      color: #ffffff;
+      border-color: var(--correct);
+    }
+
+    .q-jump.graded-wrong {
+      background: var(--wrong);
+      color: #ffffff;
+      border-color: var(--wrong);
+    }
+
+    /* Exam Area */
+    .exam-content {
+      min-width: 0;
+    }
+
+    .rule-banner {
+      background: var(--surface);
+      border: 1px solid var(--border-strong);
+      border-left: 5px solid var(--earth);
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      font-size: 14.5px;
+      color: var(--ink);
+    }
+
+    .rule-banner strong {
+      font-family: var(--font-heading);
+      color: var(--ink-heading);
+    }
+
+    .score-banner {
+      display: none;
+      background: var(--surface);
+      border: 2px solid var(--brand);
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .score-banner.visible {
+      display: block;
+    }
+
+    .score-banner-top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .score-big {
+      font-family: var(--font-heading);
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--brand);
+      line-height: 1.1;
+    }
+
+    .score-caption {
+      font-size: 14px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* Question Card */
+    .question-list {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .q-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 22px 24px;
+      box-shadow: var(--shadow);
+      scroll-margin-top: 84px;
+      transition: border-color 0.15s ease;
+    }
+
+    .q-card.graded-correct {
+      border-color: var(--correct-border);
+    }
+
+    .q-card.graded-wrong {
+      border-color: var(--wrong-border);
+    }
+
+    .q-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .q-num {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 15px;
+      color: #ffffff;
+      background: var(--ink-heading);
+      padding: 3px 11px;
+      border-radius: 6px;
+    }
+
+    .badge {
+      font-family: var(--font-heading);
+      font-size: 12.5px;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: 6px;
+      border: 1px solid transparent;
+    }
+
+    .badge-cat {
+      background: var(--earth-soft);
+      color: #4f4636;
+      border-color: var(--border-strong);
+    }
+
+    .badge-diff-Basic {
+      background: #eef6ff;
+      color: #1d4ed8;
+      border-color: #bfdbfe;
+    }
+
+    .badge-diff-Application {
+      background: #fef7e6;
+      color: #9a5b00;
+      border-color: #fde09b;
+    }
+
+    .badge-diff-Deep {
+      background: #f5eefc;
+      color: #6b21a8;
+      border-color: #dec7f7;
+    }
+
+    .badge-type-single {
+      background: #f3f4f6;
+      color: #374151;
+      border-color: #d1d5db;
+    }
+
+    .badge-type-multi {
+      background: var(--brand-soft);
+      color: var(--brand);
+      border-color: #cbc4f5;
+    }
+
+    .badge-result {
+      margin-left: auto;
+      font-weight: 600;
+    }
+
+    .badge-result.ok {
+      background: var(--correct-bg);
+      color: var(--correct);
+      border-color: var(--correct-border);
+    }
+
+    .badge-result.fail {
+      background: var(--wrong-bg);
+      color: var(--wrong);
+      border-color: var(--wrong-border);
+    }
+
+    .q-stem {
+      font-size: 16.5px;
+      font-weight: 600;
+      color: var(--ink-heading);
+      margin: 0 0 16px;
+      line-height: 1.6;
+    }
+
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .option-btn {
+      width: 100%;
+      text-align: left;
+      font-family: var(--font-body);
+      font-size: 15.5px;
+      line-height: 1.55;
+      color: var(--ink);
+      background: var(--surface-soft);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 12px 15px;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      transition: all 0.14s ease;
+    }
+
+    .option-btn:hover:not(:disabled) {
+      border-color: var(--brand-accent);
+      background: #f6f4fd;
+    }
+
+    .option-btn:focus-visible {
+      outline: 2px solid var(--brand);
+      outline-offset: 2px;
+    }
+
+    .option-btn.selected {
+      border-color: var(--brand);
+      background: var(--brand-soft);
+    }
+
+    .opt-indicator {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      margin-top: 1px;
+      border: 2px solid #9d9585;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink-heading);
+      background: #ffffff;
+      transition: all 0.14s ease;
+    }
+
+    .opt-indicator.radio {
+      border-radius: 50%;
+    }
+
+    .opt-indicator.checkbox {
+      border-radius: 6px;
+    }
+
+    .option-btn.selected .opt-indicator {
+      border-color: var(--brand);
+      background: var(--brand);
+      color: #ffffff;
+    }
+
+    /* Post-submission option states */
+    .option-btn.reveal-correct {
+      border-color: var(--correct);
+      background: var(--correct-bg);
+    }
+
+    .option-btn.reveal-correct .opt-indicator {
+      border-color: var(--correct);
+      background: var(--correct);
+      color: #ffffff;
+    }
+
+    .option-btn.reveal-wrong-pick {
+      border-color: var(--wrong);
+      background: var(--wrong-bg);
+    }
+
+    .option-btn.reveal-wrong-pick .opt-indicator {
+      border-color: var(--wrong);
+      background: var(--wrong);
+      color: #ffffff;
+    }
+
+    .opt-label-key {
+      font-weight: 700;
+      margin-right: 6px;
+      color: var(--ink-heading);
+    }
+
+    /* Empty filter state */
+    .empty-state {
+      background: var(--surface);
+      border: 1px dashed var(--border-strong);
+      border-radius: var(--radius-lg);
+      padding: 40px 24px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    /* Answer Key Section at End of Exam */
+    .answer-key-section {
+      margin-top: 40px;
+      padding-top: 32px;
+      border-top: 3px solid var(--border-strong);
+    }
+
+    .answer-key-header {
+      background: var(--ink-heading);
+      color: #fcf7ed;
+      padding: 20px 24px;
+      border-radius: var(--radius-lg);
+      margin-bottom: 20px;
+    }
+
+    .answer-key-header h2 {
+      font-family: var(--font-heading);
+      margin: 0 0 6px;
+      font-size: 22px;
+    }
+
+    .answer-key-header p {
+      margin: 0;
+      color: #dcd5c7;
+      font-size: 14.5px;
+    }
+
+    .answer-key-locked {
+      background: var(--surface);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-lg);
+      padding: 32px 24px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .answer-key-locked p {
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 15.5px;
+    }
+
+    .answer-key-list {
+      display: none;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .answer-key-list.visible {
+      display: flex;
+    }
+
+    .ak-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .ak-item-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+      font-family: var(--font-heading);
+      font-size: 15px;
+    }
+
+    .ak-correct-ans {
+      color: var(--correct);
+      font-weight: 600;
+    }
+
+    .ak-user-ans {
+      font-size: 13.5px;
+      color: var(--muted);
+    }
+
+    .ak-exp {
+      margin: 6px 0 0;
+      font-size: 14.8px;
+      color: var(--ink);
+      line-height: 1.65;
+    }
+
+    .legal-note-box {
+      margin-top: 24px;
+      background: var(--earth-soft);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      font-size: 14px;
+      color: #4a4437;
+    }
+
+    .legal-note-box h3 {
+      font-family: var(--font-heading);
+      font-size: 15.5px;
+      margin: 0 0 6px;
+      color: var(--ink-heading);
+    }
+
+    .legal-note-box ul {
+      margin: 6px 0 0;
+      padding-left: 20px;
+    }
+
+    /* Confirm Modal (No window.confirm in sandbox) */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(44, 43, 38, 0.55);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 100;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-card {
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      max-width: 440px;
+      width: 100%;
+      padding: 24px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+      border: 1px solid var(--border);
+    }
+
+    .modal-card h3 {
+      font-family: var(--font-heading);
+      margin: 0 0 8px;
+      font-size: 19px;
+      color: var(--ink-heading);
+    }
+
+    .modal-card p {
+      margin: 0 0 20px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="app-header">
+    <div class="header-inner">
+      <span class="header-eyebrow">พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 (PDPA)</span>
+      <h1 class="app-title">ข้อสอบวัดผลการเรียนรู้ด้านการคุ้มครองข้อมูลส่วนบุคคล (Personal Data Protection)</h1>
+      <p class="app-subtitle">ชุดข้อสอบมาตรฐานจำนวน 100 ข้อ ครอบคลุมเนื้อหา 7 หมวด พร้อมระบบตรวจให้คะแนนและส่วนเฉลยละเอียดท้ายชุดข้อสอบ</p>
+      <div class="criteria-bar">
+        <span class="criteria-pill">รวม 100 ข้อ (7 หมวดเนื้อหา)</span>
+        <span class="criteria-pill">Basic 50 ข้อ • Application 27 ข้อ • Deep 23 ข้อ</span>
+        <span class="criteria-pill">คำตอบเดียว (เลือก 1 ข้อ) &amp; หลายคำตอบ (ต้องเลือกถูกครบทุกข้อจึงได้คะแนน)</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="sticky-toolbar">
+    <div class="toolbar-inner">
+      <div class="progress-group">
+        <span class="progress-text" id="progressText">ตอบแล้ว 0 / 100 ข้อ</span>
+        <div class="progress-track" aria-hidden="true">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+      <div class="toolbar-actions">
+        <button type="button" class="btn btn-secondary" id="resetBtn">เริ่มทำใหม่</button>
+        <button type="button" class="btn btn-secondary" id="jumpKeyToolbarBtn">ไปส่วนเฉลยท้ายข้อสอบ</button>
+        <button type="button" class="btn btn-primary" id="submitBtn">ส่งคำตอบและดูเฉลย</button>
+      </div>
+    </div>
+  </div>
+
+  <main class="main-container">
+    <aside class="sidebar" aria-label="ตัวกรองและนำทางข้อสอบ">
+      <div class="filter-group">
+        <label class="filter-label" for="catFilter">กรองตามหมวดเนื้อหา (7 กลุ่ม)</label>
+        <select id="catFilter" class="filter-select">
+          <option value="ALL">ทุกหมวดเนื้อหา (100 ข้อ)</option>
+          <option value="Intro">1. Intro: ความรู้เบื้องต้นฯ (15 ข้อ)</option>
+          <option value="ROP">2. ROP: ข้อมูลและกิจกรรมประมวลผล (14 ข้อ)</option>
+          <option value="Bases">3. Bases: ฐานการประมวลผล (16 ข้อ)</option>
+          <option value="Controller">4. Controller: หน้าที่ผู้ควบคุมภาครัฐ (16 ข้อ)</option>
+          <option value="DPA">5. DPA: ข้อตกลงการประมวลผล (12 ข้อ)</option>
+          <option value="Rights">6. Rights: สิทธิของเจ้าของข้อมูล (15 ข้อ)</option>
+          <option value="Transfer">7. Transfer: การโอนข้อมูลไปต่างประเทศ (12 ข้อ)</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label class="filter-label" for="diffFilter">กรองตามระดับความยาก</label>
+        <select id="diffFilter" class="filter-select">
+          <option value="ALL">ทุกระดับความยาก (100 ข้อ)</option>
+          <option value="Basic">Basic - ความรู้พื้นฐาน (50 ข้อ)</option>
+          <option value="Application">Application - ความรู้ทางปฏิบัติ (27 ข้อ)</option>
+          <option value="Deep">Deep - ความรู้เชิงลึก (23 ข้อ)</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label class="filter-label" for="typeFilter">กรองตามรูปแบบข้อสอบ</label>
+        <select id="typeFilter" class="filter-select">
+          <option value="ALL">ทุกรูปแบบข้อสอบ</option>
+          <option value="single">แบบคำตอบเดียว (Single answer)</option>
+          <option value="multi">แบบหลายคำตอบ (Multiple answer)</option>
+        </select>
+      </div>
+
+      <h2 class="sidebar-title">แผนผังข้อสอบ (คลิกเพื่อข้ามไปข้อนั้น)</h2>
+      <div class="q-grid" id="qJumpGrid"></div>
+    </aside>
+
+    <section class="exam-content">
+      <div class="rule-banner">
+        <strong>เกณฑ์การทำข้อสอบและการให้คะแนน:</strong> ข้อสอบแบบ <strong>คำตอบเดียว</strong> มีคำตอบที่ถูกเพียง 1 ข้อ ส่วนข้อสอบแบบ <strong>หลายคำตอบ</strong> (มีข้อความ <em>"เลือกคำตอบที่ถูกทั้งหมด"</em> ระบุในโจทย์) มีคำตอบที่ถูกอย่างน้อย 2 ตัวเลือก ผู้สอบต้องเลือกให้ครบทุกตัวเลือกที่ถูกต้องและไม่เลือกตัวเลือกที่ผิดเลยจึงจะได้ 1 คะแนน
+      </div>
+
+      <div class="score-banner" id="scoreBanner" role="status" aria-live="polite">
+        <div class="score-banner-top">
+          <div>
+            <div class="score-big" id="scoreBigText">คะแนนรวม 0 / 100 คะแนน</div>
+            <div class="score-caption" id="scoreSubText">ตรวจคำตอบเรียบร้อยแล้ว สามารถดูสถานะรายข้อหรืออ่านคำอธิบายละเอียดได้ที่ส่วนเฉลยท้ายชุดข้อสอบ</div>
+          </div>
+          <button type="button" class="btn btn-primary" id="jumpKeyScoreBtn">อ่านเฉลยและคำอธิบายท้ายชุดข้อสอบ</button>
+        </div>
+      </div>
+
+      <div class="question-list" id="questionList"></div>
+
+      <!-- ส่วนเฉลยท้ายสุดของชุดข้อสอบ -->
+      <section class="answer-key-section" id="answerKeySection">
+        <div class="answer-key-header">
+          <h2>ส่วนเฉลยและคำอธิบายเหตุผลท้ายชุดข้อสอบ (ข้อ 1 – 100)</h2>
+          <p>แสดงคำตอบที่ถูกต้องพร้อมคำอธิบายเหตุผลตาม พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 กฎหมายลำดับรอง และแนวปฏิบัติที่เกี่ยวข้อง</p>
+        </div>
+
+        <div class="answer-key-locked" id="answerKeyLocked">
+          <p>ส่วนเฉลยและคำอธิบายถูกซ่อนไว้ชั่วคราวระหว่างทำข้อสอบ กดปุ่ม <strong>"ส่งคำตอบและดูเฉลย"</strong> เพื่อตรวจคะแนนและเปิดดูเฉลยพร้อมคำอธิบายครบทั้ง 100 ข้อ</p>
+          <button type="button" class="btn btn-primary" id="unlockKeyBtn">ส่งคำตอบและเปิดดูเฉลยท้ายชุดข้อสอบ</button>
+        </div>
+
+        <div class="answer-key-list" id="answerKeyList"></div>
+
+        <div class="legal-note-box">
+          <h3>หมายเหตุทางกฎหมายและขอบเขตการอ้างอิง</h3>
+          <ul>
+            <li>ข้อสอบชุดนี้อ้างอิงตัวบท <strong>พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562</strong> ประกาศคณะกรรมการคุ้มครองข้อมูลส่วนบุคคล (เช่น เรื่อง หลักเกณฑ์และวิธีการในการแจ้งเหตุการละเมิดข้อมูลส่วนบุคคล พ.ศ. 2565, ระเบียบว่าด้วยการยื่น การไม่รับเรื่อง การยุติเรื่อง พ.ศ. 2565, มาตรการรักษาความมั่นคงปลอดภัย พ.ศ. 2565) และเอกสารแนวปฏิบัติ Thailand Data Protection Guidelines (TDPG 3.0) ในเอกสารประกอบการอบรม</li>
+            <li>ในประเด็นรายละเอียดปลีกย่อยทางปฏิบัติ เช่น เกณฑ์การยกเว้นการจัดทำ ROP ของกิจการขนาดเล็ก เกณฑ์จำนวนข้อมูลส่วนบุคคลขนาดใหญ่สำหรับการตั้ง DPO ของหน่วยงาน หรือรายชื่อประเทศปลายทางที่มีมาตรฐานเพียงพอ อาจมีการออกประกาศหรือปรับปรุงหลักเกณฑ์เพิ่มเติมโดยคณะกรรมการคุ้มครองข้อมูลส่วนบุคคล (กคส.) ผู้ปฏิบัติงานของหน่วยงานภาครัฐจึงควรตรวจสอบประกาศ กคส. ฉบับล่าสุดควบคู่เสมอ</li>
+          </ul>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <!-- Modal ยืนยัน -->
+  <div class="modal-backdrop" id="confirmModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <h3 id="modalTitle">ยืนยันการดำเนินการ</h3>
+      <p id="modalMessage"></p>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-secondary" id="modalCancelBtn">ยกเลิก</button>
+        <button type="button" class="btn btn-primary" id="modalConfirmBtn">ยืนยัน</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const CATEGORY_LABELS = {
+      Intro: "1. Intro: ความรู้เบื้องต้นเกี่ยวกับการคุ้มครองข้อมูลส่วนบุคคล",
+      ROP: "2. ROP: ข้อมูลส่วนบุคคลและกิจกรรมการประมวลผล",
+      Bases: "3. Bases: ฐานการประมวลผลข้อมูลส่วนบุคคล",
+      Controller: "4. Controller: หน้าที่ของหน่วยงานภาครัฐในฐานะ Data Controller",
+      DPA: "5. DPA: ข้อตกลงการประมวลผลข้อมูลส่วนบุคคล",
+      Rights: "6. Rights: สิทธิของเจ้าของข้อมูลส่วนบุคคล",
+      Transfer: "7. Transfer: การโอนข้อมูลส่วนบุคคลไปยังต่างประเทศ"
+    };
+
+    const CHOICE_LETTERS = ["ก", "ข", "ค", "ง", "จ"];
+
+    // ฐานข้อมูลข้อสอบ 100 ข้อ: Basic = 50, Application = 27, Deep = 23
+    const QUESTIONS = [
+      // ==================== หมวด 1: Intro (ข้อ 1 - 15 | Basic 8, App 4, Deep 3 | Single 11, Multi 4) ====================
+      {
+        id: 1, cat: "Intro", diff: "Basic", type: "single",
+        q: "พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 มีผลใช้บังคับเต็มรูปแบบทั้งฉบับตั้งแต่วันใดเป็นต้นไป หลังจากมีการตราพระราชกฤษฎีกาเลื่อนการใช้บังคับรวม 2 ครั้ง",
+        opts: [
+          "วันที่ 27 พฤษภาคม พ.ศ. 2562",
+          "วันที่ 27 พฤษภาคม พ.ศ. 2563",
+          "วันที่ 1 มิถุนายน พ.ศ. 2564",
+          "วันที่ 1 มิถุนายน พ.ศ. 2565"
+        ],
+        ans: [3],
+        exp: "เฉลย ง ถูกต้อง เพราะ พ.ร.บ.ฯ ประกาศในราชกิจจานุเบกษาวันที่ 27 พ.ค. 2562 และมีการออก พ.ร.ฎ. เลื่อนการบังคับใช้หมวดสำคัญออกไป 2 ครั้ง จนมีผลใช้บังคับเต็มรูปแบบในวันที่ 1 มิถุนายน 2565 ส่วน ก คือวันประกาศในราชกิจจานุเบกษา ข คือกำหนดเดิมหลังพ้น 1 ปี และ ค คือวันสิ้นสุดการเลื่อนครั้งที่ 1 ซึ่งยังเลื่อนต่ออีกครั้ง"
+      },
+      {
+        id: 2, cat: "Intro", diff: "Basic", type: "single",
+        q: "ตามมาตรา 6 แห่ง พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 คำว่า “ข้อมูลส่วนบุคคล” หมายความถึงข้อใด",
+        opts: [
+          "ข้อมูลเกี่ยวกับบุคคลธรรมดาซึ่งทำให้สามารถระบุตัวบุคคลนั้นได้ไม่ว่าทางตรงหรือทางอ้อม แต่ไม่รวมถึงข้อมูลของผู้ถึงแก่กรรมโดยเฉพาะ",
+          "ข้อมูลเกี่ยวกับบุคคลธรรมดาหรือนิติบุคคลซึ่งทำให้สามารถระบุตัวตนได้ไม่ว่าทางตรงหรือทางอ้อม",
+          "ข้อมูลเกี่ยวกับบุคคลธรรมดาที่มีชีวิตและผู้ถึงแก่กรรมไม่เกิน 5 ปี ซึ่งทำให้สามารถระบุตัวบุคคลนั้นได้โดยตรงเท่านั้น",
+          "ข้อมูลเฉพาะเจาะจงที่ปรากฏบนเอกสารราชการของบุคคลสัญชาติไทยซึ่งใช้ยืนยันตัวตนทางกฎหมายได้เท่านั้น"
+        ],
+        ans: [0],
+        exp: "เฉลย ก ถูกต้องตรงตามนิยามมาตรา 6 ประกอบคำว่า 'บุคคล' ซึ่งหมายถึงบุคคลธรรมดา ส่วน ข ผิดเพราะไม่คุ้มครองข้อมูลนิติบุคคล ค ผิดเพราะไม่รวมข้อมูลผู้ถึงแก่กรรมโดยเฉพาะและครอบคลุมทั้งทางตรงและทางอ้อม ง ผิดเพราะไม่จำกัดเฉพาะเอกสารราชการหรือเฉพาะสัญชาติไทย"
+      },
+      {
+        id: 3, cat: "Intro", diff: "Basic", type: "single",
+        q: "บุคคลใดทำหน้าที่เป็นรองประธานกรรมการในคณะกรรมการคุ้มครองข้อมูลส่วนบุคคล (กคส.) โดยตำแหน่งตามมาตรา 8",
+        opts: [
+          "ปลัดสำนักนายกรัฐมนตรี",
+          "เลขาธิการคณะกรรมการกฤษฎีกา",
+          "ปลัดกระทรวงดิจิทัลเพื่อเศรษฐกิจและสังคม",
+          "เลขาธิการคณะกรรมการคุ้มครองข้อมูลส่วนบุคคล"
+        ],
+        ans: [2],
+        exp: "เฉลย ค ถูกต้องตามมาตรา 8 (2) ซึ่งกำหนดให้ปลัดกระทรวงดิจิทัลเพื่อเศรษฐกิจและสังคมเป็นรองประธานกรรมการ ส่วน ก และ ข เป็นกรรมการโดยตำแหน่งตามมาตรา 8 (3) และ ง ทำหน้าที่เป็นกรรมการและเลขานุการ"
+      },
+      {
+        id: 4, cat: "Intro", diff: "Basic", type: "single",
+        q: "ข้อใดแสดงความแตกต่างระหว่าง Data Controller และ Data Processor ตามมาตรา 6 ได้ถูกต้องที่สุด",
+        opts: [
+          "Data Controller ต้องเป็นหน่วยงานของรัฐเท่านั้น ส่วน Data Processor ต้องเป็นบริษัทเอกชนที่รับจ้างช่วง",
+          "Data Controller มีอำนาจหน้าที่ตัดสินใจเกี่ยวกับการเก็บรวบรวม ใช้ หรือเปิดเผยข้อมูล ส่วน Data Processor ดำเนินการตามคำสั่งหรือในนามของ Data Controller",
+          "Data Controller เป็นผู้ลงมือจัดเก็บข้อมูลในระบบเองเสมอ ส่วน Data Processor เป็นผู้กำหนดนโยบายการใช้ข้อมูล",
+          "Data Controller รับผิดชอบเฉพาะข้อมูลส่วนบุคคลอ่อนไหว ส่วน Data Processor รับผิดชอบเฉพาะข้อมูลส่วนบุคคลทั่วไป"
+        ],
+        ans: [1],
+        exp: "เฉลย ข ถูกต้อง เพราะหัวใจสำคัญตามมาตรา 6 คืออำนาจตัดสินใจกำหนดวัตถุประสงค์และวิธีการประมวลผลเป็นของ Data Controller ส่วน Data Processor ดำเนินการตามคำสั่งเท่านั้น ก ผิดเพราะทั้งรัฐและเอกชนเป็นได้ทั้งสองบทบาท ค ผิดเพราะสลับบทบาทกัน ง ผิดเพราะทั้งคู่เกี่ยวข้องได้กับข้อมูลทุกประเภท"
+      },
+      {
+        id: 5, cat: "Intro", diff: "Basic", type: "single",
+        q: "สำนักงานคณะกรรมการคุ้มครองข้อมูลส่วนบุคคล (สคส.) มีสถานะทางกฎหมายเป็นหน่วยงานประเภทใดตามมาตรา 43",
+        opts: [
+          "ส่วนราชการระดับกรมในสังกัดกระทรวงดิจิทัลเพื่อเศรษฐกิจและสังคม",
+          "รัฐวิสาหกิจประเภทส่งเสริมกิจการดิจิทัลภายใต้การกำกับของสำนักนายกรัฐมนตรี",
+          "องค์กรอิสระตามรัฐธรรมนูญที่ขึ้นตรงต่อรัฐสภาโดยไม่ผ่านฝ่ายบริหาร",
+          "หน่วยงานของรัฐที่มีฐานะเป็นนิติบุคคล และไม่เป็นส่วนราชการหรือรัฐวิสาหกิจ"
+        ],
+        ans: [3],
+        exp: "เฉลย ง ถูกต้องตามมาตรา 43 วรรคสอง สคส. เป็นหน่วยงานของรัฐที่มีฐานะเป็นนิติบุคคล และไม่เป็นส่วนราชการตามกฎหมายว่าด้วยระเบียบบริหารราชการแผ่นดิน หรือรัฐวิสาหกิจ ส่วน ก ข และ ค ขัดต่อบทบัญญัติมาตรา 43"
+      },
+      {
+        id: 6, cat: "Intro", diff: "Basic", type: "single",
+        q: "ในการฟ้องร้องเรียกค่าสินไหมทดแทนทางแพ่งตามมาตรา 78 สิทธิเรียกร้องค่าเสียหายจากการละเมิดข้อมูลส่วนบุคคลขาดอายุความเมื่อใด",
+        opts: [
+          "เมื่อพ้น 1 ปีนับแต่วันที่รู้ถึงความเสียหายและรู้ตัวผู้ต้องรับผิด หรือเมื่อพ้น 5 ปีนับแต่วันที่มีการละเมิด",
+          "เมื่อพ้น 2 ปีนับแต่วันที่รู้ถึงความเสียหายและรู้ตัวผู้ต้องรับผิด หรือเมื่อพ้น 10 ปีนับแต่วันที่มีการละเมิด",
+          "เมื่อพ้น 3 ปีนับแต่วันที่รู้ถึงความเสียหายและรู้ตัวผู้ต้องรับผิด หรือเมื่อพ้น 10 ปีนับแต่วันที่มีการละเมิด",
+          "เมื่อพ้น 5 ปีนับแต่วันที่รู้ถึงความเสียหายและรู้ตัวผู้ต้องรับผิด หรือเมื่อพ้น 20 ปีนับแต่วันที่มีการละเมิด"
+        ],
+        ans: [2],
+        exp: "เฉลย ค ถูกต้องตามมาตรา 78 วรรคสอง ซึ่งกำหนดอายุความทางแพ่งไว้ 3 ปีนับแต่วันที่ผู้เสียหายรู้ถึงความเสียหายและรู้ตัว Data Controller หรือ Data Processor ที่ต้องรับผิด หรือ 10 ปีนับแต่วันที่มีการละเมิด (แตกต่างจากละเมิดทั่วไปตาม ป.พ.พ. ที่ใช้ 1 ปี / 10 ปี ซึ่งทำให้ตัวเลือก ก ข และ ง ผิด)"
+      },
+      {
+        id: 7, cat: "Intro", diff: "Basic", type: "multi",
+        q: "ตามมาตรา 4 วรรคหนึ่ง พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 ไม่ใช้บังคับแก่การดำเนินการในข้อใดบ้าง (เลือกคำตอบที่ถูกทั้งหมด)",
+        opts: [
+          "การเก็บรวบรวมข้อมูลส่วนบุคคลเพื่อประโยชน์ส่วนตนหรือเพื่อกิจกรรมในครอบครัวของบุคคลนั้นเท่านั้น",
+          "การพิจารณาพิพากษาคดีของศาลและการดำเนินงานของเจ้าหน้าที่ในกระบวนการพิจารณาคดี",
+          "การเก็บรวบรวมข้อมูลผู้รับบริการของโรงพยาบาลสังกัดกระทรวงสาธารณสุขเพื่อการรักษาพยาบาลทั่วไป",
+          "การดำเนินการกับข้อมูลของบริษัทข้อมูลเครดิตและสมาชิกตามกฎหมายว่าด้วยการประกอบธุรกิจข้อมูลเครดิต",
+          "การจัดเก็บทะเบียนประวัติบุคลากรเพื่อการบริหารงานบุคคลภายในองค์กรปกครองส่วนท้องถิ่น"
+        ],
+        ans: [0, 1, 3],
+        exp: "เฉลย ก, ข, ง ถูกต้อง เพราะตรงตามข้อยกเว้นมาตรา 4 (1), (5) และ (6) ส่วน ค และ จ เป็นภารกิจให้บริการและบริหารงานทั่วไปของหน่วยงานรัฐซึ่งอยู่ในบังคับของ PDPA ไม่ได้รับยกเว้นตามมาตรา 4"
+      },
+      {
+        id: 8, cat: "Intro", diff: "Basic", type: "multi",
+        q: "ในกรณีที่ Data Controller หรือ Data Processor อยู่นอกราชอาณาจักร กฎหมาย PDPA ของไทยจะมีผลบังคับใช้ (Extraterritorial Scope) ตามมาตรา 5 วรรคสอง เมื่อเป็นการดำเนินกิจกรรมใดต่อเจ้าของข้อมูลที่อยู่ในราชอาณาจักร (เลือกคำตอบที่ถูกทั้งหมด)",
+        opts: [
+          "การเสนอสินค้าหรือบริการให้แก่เจ้าของข้อมูลซึ่งอยู่ในราชอาณาจักรเฉพาะกรณีที่มีการเรียกเก็บชำระเงินเท่านั้น",
+          "การเสนอสินค้าหรือบริการให้แก่เจ้าของข้อมูลซึ่งอยู่ในราชอาณาจักร ไม่ว่าจะมีการชำระเงินของเจ้าของข้อมูลหรือไม่ก็ตาม",
+          "การเฝ้าติดตามพฤติกรรมของเจ้าของข้อมูลส่วนบุคคลที่เกิดขึ้นในราชอาณาจักร",
+          "การส่งต่อข้อมูลสถิตินิรนามที่ไม่สามารถระบุตัวบุคคลได้ผ่านโครงข่ายอินเทอร์เน็ตในประเทศไทย"
+        ],
+        ans: [1, 2],
+        exp: "เฉลย ข, ค ถูกต้องตามมาตรา 5 วรรคสอง (1) และ (2) ส่วน ก ผิดเพราะกฎหมายบังคับใช้ไม่ว่าจะมีการชำระเงินหรือไม่ก็ตาม และ ง ผิดเพราะข้อมูลนิรนาม (Anonymous Data) ไม่ใช่ข้อมูลส่วนบุคคลจึงไม่อยู่ในขอบเขตบังคับใช้"
+      },
+      {
+        id: 9, cat: "Intro", diff: "Application", type: "single",
+        q: "นักวิชาการของกรมแห่งหนึ่งบันทึกรายชื่อและเบอร์โทรศัพท์ของเพื่อนสนิทและญาติไว้ในสมุดโทรศัพท์ส่วนตัวเพื่อส่งการ์ดเชิญงานทำบุญบ้าน แต่ต่อมาได้นำรายชื่อชุดเดียวกันนั้นไปส่งอีเมลเชิญเข้าร่วมสัมมนาของกรมอย่างเป็นทางการ กรณีนี้ข้อใดวินิจฉัยขอบเขตการใช้บังคับกฎหมายได้ถูกต้อง",
+        opts: [
+          "ได้รับการยกเว้นทั้งสองกิจกรรม เพราะข้อมูลเริ่มต้นจากการเก็บรวบรวมเพื่อประโยชน์ส่วนตนตั้งแต่แรก",
+          "อยู่ภายใต้บังคับ PDPA ทั้งสองกิจกรรมทันที เพราะผู้จัดเก็บมีสถานะเป็นเจ้าหน้าที่ของหน่วยงานภาครัฐ",
+          "การส่งการ์ดงานบุญบ้านได้รับยกเว้นตามมาตรา 4 (1) แต่การนำข้อมูลไปใช้ในงานสัมมนาของกรมต้องปฏิบัติตาม PDPA",
+          "การส่งอีเมลสัมมนาของกรมได้รับยกเว้นตามมาตรา 4 (2) เพราะงานทุกประเภทของส่วนราชการถือเป็นความมั่นคงของรัฐ"
+        ],
+        ans: [2],
+        exp: "เฉลย ค ถูกต้อง เพราะการพิจารณาข้อยกเว้นตามมาตรา 4 ต้องพิจารณาเป็นรายกิจกรรม (Material Scope ตามกิจกรรม) กิจกรรมครอบครัวได้รับยกเว้นตามมาตรา 4 (1) แต่เมื่อนำไปใช้ในภารกิจหน่วยงานย่อมหลุดจากข้อยกเว้นส่วนตน ก จึงผิด ข ผิดเพราะข้าราชการก็มีกิจกรรมส่วนตัวได้ ง ผิดเพราะงานสัมมนาทั่วไปไม่ใช่ภารกิจความมั่นคงของรัฐ"
+      },
+      {
+        id: 10, cat: "Intro", diff: "Application", type: "single",
+        q: "เทศบาลนครแห่งหนึ่งติดตั้งกล้องวงจรปิดบริเวณศูนย์บริการประชาชน และเก็บข้อมูลทะเบียนราษฎรควบคู่กับรหัสประจำเครื่องคอมพิวเตอร์ของเจ้าหน้าที่ ข้อใดต่อไปนี้ไม่ใช่ข้อมูลส่วนบุคคลตาม PDPA",
+        opts: [
+          "ภาพเคลื่อนไหวจากกล้องวงจรปิดที่เห็นใบหน้าของผู้มาติดต่อราชการอย่างชัดเจน",
+          "รหัสพนักงานเทศบาลที่เมื่อนำไปเทียบกับฐานข้อมูลฝ่ายบุคคลแล้วทราบว่าเป็นข้าราชการรายใด",
+          "ข้อมูลมรณบัตรที่ระบุเฉพาะชื่อและสาเหตุการเสียชีวิตของบุคคลที่ถึงแก่กรรมไปแล้ว",
+          "หมายเลข IP Address ของอุปกรณ์ที่เชื่อมโยงกับบัญชีผู้ใช้งานรายบุคคลของเจ้าหน้าที่ในเทศบาล"
+        ],
+        ans: [2],
+        exp: "เฉลย ค ถูกต้อง เพราะข้อมูลของผู้ถึงแก่กรรมโดยเฉพาะไม่ถือเป็นข้อมูลส่วนบุคคลตามนิยามมาตรา 6 ส่วน ก เป็นข้อมูลระบุตัวตนทางตรง ข และ ง เป็นข้อมูลที่ระบุตัวบุคคลได้ทางอ้อมเมื่อประกอบกับข้อมูลอื่น จึงล้วนเป็นข้อมูลส่วนบุคคล"
+      },
+      {
+        id: 11, cat: "Intro", diff: "Application", type: "single",
+        q: "มหาวิทยาลัยของรัฐในต่างประเทศเปิดหลักสูตรอบรมออนไลน์เป็นภาษาไทย ตั้งกลุ่มเป้าหมายเป็นข้าราชการที่พำนักอยู่ในประเทศไทยโดยเปิดให้เรียนฟรีไม่มีค่าใช้จ่าย มหาวิทยาลัยแห่งนั้นต้องปฏิบัติตาม PDPA ของไทยหรือไม่ เพราะเหตุใด",
+        opts: [
+          "ไม่ต้องปฏิบัติตาม เพราะเป็นหน่วยงานที่จัดตั้งอยู่นอกราชอาณาจักรไทยและไม่มีสำนักงานสาขาในไทย",
+          "ไม่ต้องปฏิบัติตาม เพราะเป็นการให้บริการเรียนฟรีโดยไม่มีการเรียกเก็บค่าธรรมเนียมจากผู้เรียนในไทย",
+          "ต้องปฏิบัติตาม เพราะเข้าข่ายการเสนอสินค้าหรือบริการแก่เจ้าของข้อมูลในราชอาณาจักรตามมาตรา 5 วรรคสอง (1)",
+          "ต้องปฏิบัติตามเฉพาะกรณีที่ผู้เรียนในประเทศไทยถือสัญชาติไทยเท่านั้น หากเป็นชาวต่างชาติในไทยจะไม่ต้องปฏิบัติตาม"
+        ],
+        ans: [2],
+        exp: "เฉลย ค ถูกต้อง เพราะการใช้ภาษาไทยและมุ่งเป้าหมายมายังผู้ที่อยู่ในประเทศไทยถือเป็นการเสนอสินค้าหรือบริการตามมาตรา 5 วรรคสอง (1) แม้ไม่มีการชำระเงินก็ตาม ก และ ข จึงผิด ส่วน ง ผิดเพราะมาตรา 5 วรรคสองคุ้มครองเจ้าของข้อมูลที่ 'อยู่ในราชอาณาจักร' โดยไม่จำกัดสัญชาติ"
+      },
+      {
+        id: 12, cat: "Intro", diff: "Application", type: "multi",
+        q: "หน่วยงานของรัฐด้านความมั่นคงปลอดภัยไซเบอร์ได้รับยกเว้นไม่ให้นำบทบัญญัติ PDPA มาใช้บังคับในภารกิจด้านความมั่นคงตามมาตรา 4 (2) หน่วยงานดังกล่าวยังคงต้องดำเนินการในข้อใดต่อไปนี้ (เลือกคำตอบที่ถูกทั้งหมด)",
+        opts: [
+          "ต้องจัดให้มีการรักษาความมั่นคงปลอดภัยของข้อมูลส่วนบุคคลให้เป็นไปตามมาตรฐานตามมาตรา 4 วรรคสาม",
+          "ต้องปฏิบัติตาม PDPA ในกิจกรรมอื่นของหน่วยงานที่ไม่ใช่ภารกิจด้านความมั่นคง เช่น งานสวัสดิการเจ้าหน้าที่ภายใน",
+          "ต้องขอความยินยอมจากผู้ต้องสงสัยก่อภัยคุกคามทางไซเบอร์ทุกครั้งก่อนเริ่มตรวจสอบข้อมูลจราจรทางคอมพิวเตอร์",
+          "ได้รับยกเว้นหน้าที่ทุกประการรวมถึงไม่ต้องมีมาตรการรักษาความมั่นคงปลอดภัยของข้อมูลทั้งองค์กร"
+        ],
+        ans: [0, 1],
+        exp: "เฉลย ก, ข ถูกต้อง เพราะมาตรา 4 วรรคสามกำหนดให้หน่วยงานที่ได้รับยกเว้นตามมาตรา 4 (2)-(6) ยังคงต้องจัดให้มีการรักษาความมั่นคงปลอดภัยตามมาตรฐาน และข้อยกเว้นคุ้มครองเฉพาะรายกิจกรรมความมั่นคงเท่านั้น ไม่ได้ยกเว้นงานบริหารทั่วไปทั้งองค์กร ค ผิดเพราะงานรักษาความมั่นคงไซเบอร์ได้รับยกเว้น ง ผิดเพราะขัดต่อมาตรา 4 วรรคสาม"
+      },
+      {
+        id: 13, cat: "Intro", diff: "Deep", type: "single",
+        q: "ในกรณีที่หน่วยงานของรัฐมีกฎหมายเฉพาะบัญญัติเกี่ยวกับการคุ้มครองข้อมูลส่วนบุคคลไว้แล้ว มาตรา 3 แห่ง พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 กำหนดหลักความสัมพันธ์ระหว่างกฎหมายเฉพาะกับ PDPA ไว้อย่างไร",
+        opts: [
+          "ให้ยกเลิกบทบัญญัติในกฎหมายเฉพาะทั้งหมด แล้วใช้บังคับตาม พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคลฯ แต่เพียงฉบับเดียว",
+          "ให้บังคับตามกฎหมายเฉพาะเพียงอย่างเดียวในทุกเรื่อง โดยไม่ต้องนำ PDPA มาใช้บังคับเพิ่มเติมอีกเลย",
+          "ให้บังคับตามกฎหมายเฉพาะ เว้นแต่เรื่องการเก็บรวบรวม ใช้ เปิดเผย และสิทธิของเจ้าของข้อมูล ให้ใช้ PDPA บังคับเป็นการเพิ่มเติมไม่ว่าจะซ้ำกันหรือไม่ก็ตาม",
+          "ให้ผู้บริหารสูงสุดของหน่วยงานของรัฐใช้ดุลพินิจเลือกเองว่าจะปฏิบัติตามกฎหมายเฉพาะหรือปฏิบัติตาม PDPA ในแต่ละปีงบประมาณ"
+        ],
+        ans: [2],
+        exp: "เฉลย ค ถูกต้องตามมาตรา 3 (1) ซึ่งวางหลักให้ใช้กฎหมายเฉพาะบังคับ แต่ในส่วนการเก็บรวบรวม ใช้ เปิดเผย และสิทธิเจ้าของข้อมูลรวมถึงบทกำหนดโทษที่เกี่ยวข้อง ให้บังคับตาม PDPA เป็นการเพิ่มเติมด้วย ส่วนเรื่องการร้องเรียนให้ดูตามเงื่อนไขมาตรา 3 (2) ตัวเลือก ก ข และ ง จึงขัดต่อมาตรา 3"
+      },
+      {
+        id: 14, cat: "Intro", diff: "Deep", type: "single",
+        q: "ข้อใดอธิบายหลักความรับผิดทางแพ่งตามมาตรา 77 และมาตรา 78 ของ พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 ได้สอดคล้องกับเจตนารมณ์ของกฎหมายมากที่สุด",
+        opts: [
+          "ผู้เสียหายต้องเป็นฝ่ายพิสูจน์ถึงความจงใจหรือประมาทเลินเล่ออย่างร้ายแรงของ Data Controller เสมอ และศาลสั่งจ่ายได้เฉพาะค่าเสียหายตามจริง",
+          "กฎหมายผลักภาระการพิสูจน์ให้ Data Controller ต้องรับผิดแม้ไม่ได้จงใจหรือประมาทเลินเล่อ เว้นแต่จะพิสูจน์ข้อยกเว้นตามกฎหมายได้ และศาลสั่งค่าสินไหมเชิงลงโทษเพิ่มได้ไม่เกิน 2 เท่า",
+          "หน่วยงานภาครัฐได้รับยกเว้นความรับผิดทางแพ่งตาม PDPA ทุกกรณี โดยผู้เสียหายต้องเรียกร้องเฉพาะโทษปรับทางปกครองต่อ สคส. เท่านั้น",
+          "ศาลยุติธรรมสามารถสั่งค่าสินไหมทดแทนเชิงลงโทษได้ไม่จำกัดเพดานขึ้นอยู่กับขนาดงบประมาณของ Data Controller แต่เพียงปัจจัยเดียว"
+        ],
+        ans: [1],
+        exp: "เฉลย ข ถูกต้องตามมาตรา 77 (หลักความรับผิดโดยเคร่งครัดพร้อมการผลักภาระการพิสูจน์ เว้นแต่พิสูจน์เหตุสุดวิสัย การกระทำของเจ้าของข้อมูลเอง หรือการปฏิบัติตามคำสั่งเจ้าหน้าที่ตามกฎหมาย) และมาตรา 78 ที่ให้ศาลสั่งค่าสินไหมเชิงลงโทษเพิ่มได้ไม่เกิน 2 เท่าของค่าสินไหมที่แท้จริง ก ค และ ง จึงไม่ถูกต้อง"
+      },
+      {
+        id: 15, cat: "Intro", diff: "Deep", type: "multi",
+        q: "เมื่อวิเคราะห์เปรียบเทียบเทคนิคการจัดการข้อมูลระหว่าง Anonymization, Pseudonymization และ Encryption ในมุมมองของขอบเขตการใช้บังคับ PDPA ข้อใดกล่าวถูกต้อง (เลือกคำตอบที่ถูกทั้งหมด)",
+        opts: [
+          "ข้อมูลที่ผ่านการทำ Anonymization อย่างสมบูรณ์จนไม่สามารถระบุตัวบุคคลได้ทั้งทางตรงและทางอ้อม จะไม่อยู่ภายใต้บังคับของข้อมูลส่วนบุคคลตาม PDPA",
+          "ข้อมูลที่ผ่านการทำ Pseudonymization (ข้อมูลแฝง) ยังคงถือเป็นข้อมูลส่วนบุคคล เพราะยังสามารถเชื่อมโยงกลับไประบุตัวบุคคลได้หากมีข้อมูลประกอบ",
+          "ข้อมูลส่วนบุคคลที่เข้ารหัสลับ (Encryption) ไว้แล้วย่อมหลุดพ้นจากนิยามข้อมูลส่วนบุคคลทันที ทำให้ Data Controller ไม่ต้องขอฐานทางกฎหมายใดๆ อีก",
+          "การทำ Encryption และ Anonymization อย่างเหมาะสมเป็นปัจจัยสำคัญที่ช่วยลดความเสี่ยงต่อสิทธิเสรีภาพของบุคคลเมื่อเกิดเหตุข้อมูลรั่วไหล"
+        ],
+        ans: [0, 1, 3],
+        exp: "เฉลย ก, ข, ง ถูกต้องตามหลักการในเอกสารอบรมและแนวปฏิบัติ PDPA กล่าวคือ Anonymization ทำให้ระบุตัวตนไม่ได้อีกต่อไป ส่วน Pseudonymization และ Encryption ยังคงเป็นข้อมูลส่วนบุคคลอยู่ (ค จึงผิด) แต่ช่วยลดความเสี่ยงด้านความมั่นคงปลอดภัยและลดผลกระทบหากเกิดเหตุละเมิด"
+      },
+
+      // ==================== หมวด 2: ROP (ข้อ 16 - 29 | Basic 7, App 4, Deep 3 | Single 10, Multi 4) ====================
+      {
+        id: 16, cat: "ROP", diff: "Basic", type: "single",
+        q: "หน้าที่ของ Data Controller ในการจัดทำบันทึกรายการกิจกรรมการประมวลผลข้อมูลส่วนบุคคล (Record of Processing Activities: ROP) บัญญัติอยู่ในมาตราใดของ พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562",
+        opts: [
+          "มาตรา 23",
+          "มาตรา 30",
+          "มาตรา 37",
+          "มาตรา 39"
+        ],
+        ans: [3],
+        exp: "เฉลย ง ถูกต้อง เพราะมาตรา 39 กำหนดหน้าที่ของ Data Controller ในการบันทึกรายการ (ROP) เพื่อให้เจ้าของข้อมูลและสำนักงานตรวจสอบได้ ส่วนมาตรา 23 คือหน้าที่แจ้ง Privacy Notice มาตรา 30 คือสิทธิเข้าถึงข้อมูล และมาตรา 37 คือหน้าที่ด้านความมั่นคงปลอดภัยและแจ้งเหตุละเมิด"
+      },
+      {
+        id: 17, cat: "ROP", diff: "Basic", type: "single",
+        q: "ตามมาตรา 39 การจัดทำบันทึกรายการกิจกรรมการประมวลผลข้อมูลส่วนบุคคล (ROP) กฎหมายกำหนดให้สามารถจัดทำในรูปแบบใดได้บ้าง",
+        opts: [
+          "ต้องจัดทำเป็นเอกสารกระดาษที่มีลายมือชื่อผู้บริหารสูงสุดกำกับทุกหน้าเท่านั้น",
+          "บันทึกเป็นหนังสือหรือระบบอิเล็กทรอนิกส์ก็ได้ เพื่อให้เจ้าของข้อมูลส่วนบุคคลและสำนักงานสามารถตรวจสอบได้",
+          "ต้องบันทึกผ่านระบบฐานข้อมูลกลางของสำนักงานคณะกรรมการคุ้มครองข้อมูลส่วนบุคคลออนไลน์แต่เพียงช่องทางเดียว",
+          "บันทึกด้วยวาจาในที่ประชุมคณะกรรมการบริหารแล้วเก็บเป็นไฟล์เสียงไว้ภายในหน่วยงานเท่านั้น"
+        ],
+        ans: [1],
+        exp: "เฉลย ข ถูกต้องตามมาตรา 39 วรรคหนึ่ง ซึ่งเปิดช่องให้บันทึกเป็นหนังสือหรือระบบอิเล็กทรอนิกส์ก็ได้ โดยมีวัตถุประสงค์เพื่อให้เจ้าของข้อมูลและ สคส. ตรวจสอบได้ ก ค และ ง จึงผิดไปจากตัวบทกฎหมาย"
+      },
+      {
+        id: 18, cat: "ROP", diff: "Basic", type: "single",
+        q: "ข้อใดจัดเป็นข้อมูลส่วนบุคคลอ่อนไหว (Sensitive Data) ตามมาตรา 26 แห่ง พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562",
+        opts: [
+          "หมายเลขบัตรประจำตัวประชาชนและเลขบัญชีเงินฝากธนาคาร",
+          "ประวัติการชำระภาษีเงินได้และยอดหนี้ค้างชำระบัตรเครดิต",
+          "ข้อมูลจำลองลายนิ้วมือและข้อมูลการเป็นสมาชิกสหภาพแรงงาน",
+          "ตำแหน่งพิกัดที่อยู่ปัจจุบันจากระบบ GPS และหมายเลขโทรศัพท์มือถือ"
+        ],
+        ans: [2],
+        exp: "เฉลย ค ถูกต้อง เพราะข้อมูลชีวภาพ (เช่น ข้อมูลจำลองลายนิ้วมือ) และข้อมูลสหภาพแรงงาน ระบุไว้ชัดเจนในมาตรา 26 ส่วนเลขบัตรประชาชน ข้อมูลการเงิน ภาษี และพิกัด GPS แม้เป็นข้อมูลสำคัญแต่กฎหมายจัดเป็นข้อมูลส่วนบุคคลทั่วไป (ไม่ใช่ข้อมูลตามมาตรา 26)"
+      },
+      {
+        id: 19, cat: "ROP", diff: "Basic", type: "single",
+        q: "ตามนิยามในมาตรา 26 วรรคสอง “ข้อมูลชีวภาพ” (Biometric Data) มีองค์ประกอบสำคัญอย่างไร",
+        opts: [
+          "เป็นภาพถ่ายบุคคลทั่วไปทุกชนิดที่ถ่ายด้วยกล้องดิจิทัลความละเอียดสูงของหน่วยงาน",
+          "เป็นข้อมูลส่วนบุคคลที่เกิดจากการใช้เทคนิคหรือเทคโนโลยีนำลักษณะเด่นทางกายภาพหรือพฤติกรรมมาใช้ยืนยันตัวตนของบุคคลนั้นที่ไม่เหมือนกับบุคคลอื่นได้",
+          "เป็นข้อมูลกรุ๊ปเลือด ส่วนสูง และน้ำหนักตัวของพนักงานที่บันทึกไว้ในใบสมัครงาน",
+          "เป็นข้อมูลทะเบียนบ้านและวันเดือนปีเกิดที่ใช้ตรวจสอบอายุของผู้รับบริการภาครัฐ"
+        ],
+        ans: [1],
+        exp: "เฉลย ข ถูกต้องตรงตามนิยามมาตรา 26 วรรคสอง เช่น ข้อมูลภาพจำลองใบหน้า ข้อมูลจำลองม่านตา หรือข้อมูลจำลองลายนิ้วมือ ส่วนภาพถ่ายธรรมดาที่ไม่ได้ผ่านเทคนิคสกัดลักษณะเด่น (Biometric Template) เพื่อยืนยันตัวตน ก ค และ ง จึงไม่ใช่ข้อมูลชีวภาพตามมาตรานี้"
+      },
+      {
+        id: 20, cat: "ROP", diff: "Basic", type: "single",
+        q: "เมื่อ Data Controller ปฏิเสธคำขอใช้สิทธิของเจ้าของข้อมูลในกรณีใดต่อไปนี้ กฎหมายกำหนดให้ต้องบันทึกการปฏิเสธพร้อมด้วยเหตุผลไว้ในรายการ ROP ตามมาตรา 39",
+        opts: [
+          "การปฏิเสธคำขอเข้าถึงข้อมูล (มาตรา 30) โอนข้อมูล (มาตรา 31) คัดค้าน (มาตรา 32) และแก้ไขข้อมูลให้ถูกต้อง (มาตรา 36)",
+          "เฉพาะกรณีการปฏิเสธคำขอถอนความยินยอมตามมาตรา 19 แต่เพียงกรณีเดียวเท่านั้น",
+          "เฉพาะกรณีที่เจ้าของข้อมูลยื่นคำร้องด้วยวาจาผ่านทางโทรศัพท์โดยไม่ใช้แบบฟอร์มของหน่วยงาน",
+          "ไม่ต้องบันทึกการปฏิเสธคำขอใดๆ ลงใน ROP เพราะต้องส่งรายงานให้ศาลปกครองแทนทุกครั้ง"
+        ],
+        ans: [0],
+        exp: "เฉลย ก ถูกต้องตามมาตรา 39 (7) ซึ่งกำหนดให้บันทึกการปฏิเสธคำขอหรือการคัดค้านตามมาตรา 30 วรรคสาม, มาตรา 31 วรรคสาม, มาตรา 32 วรรคสาม และมาตรา 36 วรรคหนึ่ง ไว้ใน ROP ส่วน ข ค และ ง ขัดต่อมาตรา 39 (7)"
+      },
+      {
+        id: 21, cat: "ROP", diff: "Basic", type: "multi",
+        q: "ตามมาตรา 39 วรรคหนึ่ง รายการที่ Data Controller ต้องบันทึกไว้ใน ROP อย่างน้อยต้องประกอบด้วยข้อมูลใดบ้าง (เลือกคำตอบที่ถูกทั้งหมด)",
+        opts: [
+          "ข้อมูลส่วนบุคคลที่มีการเก็บรวบรวม และวัตถุประสงค์ของการเก็บรวบรวมข้อมูลส่วนบุคคลแต่ละประเภท",
+          "ระยะเวลาการเก็บรักษาข้อมูลส่วนบุคคล รวมถึงสิทธิและวิธีการเข้าถึงข้อมูลส่วนบุคคล",
+          "คำอธิบายเกี่ยวกับมาตรการรักษาความมั่นคงปลอดภัยตามมาตรา 37 (1)",
+          "รหัสผ่านส่วนตัว (Password) ของผู้ใช้งานทุกคนในองค์กรแบบข้อความปกติที่ไม่เข้ารหัส"
+        ],
+        ans: [0, 1, 2],
+        exp: "เฉลย ก, ข, ค ถูกต้องตรงตามรายการที่กำหนดในมาตรา 39 (1), (2), (4), (5) และ (8) ส่วน ง ผิดเพราะการเก็บรหัสผ่านแบบไม่เข้ารหัสไว้ในเอกสารตรวจสอบขัดต่อหลักความมั่นคงปลอดภัยและไม่ได้อยู่ในรายการตามมาตรา 39"
+      },
+      {
+        id: 22, cat: "ROP", diff: "Basic", type: "multi",
+        q: "กิจการขนาดเล็กตามประกาศของ กคส. อาจได้รับยกเว้นไม่ต้องทำ ROP ในบางรายการตามมาตรา 39 วรรคสาม ยกเว้นแต่จะเข้าลักษณะในข้อใดที่ทำให้ยังคงต้องจัดทำ ROP เต็มรูปแบบ (เลือกคำตอบที่ถูกทั้งหมด)",
+        opts: [
+          "การเก็บรวบรวม ใช้ หรือเปิดเผยข้อมูลนั้นมีความเสี่ยงที่จะมีผลกระทบต่อสิทธิและเสรีภาพของเจ้าของข้อมูล",
+          "มิใช่กิจการที่เก็บรวบรวม ใช้ หรือเปิดเผยข้อมูลส่วนบุคคลเป็นครั้งคราว (คือทำเป็นประจำต่อเนื่อง)",
+          "มีการเก็บรวบรวม ใช้ หรือเปิดเผยข้อมูลส่วนบุคคลอ่อนไหวตามมาตรา 26",
+          "มีการว่าจ้างพนักงานประจำตั้งแต่ 2 คนขึ้นไปแต่ประมวลผลข้อมูลเป็นครั้งคราวและไม่มีข้อมูลอ่อนไหว"
+        ],
+        ans: [0, 1, 2],
+        exp: "เฉลย ก, ข, ค ถูกต้องตามข้อยกเว้นซ้อนข้อยกเว้นในมาตรา 39 วรรคสาม (และมาตรา 40 วรรคสี่สำหรับผู้ประมวลผล) หากเข้าข้อใดข้อหนึ่งใน ก ข หรือ ค แม้เป็นกิจการขนาดเล็กก็ยังต้องจัดทำ ROP และถึงแม้ได้รับยกเว้นบางข้อก็ยังต้องบันทึกการปฏิเสธคำขอตามมาตรา 39 (7) อยู่เสมอ ส่วน ง ไม่ใช่เงื่อนไขตัดสิทธิยกเว้นตามมาตรา 39 วรรคสาม"
+      },
+      {
+        id: 23, cat: "ROP", diff: "Application", type: "single",
+        q: "สำนักทะเบียนของเทศบาลถ่ายสำเนาบัตรประจำตัวประชาชนของผู้มาขอรับบริการ ซึ่งบนหน้าบัตรปรากฏข้อมูล “ศาสนา” และภาพใบหน้าที่สวมผ้าโพกศีรษะตามหลักศาสนา หากเทศบาลใช้สำเนาบัตรเพื่อตรวจสอบชื่อ-นามสกุลยืนยันตัวตนเท่านั้นและได้ขีดฆ่าข้อมูลศาสนาออก การจำแนกประเภทข้อมูลใน ROP ข้อใดเหมาะสมที่สุด",
+        opts: [
+          "ต้องบันทึกใน ROP ว่าเป็นการประมวลผลข้อมูลอ่อนไหวตามมาตรา 26 เสมอ เพราะภาพใบหน้าสื่อถึงความเชื่อทางศาสนาได้",
+          "ถือเป็นการประมวลผลข้อมูลส่วนบุคคลทั่วไป เพราะมีวัตถุประสงค์เพียงเพื่อยืนยันตัวตนไม่ได้มุ่งบ่งชี้หรือจำแนกศาสนาของบุคคล",
+          "ไม่ถือเป็นข้อมูลส่วนบุคคลทุกประเภท เพราะบัตรประจำตัวประชาชนเป็นเอกสารที่ออกโดยหน่วยงานของรัฐเอง",
+          "ต้องบันทึกเป็นข้อมูลชีวภาพตามมาตรา 26 วรรคสอง เพราะมีรูปถ่ายใบหน้าปรากฏอยู่บนสำเนาเอกสาร"
+        ],
+        ans: [1],
+        exp: "เฉลย ข ถูกต้องตามแนวปฏิบัติ TDPG 3.0 เรื่องข้อมูลอ่อนไหว (B3.2 และ H1.1) การมีรูปถ่ายที่เห็นผ้าโพกศีรษะหากใช้เพื่อยืนยันตัวตนตามปกติโดยไม่ได้มุ่งประมวลผลเพื่อบ่งชี้ศาสนา และตัดข้อมูลศาสนาที่ไม่จำเป็นออก ถือเป็นการประมวลผลข้อมูลส่วนบุคคลทั่วไป ส่วน ก ค และ ง เข้าใจคลาดเคลื่อนในนิยาม"
+      },
+      {
+        id: 24, cat: "ROP", diff: "Application", type: "single",
+        q: "กรมแห่งหนึ่งนำข้อมูลส่วนบุคคลของผู้รับทุนวิจัยที่เดิมเก็บรวบรวมโดยได้รับยกเว้นไม่ต้องขอความยินยอมตามมาตรา 24 ไปเปิดเผยต่อหน่วยงานตรวจสอบภาครัฐตามที่มีกฎหมายให้อำนาจ กรมดังกล่าวมีหน้าที่ต้องบันทึกเพิ่มเติมลงใน ROP อย่างไรตามมาตรา 27 วรรคสาม",
+        opts: [
+          "ไม่ต้องบันทึกใดๆ เพิ่มเติม เพราะเป็นการเปิดเผยข้อมูลระหว่างหน่วยงานของรัฐด้วยกันเอง",
+          "ต้องลบรายการ ROP เดิมทิ้งทันทีแล้วให้หน่วยงานที่รับข้อมูลเป็นผู้สร้าง ROP ใหม่แต่เพียงฝ่ายเดียว",
+          "ต้องบันทึกเฉพาะรายชื่อเจ้าหน้าที่ผู้กดส่งไฟล์ข้อมูลเท่านั้น โดยไม่ต้องระบุประเภทข้อมูลและวัตถุประสงค์การเปิดเผย",
+          "ต้องบันทึกการใช้หรือเปิดเผยข้อมูลส่วนบุคคลที่ได้รับยกเว้นไม่ต้องขอความยินยอมนั้นไว้ในรายการ ROP ตามมาตรา 39 (6)"
+        ],
+        ans: [3],
+        exp: "เฉลย ง ถูกต้องตามมาตรา 27 วรรคสาม ประกอบมาตรา 39 (6) ซึ่งกำหนดว่าเมื่อ Data Controller ใช้หรือเปิดเผยข้อมูลส่วนบุคคลที่เก็บรวบรวมได้โดยได้รับยกเว้นไม่ต้องขอความยินยอม ต้องบันทึกการใช้หรือเปิดเผยนั้นไว้ในรายการตามมาตรา 39 ด้วย ส่วน ก ข และ ค ขัดต่อกฎหมาย"
+      },
+      {
+        id: 25, cat: "ROP", diff: "Application", type: "single",
+        q: "โรงพยาบาลสังกัดกรุงเทพมหานครเปลี่ยนระบบลงเวลาปฏิบัติงานของบุคลากรจากการเซ็นชื่อในสมุด มาเป็นเครื่องสแกนใบหน้า (Facial Recognition) ที่แปลงโครงสร้างใบหน้าเป็นรหัสจำลองชีวมิติ การปรับปรุง ROP ในกิจกรรมนี้ข้อใดถูกต้อง",
+        opts: [
+          "ต้องปรับปรุง ROP โดยระบุประเภทข้อมูลเป็นข้อมูลชีวภาพ (ข้อมูลอ่อนไหวตามมาตรา 26) ทบทวนฐานทางกฎหมาย และระบุมาตรการรักษาความมั่นคงปลอดภัยที่เหมาะสม",
+          "ไม่ต้องแก้ไข ROP เพราะทั้งลายมือชื่อและรหัสจำลองใบหน้าต่างเป็นข้อมูลส่วนบุคคลทั่วไปเหมือนกัน",
+          "สามารถยกเลิกการจัดทำ ROP ในกิจกรรมลงเวลาได้ทันที เพราะเครื่องสแกนทำงานด้วยระบบอัตโนมัติทั้งหมด",
+          "ต้องแยกเก็บ ROP ของระบบสแกนใบหน้าไว้เป็นความลับสูงสุดที่ห้ามแม้แต่สำนักงาน สคส. เข้าตรวจสอบโดยเด็ดขาด"
+        ],
+        ans: [0],
+        exp: "เฉลย ก ถูกต้อง เพราะการใช้เทคโนโลยีสกัดลักษณะเด่นของใบหน้าเป็น Biometric Template เพื่อยืนยันตัวตนเข้าข่ายข้อมูลชีวภาพตามมาตรา 26 วรรคสอง จึงต้องปรับปรุงรายการข้อมูล วัตถุประสงค์ ฐานกฎหมาย และมาตรการความปลอดภัยใน ROP ให้เป็นปัจจุบัน ข ค และ ง จึงผิด"
+      },
+      {
+        id: 26, cat: "ROP", diff: "Application", type: "multi",
+        q: "องค์การบริหารส่วนจังหวัด (อบจ.) กำลังสำรวจข้อมูล (Data Inventory) เพื่อจัดทำ ROP สำหรับระบบรับสมัครสอบคัดเลือกพนักงานจ้าง ข้อมูลใดบ้างที่ อบจ. ต้องระมัดระวังเป็นพิเศษเนื่องจากเข้าข่ายข้อมูลส่วนบุคคลอ่อนไหวตามมาตรา 26 (เลือกคำตอบที่ถูกทั้งหมด)",
+        opts: [
+          "สำเนาใบแสดงผลการเรียน (Transcript) และเกรดเฉลี่ยสะสมจากมหาวิทยาลัย",
+          "ใบรับรองแพทย์ที่ระบุผลการตรวจโรคติดต่อและภาวะสุขภาพจิตของผู้สมัคร",
+          "ผลการตรวจสอบประวัติอาชญากรรมอย่างเป็นทางการจากสำนักงานตำรวจแห่งชาติ",
+          "ประวัติการทำงานที่ผ่านมาและชื่อสถานที่ทำงานเดิมของผู้สมัคร",
+          "ข้อมูลความพิการตามบัตรประจำตัวคนพิการเพื่อจัดสิ่งอำนวยความสะดวกในห้องสอบ"
+        ],
+        ans: [1, 2, 4],
+        exp: "เฉลย ข, ค, จ ถูกต้อง เพราะข้อมูลสุขภาพ ประวัติอาชญากรรม และความพิการ ล้วนเป็นข้อมูลอ่อนไหวตามมาตรา 26 ที่ต้องอาศัยข้อยกเว้นเฉพาะตามมาตรา 26 ในการประมวลผล ส่วน ก (ผลการเรียน) และ ง (ประวัติการทำงาน) เป็นข้อมูลส่วนบุคคลทั่วไป"
+      },
+      {
+        id: 27, cat: "ROP", diff: "Deep", type: "single",
+        q: "ตามแนวปฏิบัติ TDPG 3.0 การจำแนกประเภทข้อมูลออกเป็นข้อมูลที่เจ้าของข้อมูลให้ (Provided) ข้อมูลจากการสำรวจ (Observed) ข้อมูลสืบเนื่อง (Derived) และข้อมูลจากการอนุมาน (Inferred) มีนัยสำคัญต่อการประเมินความเสี่ยงใน ROP กรณีข้อมูลอ่อนไหวอย่างไร",
+        opts: [
+          "เฉพาะข้อมูลที่เจ้าของข้อมูลกรอกให้เองโดยตรงเท่านั้นที่ถือเป็นข้อมูลอ่อนไหว ส่วนข้อมูลที่ได้จากการอนุมานด้วย AI จะไม่ถือเป็นข้อมูลอ่อนไหวเลย",
+          "ข้อมูลที่ได้จากการสำรวจผ่านกล้องวงจรปิดหรือคุกกี้ทุกชนิดถือเป็นข้อมูลสาธารณะที่ไม่ต้องนำมาบันทึกใน ROP ของหน่วยงาน",
+          "ข้อมูลสืบเนื่อง เช่น การคำนวณอายุจากวันเดือนปีเกิด ถือเป็นการสร้างข้อมูลพันธุกรรมตามมาตรา 26 เสมอ",
+          "หากหน่วยงานนำข้อมูลทั่วไป เช่น ประวัติการซื้ออาหารและพฤติกรรมการเข้าเว็บ มาวิเคราะห์อนุมาน (Inference) เพื่อจำแนกศาสนาหรือแนวคิดทางการเมืองของบุคคล กิจกรรมนั้นจะเข้าข่ายการประมวลผลข้อมูลอ่อนไหวทันที"
+        ],
+        ans: [3],
+        exp: "เฉลย ง ถูกต้องตามแนวปฏิบัติ TDPG 3.0 (B3.2 และเชิงอรรถ 281) แม้ข้อมูลตั้งต้นจะเป็นข้อมูลทั่วไป แต่หากกิจกรรมประมวลผลใช้การอนุมาน (Inference) เพื่อบ่งชี้ศาสนา เชื้อชาติ สุขภาพ หรือความคิดเห็นทางการเมือง ย่อมกลายเป็นการประมวลผลข้อมูลอ่อนไหวที่ต้องอยู่ภายใต้เงื่อนไขมาตรา 26"
+      },
+      {
+        id: 28, cat: "ROP", diff: "Deep", type: "single",
+        q: "ข้อใดวิเคราะห์ความแตกต่างระหว่างข้อมูลประวัติอาชญากรรมกับข่าวอาชญากรรมทั่วไป และความแตกต่างระหว่าง PDPA ไทยกับ GDPR ในเรื่องนี้ได้ถูกต้องตามเอกสารแนวปฏิบัติ",
+        opts: [
+          "ข่าวหนังสือพิมพ์ที่รายงานว่าบุคคลถูกจับกุมถือเป็นประวัติอาชญากรรมตามมาตรา 26 เสมอ เช่นเดียวกับทะเบียนประวัติอาชญากรของตำรวจ",
+          "GDPR จัดให้ข้อมูลความพิการแยกออกจากข้อมูลสุขภาพ ส่วน PDPA ไทยไม่คุ้มครองข้อมูลความพิการเป็นข้อมูลอ่อนไหว",
+          "PDPA ไทยจัดให้ประวัติอาชญากรรม (ซึ่งมุ่งหมายถึงบันทึกทางการของรัฐ) รวมอยู่ในกลุ่มข้อมูลอ่อนไหวมาตรา 26 ขณะที่ GDPR แยกประวัติอาชญากรรมไว้เป็นอีกมาตราหนึ่งต่างหาก (Article 10) ที่ต้องประมวลผลภายใต้การควบคุมของรัฐหรือกฎหมายเฉพาะ",
+          "ทั้ง PDPA ไทยและ GDPR อนุญาตให้หน่วยงานใดๆ เก็บประวัติอาชญากรรมของผู้สมัครงานทุกคนได้โดยอ้างฐานสัญญาจ้างงานตามปกติ"
+        ],
+        ans: [2],
+        exp: "เฉลย ค ถูกต้องตาม TDPG 3.0 (B3.1 และ B3.7) PDPA ไทยรวมประวัติอาชญากรรมไว้ในมาตรา 26 (และมาตรา 26 วรรคสามกำหนดให้ต้องกระทำภายใต้การควบคุมของหน่วยงานที่มีอำนาจหน้าที่ตามกฎหมายหรือมีมาตรการตามที่ กคส. กำหนด) ขณะที่ GDPR แยกไว้จาก Article 9 และข่าวหนังสือพิมพ์ทั่วไปถือเป็นข้อมูลส่วนบุคคลทั่วไป ไม่ใช่บันทึกประวัติอาชญากรรมทางการ"
+      },
+      {
+        id: 29, cat: "ROP", diff: "Deep", type: "multi",
+        q: "การจัดทำ ROP อย่างครบถ้วนและเป็นปัจจุบันของหน่วยงานภาครัฐช่วยสนับสนุนการปฏิบัติหน้าที่ตามมาตราอื่นของ PDPA ในมิติใดบ้าง (เลือกคำตอบที่ถูกทั้งหมด)",
+        opts: [
+          "ใช้เป็นฐานข้อมูลตั้งต้นในการร่างและทบทวนประกาศความเป็นส่วนตัว (Privacy Notice) ตามมาตรา 23 ให้ครบถ้วนตรงตามกิจกรรมจริง",
+          "ช่วยให้ตรวจสอบและลบหรือทำลายข้อมูลส่วนบุคคลเมื่อพ้นกำหนดระยะเวลาเก็บรักษาตามมาตรา 37 (3) ได้อย่างเป็นระบบ",
+          "ใช้เป็นหลักฐานแสดงความรับผิดชอบ (Accountability) เมื่อสำนักงาน สคส. หรือเจ้าของข้อมูลขอตรวจสอบตามมาตรา 39 และใช้บันทึกเหตุปฏิเสธสิทธิ",
+          "ใช้ทดแทนการขอความยินยอมโดยชัดแจ้งจากเจ้าของข้อมูลได้ทันที ทำให้หน่วยงานไม่ต้องแจ้งวัตถุประสงค์ใดๆ แก่ประชาชนอีก"
+        ],
+        ans: [0, 1, 2],
+        exp: "เฉลย ก, ข, ค ถูกต้อง เพราะ ROP (Data Mapping & Record) เป็นหัวใจของการกำกับดูแลข้อมูลทั้งวงจร ตั้งแต่การออก Privacy Notice การคุมระยะเวลาจัดเก็บ (Data Retention) ไปจนถึงการตอบสนองสิทธิและให้ สคส. ตรวจสอบ ส่วน ง ผิดเพราะ ROP เป็นบันทึกภายในเพื่อความโปร่งใส ไม่สามารถใช้แทนฐานความยินยอมหรือแทนหน้าที่แจ้ง Privacy Notice ได้"
+      },
+
+      // ==================== หมวด 3: Bases (ข้อ 30 - 45 | Basic 8, App 4, Deep 4 | Single 12, Multi 4) ====================
+      {
+        id: 30, cat: "Bases", diff: "Basic", type: "single",
+        q: "ฐานการประมวลผลข้อมูลส่วนบุคคลทั่วไปตามมาตรา 24 แห่ง พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 ซึ่งแตกต่างจาก GDPR ของสหภาพยุโรปที่มีเพียง 6 ฐาน คือฐานใด",
+        opts: [
+          "ฐานการปฏิบัติตามสัญญา (Contract)",
+          "ฐานประโยชน์โดยชอบด้วยกฎหมาย (Legitimate Interest)",
+          "ฐานการจัดทำเอกสารประวัติศาสตร์ จดหมายเหตุ หรือการศึกษาวิจัยหรือสถิติ (Research / Archives / Statistics)",
+          "ฐานการปฏิบัติหน้าที่ในการดำเนินภารกิจเพื่อประโยชน์สาธารณะ (Public Task)"
+        ],
+        ans: [2],
+        exp: "เฉลย ค ถูกต้องตามเอกสารอบรม (เปรียบเทียบมาตรา 24 กับ GDPR Article 6) พ.ร.บ. ของไทยมีรวม 7 ฐาน (ความยินยอม + 6 ข้อยกเว้นตามมาตรา 24) โดยมีฐานจดหมายเหตุ/วิจัย/สถิติ มาตรา 24 (1) เพิ่มเติมขึ้นมาจาก 6 ฐานหลักของ GDPR"
+      },
+      {
+        id: 31, cat: "Bases", diff: "Basic", type: "single",
+        q: "ตามมาตรา 19 การขอความยินยอม (Consent) จากเจ้าของข้อมูลส่วนบุคคล ข้อใดไม่เป็นไปตามหลักเกณฑ์ของกฎหมาย",
+        opts: [
+          "แยกส่วนข้อความขอความยินยอมออกจากข้อความเงื่อนไขการให้บริการอื่นอย่างชัดเจน",
+          "ใช้ภาษาที่อ่านเข้าใจง่าย เข้าถึงง่าย และไม่หลอกลวงให้เข้าใจผิดในวัตถุประสงค์",
+          "ตั้งค่าทำเครื่องหมายถูกไว้ล่วงหน้าในช่องยินยอม (Pre-ticked box) เพื่อให้ผู้รับบริการกดยืนยันได้สะดวกรวดเร็ว",
+          "คำนึงอย่างถึงที่สุดในความเป็นอิสระของเจ้าของข้อมูล และไม่นำความยินยอมที่ไม่จำเป็นมาผูกเป็นเงื่อนไขการทำสัญญา"
+        ],
+        ans: [2],
+        exp: "เฉลย ค ถูกต้อง (คือไม่ชอบด้วยกฎหมาย) เพราะการทำ Pre-ticked box หรือการถือเอาความเงียบเป็นความยินยอม ไม่ถือเป็นการกระทำที่ให้ความยินยอมอย่างชัดแจ้ง (Clear affirmative action) ตามมาตรา 19 และแนวปฏิบัติ TDPG 3.0 ส่วน ก ข และ ง เป็นหลักเกณฑ์ที่ถูกต้องตามมาตรา 19"
+      },
+      {
+        id: 32, cat: "Bases", diff: "Basic", type: "single",
+        q: "ในกรณีที่เจ้าของข้อมูลส่วนบุคคลเป็นผู้เยาว์ที่มีอายุไม่เกิน 10 ปี และจำเป็นต้องอาศัยฐานความยินยอมตามมาตรา 20 ผู้ควบคุมข้อมูลต้องขอความยินยอมจากผู้ใด",
+        opts: [
+          "ขอความยินยอมจากตัวผู้เยาว์ได้โดยลำพังหากผู้เยาว์สามารถอ่านและเขียนหนังสือได้แล้ว",
+          "ขอความยินยอมจากครูประจำชั้นหรือผู้อำนวยการสถานศึกษาที่ผู้เยาว์กำลังศึกษาอยู่",
+          "ขอความยินยอมจากผู้ใช้อำนาจปกครองที่มีอำนาจกระทำการแทนผู้เยาว์",
+          "ขอความยินยอมจากพนักงานเจ้าหน้าที่ของสำนักงานคณะกรรมการคุ้มครองข้อมูลส่วนบุคคล"
+        ],
+        ans: [2],
+        exp: "เฉลย ค ถูกต้องตามมาตรา 20 (2) กรณีผู้เยาว์อายุไม่เกิน 10 ปี ให้ขอความยินยอมจากผู้ใช้อำนาจปกครองที่มีอำนาจกระทำการแทนผู้เยาว์ ส่วน ก ข และ ง ไม่สอดคล้องกับมาตรา 20"
+      },
+      {
+        id: 33, cat: "Bases", diff: "Basic", type: "single",
+        q: "หากเจ้าของข้อมูลส่วนบุคคลเป็น “คนไร้ความสามารถ” หรือ “คนเสมือนไร้ความสามารถ” การขอความยินยอมตามมาตรา 20 กำหนดให้ดำเนินการอย่างไรตามลำดับ",
+        opts: [
+          "คนไร้ความสามารถขอจากผู้พิทักษ์ ส่วนคนเสมือนไร้ความสามารถขอจากผู้อนุบาล",
+          "คนไร้ความสามารถขอจากผู้อนุบาล ส่วนคนเสมือนไร้ความสามารถขอจากผู้พิทักษ์",
+          "ทั้งสองกรณีให้ขอความยินยอมจากคู่สมรสหรือบุตรที่บรรลุนิติภาวะแล้วคนใดคนหนึ่งก็ได้โดยไม่ต้องดูคำสั่งศาล",
+          "ทั้งสองกรณีห้ามประมวลผลข้อมูลบนฐานความยินยอมโดยเด็ดขาดในทุกสถานการณ์"
+        ],
+        ans: [1],
+        exp: "เฉลย ข ถูกต้องตามมาตรา 20 วรรคสองและวรรคสาม คนไร้ความสามารถต้องขอความยินยอมจากผู้อนุบาลที่มีอำนาจกระทำการแทน ส่วนคนเสมือนไร้ความสามารถต้องขอความยินยอมจากผู้พิทักษ์ที่มีอำนาจกระทำการแทน (ก จึงสลับกัน)"
+      },
+      {
+        id: 34, cat: "Bases", diff: "Basic", type: "single",
+        q: "การใช้ฐานการปฏิบัติตามสัญญาตามมาตรา 24 (3) มีข้อจำกัดสำคัญประการใดตามกฎหมายและแนวปฏิบัติ",
+        opts: [
+          "ใช้ได้กับข้อมูลส่วนบุคคลทั่วไปที่จำเป็นต่อการปฏิบัติตามสัญญาซึ่งเจ้าของข้อมูลเป็นคู่สัญญาเท่านั้น ไม่สามารถใช้เป็นฐานสำหรับข้อมูลอ่อนไหวตามมาตรา 26 ได้",
+          "ใช้ประมวลผลข้อมูลอ่อนไหวทุกประเภทของคู่สัญญาและบุคคลในครอบครัวของคู่สัญญาได้โดยไม่ต้องขอความยินยอม",
+          "ใช้สำหรับการส่งข้อความโฆษณาการตลาดแบบตรงและระบบสะสมแต้มเสริมทุกประเภทได้โดยอัตโนมัติ",
+          "ใช้ได้เฉพาะสัญญาที่มีมูลค่าเกินกว่าหนึ่งแสนบาทและทำเป็นหนังสือจดทะเบียนต่อพนักงานเจ้าหน้าที่เท่านั้น"
+        ],
+        ans: [0],
+        exp: "เฉลย ก ถูกต้อง เพราะมาตรา 24 (3) ใช้ได้เฉพาะข้อมูลส่วนบุคคลทั่วไปที่จำเป็นต่อการปฏิบัติตามสัญญาหรือคำขอก่อนเข้าทำสัญญาซึ่งเจ้าของข้อมูลเป็นคู่สัญญาเท่านั้น และในมาตรา 26 ไม่มีฐานสัญญาทั่วไปสำหรับข้อมูลอ่อนไหว (ยกเว้นกรณีเฉพาะทางการแพทย์ตามมาตรา 26 (5)(ก))"
+      },
+      {
+        id: 35, cat: "Bases", diff: "Basic", type: "single",
+        q: "ข้อมูลส่วนบุคคลที่ Data Controller เก็บรวบรวมไว้ก่อนวันที่ พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 ใช้บังคับ (ข้อมูลเก่าตามบทเฉพาะกาล มาตรา 95) กฎหมายกำหนดให้ดำเนินการอย่างไร",
+        opts: [
+          "ต้องลบหรือทำลายข้อมูลเก่าทั้งหมดภายใน 90 วันนับแต่วันที่กฎหมายมีผลใช้บังคับ",
+          "สามารถเก็บรวบรวมและใช้ข้อมูลนั้นต่อไปได้ตามวัตถุประสงค์เดิม แต่ต้องกำหนดและประชาสัมพันธ์วิธีการยกเลิกความยินยอมให้แจ้งยกเลิกได้โดยง่าย",
+          "สามารถนำไปใช้และเปิดเผยเพื่อวัตถุประสงค์ใหม่ใดๆ ก็ได้อย่างเสรีตลอดไปโดยไม่ต้องแจ้งเจ้าของข้อมูล",
+          "ต้องยื่นคำร้องขออนุมัติใช้ข้อมูลเก่าเป็นรายชุดต่อคณะกรรมการผู้เชี่ยวชาญภายใน 180 วัน"
+        ],
+        ans: [1],
+        exp: "เฉลย ข ถูกต้องตามบทเฉพาะกาล มาตรา 95 วรรคหนึ่ง ซึ่งอนุญาตให้เก็บรวบรวมและใช้ต่อไปได้ตามวัตถุประสงค์เดิม โดยต้องกำหนดและเผยแพร่ประชาสัมพันธ์ช่องทางให้เจ้าของข้อมูลแจ้งยกเลิกความยินยอมได้โดยง่าย ส่วนการเปิดเผยต้องเป็นไปตามบทบัญญัติแห่ง พ.ร.บ. นี้"
+      },
+      {
+        id: 36, cat: "Bases", diff: "Basic", type: "multi",
+        q: "การประมวลผลข้อมูลส่วนบุคคลอ่อนไหวตามมาตรา 26 โดยไม่ต้องได้รับความยินยอมโดยชัดแจ้ง สามารถกระทำได้ในข้อยกเว้นกรณีใดบ้าง (เลือกคำตอบที่ถูกทั้งหมด)",
+        opts: [
+          "เพื่อป้องกันหรือระงับอันตรายต่อชีวิต ร่างกาย หรือสุขภาพของบุคคลซึ่งเจ้าของข้อมูลไม่สามารถให้ความยินยอมได้ ไม่ว่าด้วยเหตุใดก็ตาม",
+          "เป็นข้อมูลที่เปิดเผยต่อสาธารณะด้วยความยินยอมโดยชัดแจ้งของเจ้าของข้อมูลส่วนบุคคล",
+          "เป็นการจำเป็นเพื่อการก่อตั้งสิทธิเรียกร้องตามกฎหมาย การปฏิบัติตามหรือการใช้สิทธิเรียกร้องตามกฎหมาย หรือการยกขึ้นต่อสู้สิทธิเรียกร้องตามกฎหมาย",
+          "เป็นการจำเป็นเพื่อการวิเคราะห์พฤติกรรมผู้บริโภคในการส่งโฆษณาออนไลน์แบบเจาะจงรายบุคคล (Targeted Advertisement)"
+        ],
+        ans: [0, 1, 2],
+        exp: "เฉลย ก, ข, ค ถูกต้องตรงตามมาตรา 26 (1), (3) และ (4) ส่วน ง ผิดเพราะการทำโฆษณาออนไลน์แบบเจาะจงรายบุคคลไม่ใช่ข้อยกเว้นตามมาตรา 26 และแม้เป็นข้อมูลทั่วไปก็ต้องใช้ฐานความยินยอม"
+      },
+      {
+        id: 37, cat: "Bases", diff: "Basic", type: "multi",
+        q: "ในการใช้ฐานประโยชน์โดยชอบด้วยกฎหมาย (Legitimate Interest) ตามมาตรา 24 (5) ผู้ควบคุมข้อมูลต้องประเมินชั่งน้ำหนัก (Legitimate Interest Assessment: LIA) ในองค์ประกอบหลักใดบ้าง (เลือกคำตอบที่ถูกทั้งหมด)",
+        opts: [
+          "ระบุประโยชน์อันชอบด้วยกฎหมายที่ชัดเจนของผู้ควบคุมข้อมูลหรือของบุคคล/นิติบุคคลอื่น (Purpose Test)",
+          "พิจารณาความจำเป็นของการประมวลผลว่าไม่มีวิธีอื่นที่กระทบสิทธิน้อยกว่าเพื่อให้บรรลุวัตถุประสงค์เดียวกัน (Necessity Test)",
+          "ชั่งน้ำหนักสมดุลว่าประโยชน์ดังกล่าวมิได้มีความสำคัญน้อยกว่าสิทธิขั้นพื้นฐานในข้อมูลส่วนบุคคลของเจ้าของข้อมูล (Balancing Test)",
+          "ตรวจสอบว่าเจ้าของข้อมูลได้ลงลายมือชื่อให้ความยินยอมเป็นหนังสือแยกส่วนไว้แล้วหรือไม่"
+        ],
+        ans: [0, 1, 2],
+        exp: "เฉลย ก, ข, ค ถูกต้องตามหลักการทำ LIA ในแนวปฏิบัติ TDPG 3.0 (C6.4) และมาตรา 24 (5) ส่วน ง ผิดเพราะหากใช้ฐาน Legitimate Interest ย่อมเป็นการประมวลผลภายใต้ข้อยกเว้นที่ไม่ต้องขอความยินยอม ไม่ได้นำฐาน Consent มาปะปน"
+      },
+      {
+        id: 38, cat: "Bases", diff: "Application", type: "single",
+        q: "กรมขนส่งทางบกเก็บรวบรวมข้อมูลชื่อ เลขประจำตัวประชาชน และประวัติการผ่านการทดสอบของผู้มาขอรับใบอนุญาตขับรถตามที่พระราชบัญญัติรถยนต์ให้อำนาจหน้าที่ไว้ กรมขนส่งทางบกควรอ้างฐานทางกฎหมายใดจึงจะเหมาะสมที่สุด",
+        opts: [
+          "ฐานความยินยอมตามมาตรา 19 เพราะประชาชนเดินเข้ามาติดต่อขอทำใบขับขี่ด้วยความสมัครใจเอง",
+          "ฐานภารกิจเพื่อประโยชน์สาธารณะหรือการใช้อำนาจรัฐตามมาตรา 24 (4) หรือฐานการปฏิบัติตามกฎหมายตามมาตรา 24 (6)",
+          "ฐานสัญญาตามมาตรา 24 (3) เพราะการออกใบอนุญาตทางปกครองถือเป็นสัญญาจ้างทำของทางแพ่ง",
+          "ฐานป้องกันอันตรายต่อชีวิตตามมาตรา 24 (2) เพราะผู้ขับขี่ทุกคนถือว่าตกอยู่ในสภาวะหมดสติไม่สามารถให้ความยินยอมได้"
+        ],
+        ans: [1],
+        exp: "เฉลย ข ถูกต้องตามแนวปฏิบัติ TDPG 3.0 (C5.1) หน่วยงานรัฐที่ใช้อำนาจรัฐหรือดำเนินภารกิจสาธารณะตามที่กฎหมายกำหนดไว้ชัดเจน เช่น การสอบใบอนุญาตขับขี่ ต้องใช้ฐานภารกิจของรัฐ มาตรา 24 (4) หรือฐานปฏิบัติตามกฎหมาย มาตรา 24 (6) ไม่ควรใช้ฐานความยินยอมเพราะอำนาจต่อรองไม่เท่ากันและประชาชนถอนความยินยอมเพื่อให้พ้นเงื่อนไขกฎหมายไม่ได้"
+      },
+      {
+        id: 39, cat: "Bases", diff: "Application", type: "single",
+        q: "ประชาชนประสบอุบัติเหตุทางจราจรหมดสติถูกนำตัวส่งห้องฉุกเฉินของโรงพยาบาลศูนย์สังกัดกระทรวงสาธารณสุข แพทย์จำเป็นต้องดึงประวัติการแพ้ยาและกรุ๊ปเลือดจากโรงพยาบาลต้นสังกัดเดิมอย่างเร่งด่วนเพื่อช่วยชีวิต กรณีนี้โรงพยาบาลอาศัยฐานใดในการประมวลผลข้อมูลสุขภาพดังกล่าว",
+        opts: [
+          "มาตรา 26 (1) เพื่อป้องกันหรือระงับอันตรายต่อชีวิต ร่างกาย หรือสุขภาพของบุคคลซึ่งเจ้าของข้อมูลไม่สามารถให้ความยินยอมได้",
+          "มาตรา 24 (3) เพื่อการปฏิบัติตามสัญญาระหว่างผู้ป่วยกับโรงพยาบาลก่อนเข้าทำสัญญา",
+          "มาตรา 26 (2) การดำเนินกิจกรรมของมูลนิธิหรือองค์กรไม่แสวงหากำไรด้านการเมืองและศาสนา",
+          "ต้องรอให้ผู้ป่วยฟื้นคืนสติเพื่อลงลายมือชื่อให้ความยินยอมโดยชัดแจ้งตามมาตรา 19 เสียก่อนจึงจะดึงข้อมูลได้"
+        ],
+        ans: [0],
+        exp: "เฉลย ก ถูกต้อง เพราะประวัติการแพ้ยาเป็นข้อมูลสุขภาพ (Sensitive Data ตามมาตรา 26) และผู้ป่วยหมดสติไม่สามารถให้ความยินยอมได้ จึงเข้าข้อยกเว้นมาตรา 26 (1) โดยตรง ข ผิดเพราะมาตรา 24 (3) ใช้กับข้อมูลอ่อนไหวไม่ได้ ค ผิดประเภทองค์กร ง ผิดเพราะขัดต่อเจตนารมณ์การช่วยชีวิตเร่งด่วน"
+      },
+      {
+        id: 40, cat: "Bases", diff: "Application", type: "single",
+        q: "สำนักงานเขตแห่งหนึ่งเผยแพร่ข่าวสารราชการผ่านเว็บไซต์หลักตามปกติอยู่แล้ว แต่ต้องการเปิดบริการเสริมส่งจดหมายข่าวประชาสัมพันธ์กิจกรรมชุมชนทางอีเมลให้แก่ประชาชนที่สนใจสมัครรับข่าวสารเพิ่มเติม สำนักงานเขตสามารถใช้ฐานความยินยอมได้หรือไม่ เพราะเหตุใด",
+        opts: [
+          "ใช้ไม่ได้โดยเด็ดขาด เพราะหน่วยงานของรัฐถูกห้ามไม่ให้ใช้ฐานความยินยอมในทุกกิจกรรมไม่ว่ากรณีใด",
+          "ใช้ได้ เพราะเป็นบริการเสริมที่ประชาชนมีอิสระในการเลือกอย่างแท้จริงว่าจะให้หรือไม่ให้อีเมลก็ได้โดยไม่กระทบสิทธิรับบริการหลักและยังดูข่าวจากเว็บไซต์ได้ตามปกติ",
+          "ใช้ได้ และสำนักงานเขตสามารถบังคับให้ผู้มาทำบัตรประชาชนทุกคนต้องกรอกอีเมลรับจดหมายข่าวก่อนจึงจะออกบัตรให้ได้",
+          "ใช้ไม่ได้ ต้องอ้างฐานการจัดทำเอกสารประวัติศาสตร์และจดหมายเหตุตามมาตรา 24 (1) แทนเท่านั้น"
+        ],
+        ans: [1],
+        exp: "เฉลย ข ถูกต้องตามตัวอย่างในแนวปฏิบัติ TDPG 3.0 (C2.23) แม้โดยหลักหน่วยงานรัฐมักไม่ใช้ฐานความยินยอมในภารกิจใช้อำนาจรัฐ แต่สำหรับบริการเสริม เช่น การรับอีเมลข่าวสารเพิ่มเติมที่ประชาชนปฏิเสธได้จริงโดยไม่เสียสิทธิหรือผลประโยชน์หลัก สามารถใช้ฐานความยินยอมได้"
+      },
+      {
+        id: 41, cat: "Bases", diff: "Application", type: "multi",
+        q: "กระทรวงสาธารณสุขร่วมกับกรมควบคุมโรคดำเนินการเก็บและวิเคราะห์ข้อมูลประวัติการสัมผัสโรคระบาดร้ายแรงของกลุ่มเสี่ยงเพื่อควบคุมการแพร่ระบาดในประเทศ สามารถอ้างฐานข้อยกเว้นสำหรับข้อมูลอ่อนไหวตามมาตรา 26 ข้อใดได้บ้างตามความเหมาะสมของกิจกรรม (เลือกคำตอบที่ถูกทั้งหมด)",
+        opts: [
+          "มาตรา 26 (5) (ข) ประโยชน์สาธารณะด้านการสาธารณสุข เช่น การป้องกันด้านสุขภาพจากโรคติดต่ออันตรายหรือโรคระบาด โดยจัดให้มีมาตรการที่เหมาะสมและเจาะจง",
+          "มาตรา 26 (5) (ง) การศึกษาวิจัยทางวิทยาศาสตร์หรือสถิติเพื่อบรรลุวัตถุประสงค์เพียงเท่าที่จำเป็นและจัดให้มีมาตรการปกป้องสิทธิที่เหมาะสมตามที่ กคส. กำหนด (กรณีวิเคราะห์วิจัยเชิงระบาดวิทยา)",
+          "มาตรา 24 (5) ฐานประโยชน์โดยชอบด้วยกฎหมายทั่วไปเพียงลำพังโดยไม่ต้องดูเงื่อนไขมาตรา 26",
+          "มาตรา 26 (2) กิจกรรมภายในของสหภาพแรงงานและพรรคการเมือง"
+        ],
+        ans: [0, 1],
+        exp: "เฉลย ก, ข ถูกต้องตามมาตรา 26 (5) (ข) สำหรับการควบคุมป้องกันโรคระบาดด้านสาธารณสุข และมาตรา 26 (5) (ง) กรณีนำไปศึกษาวิจัยหรือทำสถิติทางระบาดวิทยาภายใต้มาตรการที่เหมาะสม ส่วน ค ผิดเพราะข้อมูลสุขภาพต้องเข้าเงื่อนไขมาตรา 26 ไม่ใช่อ้างเฉพาะมาตรา 24 (5) และ ง ไม่เกี่ยวข้องกับภารกิจสาธารณสุข"
+      },
+      {
+        id: 42, cat: "Bases", diff: "Deep", type: "single",
+        q: "เพราะเหตุใดแนวปฏิบัติการคุ้มครองข้อมูลส่วนบุคคลจึงเตือนว่า “ความยินยอมไม่ใช่ฐานการประมวลผลที่ดีที่สุดเสมอไป” และห้ามหน่วยงานนำฐานความยินยอมไปใช้ซ้ำซ้อนในกิจกรรมที่มีฐานสัญญาหรือฐานภารกิจของรัฐรองรับอยู่แล้ว",
+        opts: [
+          "เพราะการขอความยินยอมมีค่าธรรมเนียมที่ต้องนำส่งสำนักงาน สคส. รายฉบับทำให้สิ้นเปลืองงบประมาณแผ่นดิน",
+          "เพราะความยินยอมผูกอยู่กับสิทธิในการถอนความยินยอมเมื่อใดก็ได้ หากขอความยินยอมพร่ำเพรื่อทั้งที่ต้องเก็บข้อมูลตามสัญญาหรือภารกิจรัฐ จะทำให้เจ้าของข้อมูลเข้าใจผิดว่าถอนแล้วหน่วยงานต้องหยุดประมวลผลทันที",
+          "เพราะกฎหมายกำหนดโทษอาญาจำคุกทันทีหากหน่วยงานขอความยินยอมจากประชาชนเกินกว่าปีละหนึ่งครั้ง",
+          "เพราะฐานความยินยอมอนุญาตให้เก็บรักษาข้อมูลไว้ได้ไม่เกิน 7 วันนับแต่วันที่ได้รับความยินยอมเท่านั้น"
+        ],
+        ans: [1],
+        exp: "เฉลย ข ถูกต้องตามแนวปฏิบัติ TDPG 3.0 (C1.4 และ C2.3) หากมีฐานสัญญา ฐานกฎหมาย หรือฐานภารกิจรัฐรองรับอยู่แล้วแต่กลับไปขอความยินยอม จะสร้างความสับสนและสูญเสียความเชื่อใจเมื่อเจ้าของข้อมูลขอถอนความยินยอมแล้วพบว่าหน่วยงานยังคงประมวลผลต่อไปตามฐานอื่นโดยไม่แจ้งให้ชัดเจนตั้งแต่ต้น"
+      },
+      {
+        id: 43, cat: "Bases", diff: "Deep", type: "single",
+        q: "หน่วยงานของรัฐแห่งหนึ่งต้องการตรวจสอบภาพรวมภาวะหนี้ครัวเรือนระดับจังหวัดเพื่อวางแผนเศรษฐกิจ ซึ่งสามารถใช้ชุดข้อมูลสถิติรวมที่ธนาคารส่งให้โดยไม่ต้องมีชื่อหรือเลขบัตรประชาชนได้ แต่หน่วยงานกลับสั่งเรียกข้อมูลรายบุคคลของลูกหนี้ทุกคนในจังหวัด กรณีนี้ขัดต่อหลักการใช้ฐานภารกิจของรัฐตามมาตรา 24 (4) อย่างไร",
+        opts: [
+          "ไม่ขัดต่อกฎหมาย เพราะฐานภารกิจของรัฐให้อำนาจเด็ดขาดแก่หน่วยงานรัฐในการเรียกข้อมูลส่วนบุคคลใดๆ ก็ได้โดยไม่มีเงื่อนไขความจำเป็น",
+          "ขัดต่อหลักความจำเป็น (Necessity) และการเก็บข้อมูลเท่าที่จำเป็น (Data Minimization) เพราะหากบรรลุภารกิจสาธารณะได้ด้วยข้อมูลสถิติที่ไม่ระบุตัวตน ย่อมไม่อาจอ้างความจำเป็นตามมาตรา 24 (4) ได้",
+          "ขัดต่อมาตรา 20 เรื่องการขอความยินยอมจากผู้เยาว์แต่เพียงประเด็นเดียวเท่านั้น",
+          "ขัดต่อมาตรา 29 เรื่องการส่งข้อมูลภายในเครือธุรกิจเดียวกันไปต่างประเทศ"
+        ],
+        ans: [1],
+        exp: "เฉลย ข ถูกต้องตามแนวปฏิบัติ TDPG 3.0 (C5.2 และ C5.3) ฐานภารกิจของรัฐ มาตรา 24 (4) มีคำสำคัญว่า 'เป็นการจำเป็น' และต้องสอดคล้องกับหลักความได้สัดส่วนและมาตรา 22 หากดำเนินภารกิจได้โดยไม่ต้องใช้ข้อมูลที่ระบุตัวบุคคล ย่อมไม่ถือว่าจำเป็นและอ้างฐานนี้ไม่ได้"
+      },
+      {
+        id: 44, cat: "Bases", diff: "Deep", type: "single",
+        q: "หากหน่วยงานเคยเก็บข้อมูลบนฐานความยินยอมตามวัตถุประสงค์ที่หนึ่ง ต่อมาเจ้าของข้อมูลถอนความยินยอมสำหรับวัตถุประสงค์นั้น แต่หน่วยงานยังมีหน้าที่ตาม พ.ร.บ.ว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ ต้องเก็บข้อมูลจราจรทางคอมพิวเตอร์ไว้ไม่น้อยกว่า 90 วัน หน่วยงานต้องดำเนินการอย่างไร",
+        opts: [
+          "ต้องลบข้อมูลจราจรทางคอมพิวเตอร์ทิ้งทันทีตามคำขอถอนความยินยอม เพราะ PDPA มีศักดิ์สูงกว่ากฎหมายอื่นทุกฉบับ",
+          "ต้องหยุดใช้ข้อมูลตามวัตถุประสงค์เดิมที่ถอนความยินยอม แต่ยังคงเก็บรักษาเฉพาะข้อมูลจราจรไว้ตามฐานการปฏิบัติตามกฎหมาย (มาตรา 24 (6)) โดยควรแจ้งฐานและขอบเขตดังกล่าวให้ชัดเจนตั้งแต่ต้นหรือเมื่อมีการเปลี่ยนแปลง",
+          "สามารถนำข้อมูลจราจรนั้นไปใช้ส่งโฆษณาประชาสัมพันธ์ต่อไปได้เพราะยังอยู่ในช่วง 90 วันตามกฎหมายคอมพิวเตอร์",
+          "ต้องฟ้องศาลปกครองเพื่อขอคำสั่งระงับสิทธิการถอนความยินยอมของประชาชนทุกราย"
+        ],
+        ans: [1],
+        exp: "เฉลย ข ถูกต้องตามแนวปฏิบัติ TDPG 3.0 (หน้า 67-68) ข้อมูลชุดเดียวกันอาจเกี่ยวข้องกับหลายวัตถุประสงค์และคนละฐานกฎหมาย เมื่อถอนความยินยอมในวัตถุประสงค์หนึ่ง ย่อมต้องหยุดกิจกรรมนั้น แต่ส่วนที่กฎหมายบังคับให้เก็บตามมาตรา 24 (6) ยังคงเก็บเพื่อวัตถุประสงค์ทางกฎหมายนั้นต่อไปได้โดยไม่นำไปใช้ผิดวัตถุประสงค์"
+      },
+      {
+        id: 45, cat: "Bases", diff: "Deep", type: "multi",
+        q: "ตามบทเฉพาะกาลมาตรา 95 และแนวปฏิบัติ TDPG 3.0 หากหน่วยงานมีหนังสือขอความยินยอมเก่าที่เก็บไว้ก่อน PDPA ใช้บังคับ ซึ่งเขียนเหมารวมปะปนกันทั้งส่วนที่จำเป็นตามสัญญา ส่วนวิเคราะห์การตลาด และคำว่า “เพื่อกิจกรรมอื่นใดทุกประการของหน่วยงาน” ผลทางกฎหมายเป็นอย่างไร (เลือกคำตอบที่ถูกทั้งหมด)",
+        opts: [
+          "ข้อความที่กว้างขวางคลุมเครือเช่นคำว่า “กิจกรรมอื่นใดทุกประการ” ไม่มีผลใช้บังคับเป็นความยินยอมที่ชอบด้วยกฎหมาย คงมีผลใช้ได้เฉพาะส่วนที่ระบุขอบเขตวัตถุประสงค์ไว้ชัดเจนเดิมเท่านั้น",
+          "ส่วนที่จำเป็นต่อการให้บริการตามสัญญาอยู่แล้วสามารถอ้างฐานสัญญาได้ตามปกติโดยไม่ต้องพึ่งพาความยินยอมเก่า",
+          "หน่วยงานต้องจัดให้มีและประชาสัมพันธ์ช่องทางให้เจ้าของข้อมูลสามารถแจ้งยกเลิกความยินยอม (Opt-out) ในส่วนที่อิงความยินยอมเก่าได้โดยง่าย",
+          "หากมีการนำข้อมูลเก่านั้นไป “เปิดเผย” ให้บุคคลภายนอกรายใหม่ในปัจจุบัน จะได้รับยกเว้นไม่ต้องปฏิบัติตามบทบัญญัติ PDPA เลย"
+        ],
+        ans: [0, 1, 2],
+        exp: "เฉลย ก, ข, ค ถูกต้องตามมาตรา 95 วรรคหนึ่ง และแนวปฏิบัติ TDPG 3.0 (C2.19) ส่วน ง ผิดอย่างชัดเจนเพราะมาตรา 95 วรรคสองบัญญัติว่า 'การเปิดเผยและการดำเนินการอื่นที่มิใช่การเก็บรวบรวมและการใช้ข้อมูลส่วนบุคคลตามวรรคหนึ่ง ให้เป็นไปตามบทบัญญัติแห่งพระราชบัญญัตินี้'"
+      },
+
+      // ==================== หมวด 4: Controller (ข้อ 46 - 61 | Basic 8, App 5, Deep 3 | Single 12, Multi 4) ====================
+      {
+        id: 46, cat: "Controller", diff: "Basic", type: "single",
+        q: "ตามมาตรา 23 ผู้ควบคุมข้อมูลส่วนบุคคลต้องแจ้งรายละเอียดเกี่ยวกับการประมวลผลข้อมูล (Privacy Notice) ให้เจ้าของข้อมูลทราบเมื่อใด กรณีเก็บรวบรวมข้อมูลจากเจ้าของข้อมูลโดยตรง",
+        opts: [
+          "แจ้งภายใน 60 วันหลังจากประมวลผลข้อมูลเสร็จสิ้นแล้ว",
+          "แจ้งก่อนหรือในขณะเก็บรวบรวมข้อมูลส่วนบุคคล เว้นแต่เจ้าของข้อมูลได้ทราบถึงรายละเอียดนั้นอยู่แล้ว",
+          "แจ้งเฉพาะเมื่อเกิดเหตุข้อมูลรั่วไหลออกสู่สาธารณะแล้วเท่านั้น",
+          "แจ้งปีละหนึ่งครั้งพร้อมกับการประกาศรายงานงบการเงินประจำปีของหน่วยงาน"
+        ],
+        ans: [1],
+        exp: "เฉลย ข ถูกต้องตรงตามมาตรา 23 วรรคหนึ่ง คือต้องแจ้งก่อนหรือในขณะเก็บรวบรวมข้อมูลส่วนบุคคล เว้นแต่เจ้าของข้อมูลทราบรายละเอียดนั้นอยู่แล้ว ส่วน ก ค และ ง ผิดเงื่อนไขเวลาตามกฎหมาย"
+      },
+      {
+        id: 47, cat: "Controller", diff: "Basic", type: "single",
+        q: "ข้อใดอธิบายความแตกต่างระหว่าง Privacy Policy (นโยบายการคุ้มครองข้อมูลส่วนบุคคล) กับ Privacy Notice (ประกาศความเป็นส่วนตัว) ตามเอกสารแนวทางของ สคส. ได้ถูกต้อง",
+        opts: [
+          "Privacy Policy เป็นเอกสารบังคับตามมาตรา 23 สำหรับแจ้งประชาชนภายนอก ส่วน Privacy Notice เป็นระเบียบภายในสำหรับพนักงานเท่านั้น",
+          "Privacy Policy เป็นนโยบายและแนวปฏิบัติที่สื่อสารกับบุคลากรภายในองค์กร ส่วน Privacy Notice เป็นประกาศแจ้งเงื่อนไขการประมวลผลแก่เจ้าของข้อมูลตามหน้าที่ในมาตรา 23",
+          "ทั้งสองฉบับเป็นเอกสารที่ห้ามเผยแพร่ทางระบบอิเล็กทรอนิกส์ ต้องติดป้ายประกาศหน้าอาคารสำนักงานเท่านั้น",
+          "หน่วยงานของรัฐมีหน้าที่ทำเฉพาะ Privacy Policy เท่านั้น และได้รับยกเว้นไม่ต้องแจ้ง Privacy Notice ตามมาตรา 23"
+        ],
+        ans: [1],
+        exp: "เฉลย ข ถูกต้องตามแผ่นภาพเปรียบเทียบของ สคส. ในเอกสารอบรม (หน้า 20-21 ของ Day 1) Privacy Notice เป็นหน้าที่ตามกฎหมายมาตรา 23 ที่ต้องแจ้งต่อเจ้าของข้อมูล ส่วน Privacy Policy เป็นนโยบายวางกรอบแนวปฏิบัติภายในองค์กร (แม้บางองค์กรอาจใช้ชื่อปนกัน แต่ต้องดูเนื้อหาตามมาตรา 23 เป็นสำคัญ)"
+      },
+      {
+        id: 48, cat: "Controller", diff: "Basic", type: "single",
+        q: "เมื่อเกิดเหตุการละเมิดข้อมูลส่วนบุคคล (Personal Data Breach) ที่มีความเสี่ยงต่อสิทธิและเสรีภาพของบุคคล มาตรา 37 (4) กำหนดให้ Data Controller ต้องแจ้งเหตุต่อสำนักงาน สคส. ภายในระยะเวลาใด",
+        opts: [
+          "โดยไม่ชักช้าภายใน 24 ชั่วโมงนับแต่เกิดเหตุการณ์ขึ้นจริงในระบบ",
+          "โดยไม่ชักช้าภายใน 72 ชั่วโมงนับแต่ทราบเหตุเท่าที่จะสามารถกระทำได้",
+          "ภายใน 15 วันทำการนับแต่วันที่คณะกรรมการสอบสวนภายในสรุปผลเสร็จสิ้น",
+          "ภายใน 30 วันนับแต่วันที่เจ้าของข้อมูลยื่นหนังสือร้องเรียนเข้ามาที่หน่วยงาน"
+        ],
+        ans: [1],
+        exp: "เฉลย ข ถูกต้องตามมาตรา 37 (4) และประกาศ กคส. เรื่องการแจ้งเหตุละเมิดฯ ข้อ 6 คือ ต้องแจ้งโดยไม่ชักช้า (without undue delay) ภายใน 72 ชั่วโมง 'นับแต่ทราบเหตุ (aware)' เท่าที่จะสามารถกระทำได้"
+      },
+      {
+        id: 49, cat: "Controller", diff: "Basic", type: "single",
+        q: "ตามประกาศ กคส. เรื่อง หลักเกณฑ์และวิธีการในการแจ้งเหตุการละเมิดข้อมูลส่วนบุคคล พ.ศ. 2565 ข้อ 7 หากมีเหตุจำเป็นอันไม่อาจก้าวล่วงได้ทำให้ Data Controller แจ้งเหตุละเมิดต่อ สคส. ล่าช้าเกินกว่า 72 ชั่วโมง จะต้องแจ้งพร้อมชี้แจงเหตุผลอย่างช้าไม่เกินกี่วันนับแต่ทราบเหตุ",
+        opts: [
+          "ไม่เกิน 7 วันนับแต่ทราบเหตุ",
+          "ไม่เกิน 15 วันนับแต่ทราบเหตุ",
+          "ไม่เกิน 30 วันนับแต่ทราบเหตุ",
+          "ไม่เกิน 90 วันนับแต่ทราบเหตุ"
+        ],
+        ans: [1],
+        exp: "เฉลย ข ถูกต้องตามประกาศ กคส. เรื่องการแจ้งเหตุละเมิดฯ พ.ศ. 2565 ข้อ 7 กรณีแจ้งล่าช้ากว่า 72 ชั่วโมง (เช่น อยู่ระหว่างตรวจสอบข้อมูลเบื้องต้นหรือระงับเหตุที่จำเป็น) ต้องชี้แจงเหตุผลความจำเป็นและแจ้งแก่ สคส. โดยเร็วแต่ต้องไม่เกิน 15 วันนับแต่ทราบเหตุ เพื่อให้ สคส. พิจารณายกเว้นความผิด"
+      },
+      {
+        id: 50, cat: "Controller", diff: "Basic", type: "single",
+        q: "ประเภทของการละเมิดข้อมูลส่วนบุคคลตามหลัก CIA Triad ที่ระบุในประกาศ กคส. และแนวปฏิบัติ หมายถึงองค์ประกอบใด",
+        opts: [
+          "Consent (ความยินยอม), Information (สารสนเทศ), Accountability (ความรับผิดชอบ)",
+          "Confidentiality (ความลับ), Integrity (ความถูกต้องครบถ้วน), Availability (สภาพพร้อมใช้งาน)",
+          "Controller (ผู้ควบคุม), Inspector (ผู้ตรวจสอบ), Authority (พนักงานเจ้าหน้าที่)",
+          "Collection (การเก็บรวบรวม), Identification (การระบุตัวตน), Archiving (การจัดเก็บถาวร)"
+        ],
+        ans: [1],
+        exp: "เฉลย ข ถูกต้องตามประกาศมาตรการรักษาความมั่นคงปลอดภัย พ.ศ. 2565 และประกาศแจ้งเหตุละเมิดฯ ข้อ 4 การละเมิดข้อมูลส่วนบุคคลแบ่งเป็น 3 ด้านตามหลัก CIA ได้แก่ การละเมิดความลับ (C) การละเมิดความถูกต้องครบถ้วน (I) และการละเมิดความพร้อมใช้งาน (A)"
+      },
+      {
+        id: 51, cat: "Controller", diff: "Basic", type: "single",
+        q: "ตามมาตรา 41 หน่วยงานภาครัฐที่มีลักษณะตามที่คณะกรรมการประกาศกำหนด มีหน้าที่เกี่ยวกับเจ้าหน้าที่คุ้มครองข้อมูลส่วนบุคคล (Data Protection Officer: DPO) อย่างไร",
+        opts: [
+          "ได้รับยกเว้นไม่ต้องแต่งตั้ง DPO เพราะเป็นหน่วยงานของรัฐที่ไม่แสวงหากำไร",
+          "ต้องจัดให้มี DPO ของตน และแจ้งข้อมูลสถานที่ติดต่อและวิธีการติดต่อของ DPO ให้เจ้าของข้อมูลและสำนักงานทราบ",
+          "ต้องให้ปลัดกระทรวงทำหน้าที่เป็น DPO เพียงคนเดียวสำหรับทุกกรมและทุกจังหวัดทั่วประเทศโดยห้ามมอบหมายผู้อื่น",
+          "ต้องจ้างบริษัทที่ปรึกษาต่างชาติเป็น DPO เท่านั้น ห้ามแต่งตั้งข้าราชการหรือพนักงานภายในหน่วยงานเป็น DPO"
+        ],
+        ans: [1],
+        exp: "เฉลย ข ถูกต้องตามมาตรา 41 (1) และวรรคสี่-หก หน่วยงานของรัฐตามที่ กคส. ประกาศกำหนดต้องจัดให้มี DPO (ซึ่งจะเป็นบุคลากรภายในหรือผู้รับจ้างให้บริการตามสัญญาก็ได้ และหน่วยงานรัฐขนาดใหญ่หรือมีหลายแห่งอาจแต่งตั้งร่วมกันได้โดยอนุโลม) พร้อมแจ้งข้อมูลติดต่อแก่เจ้าของข้อมูลและ สคส."
+      },
+      {
+        id: 52, cat: "Controller", diff: "Basic", type: "multi",
+        q: "ตามประกาศ กคส. เรื่อง มาตรการรักษาความมั่นคงปลอดภัยของผู้ควบคุมข้อมูลส่วนบุคคล พ.ศ. 2565 มาตรฐานขั้นต่ำในการจัดการระบบสารสนเทศต้องพิจารณาองค์ประกอบใดบ้าง (เลือกคำตอบที่ถูกทั้งหมด)",
+        opts: [
+          "การควบคุมการเข้าถึง (Access control) และการบริหารจัดการสิทธิการเข้าถึงของผู้ใช้งาน (User access management) ตามหลักให้สิทธิเท่าที่จำเป็น",
+          "การกำหนดหน้าที่ความรับผิดชอบของผู้ใช้งาน (User responsibilities) และการจัดให้มีวิธีตรวจสอบย้อนหลัง (Audit trails)",
+          "การเสริมสร้างความตระหนักรู้และแจ้งนโยบาย แนวปฏิบัติ และมาตรการคุ้มครองข้อมูลให้แก่บุคลากรและผู้ที่เกี่ยวข้องทราบ",
+          "การเปิดสิทธิผู้ดูแลระบบสูงสุด (Admin) ให้แก่เจ้าหน้าที่ทุกคนในหน่วยงานอย่างเท่าเทียมกันเพื่อความคล่องตัวในการทำงาน"
+        ],
+        ans: [0, 1, 2],
+        exp: "เฉลย ก, ข, ค ถูกต้องตามประกาศมาตรการรักษาความมั่นคงปลอดภัยฯ พ.ศ. 2565 (ในสไลด์ Day 1 หน้า 24-25) ส่วน ง ผิดร้ายแรงเพราะขัดต่อหลัก Access Control และ Least Privilege (ให้เข้าถึงได้น้อยที่สุดเท่าที่จำเป็นต่อบทบาทหน้าที่)"
+      },
+      {
+        id: 53, cat: "Controller", diff: "Basic", type: "multi",
+        q: "ข้อใดเป็นหลักประกันความเป็นอิสระและสถานะของเจ้าหน้าที่คุ้มครองข้อมูลส่วนบุคคล (DPO) ตามมาตรา 42 (เลือกคำตอบที่ถูกทั้งหมด)",
+        opts: [
+          "Data Controller จะให้ DPO ออกจากงานหรือเลิกสัญญาจ้างด้วยเหตุที่ DPO ปฏิบัติหน้าที่ตาม พ.ร.บ. นี้ไม่ได้",
+          "ในกรณีที่มีปัญหาในการปฏิบัติหน้าที่ DPO ต้องสามารถรายงานไปยังผู้บริหารสูงสุดของ Data Controller ได้โดยตรง",
+          "DPO อาจปฏิบัติหน้าที่หรือภารกิจอื่นได้ แต่ Data Controller ต้องรับรองว่าหน้าที่อื่นนั้นไม่ขัดหรือแย้งต่อการปฏิบัติหน้าที่ตาม PDPA",
+          "DPO ต้องเป็นผู้มีอำนาจตัดสินใจอนุมัติวัตถุประสงค์การเก็บรวบรวมข้อมูลแทนหัวหน้าหน่วยงานในฐานะ Data Controller"
+        ],
+        ans: [0, 1, 2],
+        exp: "เฉลย ก, ข, ค ถูกต้องตรงตามมาตรา 42 วรรคสามและวรรคสี่ ส่วน ง ผิดเพราะหน้าที่ของ DPO คือให้คำแนะนำ ตรวจสอบ ประสานงาน และรักษาความลับ หาก DPO เป็นผู้ตัดสินใจกำหนดวัตถุประสงค์การประมวลผลเสียเองจะเกิดผลประโยชน์ทับซ้อน (Conflict of Interest) ขัดต่อมาตรา 42 วรรคสี่"
+      },
+      {
+        id: 54, cat: "Controller", diff: "Application", type: "single",
+        q: "เซิร์ฟเวอร์ทะเบียนประวัติผู้รับสวัสดิการของกรมแห่งหนึ่งถูกมัลแวร์เรียกค่าไถ่ (Ransomware) เข้ารหัสไฟล์ทั้งหมดจนเจ้าหน้าที่ไม่สามารถเปิดใช้งานระบบเพื่อเบิกจ่ายเงินได้นาน 3 วัน แม้จะตรวจสอบแล้วไม่พบร่องรอยการขโมยข้อมูลออกไปภายนอก กรณีนี้ถือเป็นการละเมิดข้อมูลส่วนบุคคลหรือไม่",
+        opts: [
+          "ไม่ถือเป็นการละเมิดข้อมูลส่วนบุคคล เพราะไม่มีแฮกเกอร์เปิดอ่านหรือนำข้อมูลออกไปเผยแพร่สู่สาธารณะ",
+          "ถือเป็นการละเมิดข้อมูลส่วนบุคคลด้านความพร้อมใช้งาน (Availability Breach) เพราะทำให้ไม่สามารถเข้าถึงข้อมูลได้ตามปกติแม้จะเป็นการชั่วคราว",
+          "ถือเป็นการละเมิดเฉพาะกฎหมายว่าด้วยการกระทำความผิดเกี่ยวกับคอมพิวเตอร์ แต่ไม่เกี่ยวข้องกับ PDPA แต่อย่างใด",
+          "ถือเป็นการละเมิดเฉพาะกรณีที่ไฟล์ข้อมูลสูญหายถาวรไม่สามารถกู้คืนได้เกินกว่า 1 ปีขึ้นไปเท่านั้น"
+        ],
+        ans: [1],
+        exp: "เฉลย ข ถูกต้องตามประกาศ กคส. เรื่องการแจ้งเหตุละเมิดฯ ข้อ 4 การที่ข้อมูลส่วนบุคคลไม่อยู่ในสภาพที่พร้อมใช้งานได้ตามปกติ ไม่ว่าจะถาวรหรือชั่วคราว ถือเป็นการละเมิดความพร้อมใช้งาน (Availability) จึงต้องเข้าสู่กระบวนการประเมินความเสี่ยงตามขั้นตอนกฎหมาย"
+      },
+      {
+        id: 55, cat: "Controller", diff: "Application", type: "single",
+        q: "จากกรณีเหตุข้อมูลรั่วไหลในหน่วยงานของรัฐ เมื่อทีมงานและ DPO ตรวจสอบยืนยันเหตุและประเมินความเสี่ยงแล้วพบว่า “มีความเสี่ยงสูงที่จะมีผลกระทบต่อสิทธิและเสรีภาพของบุคคล” หน่วยงานต้องแจ้งเหตุแก่ใครและภายในกรอบเวลาใด",
+        opts: [
+          "แจ้งเฉพาะสำนักงาน สคส. ภายใน 72 ชั่วโมงเพียงแห่งเดียว โดยห้ามแจ้งเจ้าของข้อมูลเพื่อป้องกันความตื่นตระหนก",
+          "แจ้งเฉพาะเจ้าของข้อมูลภายใน 30 วัน โดยไม่ต้องแจ้งสำนักงาน สคส. หากเป็นหน่วยงานราชการส่วนภูมิภาค",
+          "แจ้งสำนักงาน สคส. โดยไม่ชักช้าภายใน 72 ชั่วโมงนับแต่ทราบเหตุ และแจ้งให้เจ้าของข้อมูลทราบพร้อมแนวทางการเยียวยาโดยไม่ชักช้าด้วย",
+          "แจ้งคณะรัฐมนตรีเพื่อขออนุมัติงบกลางเยียวยาก่อน แล้วจึงค่อยแจ้งสำนักงาน สคส. ภายใน 180 วันสิ้นปีงบประมาณ"
+        ],
+        ans: [2],
+        exp: "เฉลย ค ถูกต้องตามมาตรา 37 (4) กรณีมีความเสี่ยงทั่วไปต้องแจ้ง สคส. ภายใน 72 ชั่วโมง แต่หากประเมินแล้วพบว่าเป็น 'ความเสี่ยงสูง' (ร้ายแรง) ต่อสิทธิและเสรีภาพของบุคคล ต้องแจ้งทั้ง สคส. (ภายใน 72 ชม.) และแจ้งเจ้าของข้อมูลพร้อมแนวทางเยียวยาโดยไม่ชักช้าด้วย"
+      },
+      {
+        id: 56, cat: "Controller", diff: "Application", type: "single",
+        q: "เจ้าหน้าที่ของสำนักงานจังหวัดส่งไฟล์รายชื่อผู้ลงทะเบียนเข้ารับการอบรมผิดอีเมลไปยังข้าราชการอีกแผนกหนึ่งภายในสำนักงานเดียวกัน แต่ตรวจพบทันทีและผู้รับได้ลบไฟล์ทิ้งโดยยังไม่ได้เปิดอ่านและยืนยันผลแล้ว เมื่อประเมินพบว่า “ไม่มีความเสี่ยงต่อสิทธิและเสรีภาพของบุคคล” สำนักงานจังหวัดควรปฏิบัติอย่างไร",
+        opts: [
+          "ต้องรีบแจ้งเหตุละเมิดต่อสำนักงาน สคส. ภายใน 72 ชั่วโมงและประกาศลงสื่อมวลชนทั่วประเทศทุกกรณีไม่มีข้อยกเว้น",
+          "ได้รับยกเว้นไม่ต้องแจ้งเหตุละเมิดต่อ สคส. และไม่ต้องแจ้งเจ้าของข้อมูล แต่ควรบันทึกรายละเอียดข้อเท็จจริงและหลักฐานการประเมินความเสี่ยงเก็บไว้",
+          "สั่งลงโทษไล่ออกเจ้าหน้าที่ผู้ส่งอีเมลผิดทันทีตามบทกำหนดโทษอาญามาตรา 79",
+          "ลบข้อมูลผู้สมัครเข้าอบรมทั้งหมดออกจากฐานข้อมูลหลักของจังหวัดเพื่อทำลายหลักฐาน"
+        ],
+        ans: [1],
+        exp: "เฉลย ข ถูกต้องตามมาตรา 37 (4) และประกาศแจ้งเหตุละเมิดฯ ข้อ 5 (3) (สไลด์ Final Day หน้า 16 และ 19) หากประเมินความเสี่ยงแล้วพบว่าไม่มีความเสี่ยงต่อสิทธิเสรีภาพของบุคคล ไม่ต้องแจ้งต่อ สคส. และไม่ต้องแจ้งเจ้าของข้อมูล แต่ผู้ควบคุมควรบันทึกรายละเอียดและหลักฐานการประเมินไว้เพื่อความโปร่งใสตรวจสอบได้"
+      },
+      {
+        id: 57, cat: "Controller", diff: "Application", type: "single",
+        q: "หน่วยงานของรัฐแห่งหนึ่งได้รับโอนชุดข้อมูลส่วนบุคคลของเกษตรกรมาจากหน่วยงานอื่น (ไม่ได้เก็บจากเกษตรกรโดยตรง) เพื่อนำมาดำเนินโครงการช่วยเหลือและจะติดต่อเกษตรกรทางจดหมายในอีก 10 วันข้างหน้า ตามมาตรา 25 วรรคสาม หน่วยงานต้องแจ้งรายละเอียดการเก็บรวบรวมให้เกษตรกรทราบเมื่อใด",
+        opts: [
+          "ต้องแจ้งในการติดต่อกับเจ้าของข้อมูลเป็นครั้งแรก",
+          "ต้องแจ้งภายใน 180 วันนับแต่วันที่โครงการช่วยเหลือสิ้นสุดลง",
+          "ไม่ต้องแจ้งในทุกกรณี เพราะเป็นการรับข้อมูลต่อมาจากหน่วยงานอื่นไม่ใช่การเก็บจากเจ้าตัวเอง",
+          "ต้องแจ้งหลังจากพ้นกำหนด 1 ปีนับแต่วันที่ได้รับไฟล์ข้อมูลเข้าสู่ระบบ"
+        ],
+        ans: [0],
+        exp: "เฉลย ก ถูกต้องตามมาตรา 25 วรรคสาม ซึ่งบัญญัติว่า การแจ้งรายละเอียดกรณีเก็บจากแหล่งอื่น ต้องแจ้งภายใน 30 วันนับแต่วันที่เก็บรวบรวม เว้นแต่กรณีที่นำข้อมูลไปใช้เพื่อการติดต่อกับเจ้าของข้อมูล ต้องแจ้งในการติดต่อครั้งแรก (ซึ่งในที่นี้คืออีก 10 วันข้างหน้า) และกรณีจะนำไปเปิดเผยต้องแจ้งก่อนเปิดเผยครั้งแรก"
+      },
+      {
+        id: 58, cat: "Controller", diff: "Application", type: "multi",
+        q: "ตามมาตรา 37 (1) และประกาศมาตรการรักษาความมั่นคงปลอดภัย พ.ศ. 2565 กรณีใดบ้างที่หน่วยงานภาครัฐในฐานะ Data Controller มีหน้าที่ต้องดำเนินการ “ทบทวน” มาตรการรักษาความมั่นคงปลอดภัยของข้อมูลส่วนบุคคล (เลือกคำตอบที่ถูกทั้งหมด)",
+        opts: [
+          "เมื่อมีความจำเป็นเพื่อรักษามาตรฐานและประสิทธิภาพในการคุ้มครองข้อมูล",
+          "เมื่อเทคโนโลยีที่เกี่ยวข้องกับการประมวลผลหรือภัยคุกคามเปลี่ยนแปลงไป",
+          "เมื่อเกิดเหตุการละเมิดข้อมูลส่วนบุคคลขึ้นในหน่วยงาน",
+          "ทบทวนได้เฉพาะเมื่อครบกำหนดทุกๆ 10 ปีตามวาระแผนยุทธศาสตร์เท่านั้น ห้ามทบทวนก่อนกำหนด"
+        ],
+        ans: [0, 1, 2],
+        exp: "เฉลย ก, ข, ค ถูกต้องตามมาตรา 37 (1) และประกาศมาตรการรักษาความมั่นคงปลอดภัยฯ พ.ศ. 2565 (สไลด์ Day 1 หน้า 26) ซึ่งกำหนดให้ทบทวนเมื่อมีความจำเป็น เมื่อเทคโนโลยีเปลี่ยนแปลงไป หรือเมื่อเกิดเหตุละเมิดข้อมูลส่วนบุคคล ส่วน ง ผิดอย่างชัดเจน"
+      },
+      {
+        id: 59, cat: "Controller", diff: "Deep", type: "single",
+        q: "ในกรณีที่ปรากฏว่าหน่วยงานนิติบุคคลกระทำความผิดตาม PDPA มาตรา 81 วางหลักความรับผิดของผู้บริหารหรือผู้มีหน้าที่สั่งการไว้อย่างไร จึงเป็นที่มาของแนวปฏิบัติที่ผู้บริหารระดับสูงต้องกำหนดนโยบายและกำกับดูแลอย่างจริงจัง",
+        opts: [
+          "ผู้บริหารระดับสูงไม่ต้องรับผิดเป็นการส่วนตัวในทุกกรณี เพราะนิติบุคคลเป็นผู้รับผิดชอบค่าปรับแต่เพียงผู้เดียว",
+          "หากการกระทำความผิดของนิติบุคคลเกิดจากการสั่งการ หรือการกระทำ หรือการละเว้นไม่สั่งการ/ไม่กระทำการตามหน้าที่ของกรรมการ ผู้จัดการ หรือผู้รับผิดชอบในการดำเนินงาน ผู้นั้นต้องรับโทษตามที่บัญญัติไว้สำหรับความผิดนั้นๆ ด้วย",
+          "ผู้บริหารจะต้องรับผิดแทนนิติบุคคลเฉพาะกรณีที่ DPO ของหน่วยงานลาออกจากตำแหน่งเกินกว่า 60 วันเท่านั้น",
+          "กฎหมายให้นำโทษทั้งหมดไปลงแก่เจ้าหน้าที่ธุรการผู้ปฏิบัติงานระดับต้นแต่เพียงผู้เดียวโดยไม่ต้องพิจารณาคำสั่งของผู้บริหาร"
+        ],
+        ans: [1],
+        exp: "เฉลย ข ถูกต้องตรงตามมาตรา 81 แห่ง พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 (และสอดคล้องกับสไลด์ Day 1 หน้า 12 ที่ชี้ให้เห็นความเชื่อมโยงระหว่างนโยบายโดยผู้บริหารกับความรับผิดตามมาตรา 81)"
+      },
+      {
+        id: 60, cat: "Controller", diff: "Deep", type: "single",
+        q: "เมื่อเปรียบเทียบข้อกำหนดด้านระยะเวลาและรูปแบบการแจ้งเหตุละเมิดระหว่าง “การแจ้งต่อสำนักงาน สคส.” กับ “การแจ้งต่อเจ้าของข้อมูลส่วนบุคคล” ตามประกาศ กคส. พ.ศ. 2565 ข้อใดวิเคราะห์ได้ถูกต้องที่สุด",
+        opts: [
+          "ทั้งสองกรณีต้องแจ้งภายใน 72 ชั่วโมงเท่ากัน และต้องส่งเป็นจดหมายลงทะเบียนตอบรับรายบุคคลเท่านั้น",
+          "การแจ้งต่อ สคส. กำหนดกรอบเวลาโดยไม่ชักช้าภายใน 72 ชั่วโมงนับแต่ทราบเหตุ ส่วนการแจ้งเจ้าของข้อมูลกรณีความเสี่ยงสูงกำหนดให้แจ้งโดยไม่ชักช้า (เน้นให้เร็วที่สุดเพื่อให้ป้องกันความเสียหายทันท่วงที) และหากกระทบวงกว้างอาจแจ้งผ่านสื่อสาธารณะหรือสื่อสังคมออนไลน์ได้",
+          "การแจ้งต่อเจ้าของข้อมูลต้องทำภายใน 24 ชั่วโมงเสมอ ส่วนการแจ้งต่อ สคส. รอแจ้งสรุปรวมกันปีละครั้งได้",
+          "การแจ้งเจ้าของข้อมูลไม่ต้องระบุช่องทางติดต่อ DPO และไม่ต้องให้คำแนะนำในการป้องกันตนเองเพื่อความกระชับ"
+        ],
+        ans: [1],
+        exp: "เฉลย ข ถูกต้องตามประกาศ กคส. เรื่องการแจ้งเหตุละเมิดฯ ข้อ 6, 10 และ 11 (สไลด์ Final Day หน้า 21 และ 23) การแจ้ง สคส. มีกรอบ 72 ชม. ส่วนการแจ้งเจ้าของข้อมูลใช้ถ้อยคำว่า 'โดยไม่ชักช้า' เพื่อให้เจ้าของข้อมูลรับมือได้เร็วที่สุด และเปิดช่องให้แจ้งรายบุคคลหรือแจ้งเป็นกลุ่มผ่านสื่อสาธารณะ/ออนไลน์ได้พร้อมข้อมูลติดต่อ DPO และคำแนะนำเยียวยา"
+      },
+      {
+        id: 61, cat: "Controller", diff: "Deep", type: "multi",
+        q: "ตามประกาศ กคส. เรื่อง หลักเกณฑ์การพิจารณาออกคำสั่งลงโทษปรับทางปกครองของคณะกรรมการผู้เชี่ยวชาญ พ.ศ. 2565 และมาตรา 90 ปัจจัยใดบ้างที่คณะกรรมการผู้เชี่ยวชาญนำมาพิจารณาในการกำหนดมาตรการบังคับหรืออัตราโทษปรับทางปกครองต่อผู้ควบคุมข้อมูล (เลือกคำตอบที่ถูกทั้งหมด)",
+        opts: [
+          "รายละเอียดการกระทำผิดว่าเกิดจากเจตนาหรือประมาท ความร้ายแรงของพฤติกรรม และขนาดกิจการของผู้ควบคุมข้อมูล",
+          "การช่วยบรรเทาความเสียหายและการเยียวยาความเสียหายเมื่อผู้กระทำผิดทราบเหตุ รวมถึงการชดใช้ค่าสินไหมทดแทน",
+          "ประวัติการถูกลงโทษในอดีต และการดำเนินการตามประมวลจริยธรรมหรือแนวปฏิบัติทางธุรกิจด้านการคุ้มครองข้อมูล",
+          "คณะกรรมการผู้เชี่ยวชาญต้องสั่งปรับในอัตราสูงสุดตามกฎหมายทุกคดีโดยห้ามสั่งให้แก้ไขหรือตักเตือนก่อนโดยเด็ดขาด"
+        ],
+        ans: [0, 1, 2],
+        exp: "เฉลย ก, ข, ค ถูกต้องตามมาตรา 90 และประกาศ กคส. เรื่องหลักเกณฑ์การพิจารณาออกคำสั่งลงโทษปรับทางปกครองฯ พ.ศ. 2565 ข้อ 8 (สไลด์ Final Day หน้า 29) ส่วน ง ผิดเพราะมาตรา 90 วรรคหนึ่งให้อำนาจคณะกรรมการผู้เชี่ยวชาญสั่งให้แก้ไขหรือตักเตือนก่อนได้ในกรณีที่เห็นสมควร"
+      },
+
+      // ==================== หมวด 5: DPA (ข้อ 62 - 73 | Basic 6, App 3, Deep 3 | Single 9, Multi 3) ====================
+      {
+        id: 62, cat: "DPA", diff: "Basic", type: "single",
+        q: "หน้าที่ของ Data Controller ในการจัดให้มีข้อตกลงการประมวลผลข้อมูลส่วนบุคคล (Data Processing Agreement: DPA) กับ Data Processor บัญญัติไว้ในมาตราใดของ พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562",
+        opts: [
+          "มาตรา 24 วรรคหนึ่ง",
+          "มาตรา 31 วรรคสอง",
+          "มาตรา 40 วรรคสาม",
+          "มาตรา 48 วรรคหนึ่ง"
+        ],
+        ans: [2],
+        exp: "เฉลย ค ถูกต้องตามมาตรา 40 วรรคสาม ซึ่งกำหนดว่าในการดำเนินงานตามหน้าที่ของ Data Processor ตามที่ได้รับมอบหมาย Data Controller ต้องจัดให้มีข้อตกลงระหว่างกันเพื่อควบคุมการดำเนินงานให้เป็นไปตาม พ.ร.บ. นี้"
+      },
+      {
+        id: 63, cat: "DPA", diff: "Basic", type: "single",
+        q: "ตามมาตรา 40 วรรคสอง หาก Data Processor ดำเนินการเก็บรวบรวม ใช้ หรือเปิดเผยข้อมูลส่วนบุคคลนอกเหนือคำสั่งที่ได้รับมอบหมายจาก Data Controller ผลทางกฎหมายจะเป็นอย่างไร",
+        opts: [
+          "Data Processor พ้นจากความรับผิดทุกประการ โดยให้ Data Controller รับผิดแทนแต่เพียงผู้เดียว",
+          "ให้ถือว่า Data Processor ผู้นั้นเป็น Data Controller สำหรับการเก็บรวบรวม ใช้ หรือเปิดเผยข้อมูลส่วนบุคคลนอกเหนือคำสั่งนั้น",
+          "สัญญาจ้างหลักตกเป็นโมฆะย้อนหลังทันทีแต่ไม่ต้องรับผิดตามกฎหมายคุ้มครองข้อมูลส่วนบุคคล",
+          "ให้ถือว่าพนักงานของ Data Processor กลายเป็นเจ้าของข้อมูลส่วนบุคคลชุดนั้นแทนทันที"
+        ],
+        ans: [1],
+        exp: "เฉลย ข ถูกต้องตรงตามมาตรา 40 วรรคสอง เมื่อ Data Processor ทำนอกเหนือคำสั่ง (Processing without instruction) กฎหมายให้ถือว่าเป็น Data Controller สำหรับการประมวลผลส่วนนั้นทันที จึงต้องรับผิดในฐานะผู้ควบคุมข้อมูลของกิจกรรมนั้นเอง"
+      },
+      {
+        id: 64, cat: "DPA", diff: "Basic", type: "single",
+        q: "ตามประกาศ กคส. เรื่อง หลักเกณฑ์และวิธีการในการแจ้งเหตุการละเมิดข้อมูลส่วนบุคคล พ.ศ. 2565 ข้อ 8 Data Controller จะต้องกำหนดเงื่อนไขใน DPA ให้ Data Processor แจ้งเหตุการละเมิดข้อมูลส่วนบุคคลแก่ Data Controller ภายในระยะเวลาใด",
+        opts: [
+          "โดยไม่ชักช้าภายใน 72 ชั่วโมงนับแต่ Data Processor ทราบเหตุเท่าที่จะสามารถกระทำได้",
+          "ภายใน 15 วันทำการนับแต่วันสิ้นเดือนที่เกิดเหตุละเมิดขึ้นในระบบ",
+          "ภายใน 30 วันนับแต่วันที่ Data Processor ซ่อมแซมระบบเสร็จเรียบร้อยแล้ว",
+          "ภายใน 90 วันพร้อมกับการส่งมอบงานงวดสุดท้ายของสัญญาจ้าง"
+        ],
+        ans: [0],
+        exp: "เฉลย ก ถูกต้องตามประกาศ กคส. เรื่องการแจ้งเหตุละเมิดฯ ข้อ 8 (สไลด์ Final Day หน้า 24) ซึ่งกำหนดให้ระบุไว้ใน DPA ให้ผู้ประมวลผลแจ้งเหตุละเมิดแก่ผู้ควบคุมโดยไม่ชักช้า ภายใน 72 ชั่วโมงนับแต่ผู้ประมวลผลทราบเหตุเท่าที่จะสามารถกระทำได้"
+      },
+      {
+        id: 65, cat: "DPA", diff: "Basic", type: "single",
+        q: "หาก Data Processor ได้รับคำสั่งจาก Data Controller ให้เปิดเผยข้อมูลส่วนบุคคลของประชาชนโดยที่คำสั่งนั้นขัดต่อบทบัญญัติแห่ง พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 อย่างชัดแจ้ง ตามมาตรา 40 (1) Data Processor ควรปฏิบัติอย่างไร",
+        opts: [
+          "ต้องปฏิบัติตามคำสั่งนั้นทันทีโดยไม่มีข้อโต้แย้ง เพราะมีหน้าที่ทำตามคำสั่งผู้ว่าจ้างทุกประการ",
+          "ปฏิเสธไม่ปฏิบัติตามคำสั่งที่ขัดต่อกฎหมายหรือบทบัญญัติในการคุ้มครองข้อมูลส่วนบุคคลตาม พ.ร.บ. นี้ พร้อมแจ้งให้ Data Controller ทราบ",
+          "ดำเนินการเปิดเผยข้อมูลไปก่อนครึ่งหนึ่งเพื่อรักษาน้ำใจคู่สัญญาแล้วค่อยทำบันทึกทักท้วงภายหลัง",
+          "นำข้อมูลชุดนั้นไปประกาศขายเพื่อชดเชยความเสี่ยงทางกฎหมายที่อาจเกิดขึ้นกับบริษัท"
+        ],
+        ans: [1],
+        exp: "เฉลย ข ถูกต้องตามมาตรา 40 (1) ซึ่งกำหนดให้ Data Processor ดำเนินการตามคำสั่งที่ได้รับจาก Data Controller เท่านั้น 'เว้นแต่คำสั่งนั้นขัดต่อกฎหมายหรือบทบัญญัติในการคุ้มครองข้อมูลส่วนบุคคลตามพระราชบัญญัตินี้'"
+      },
+      {
+        id: 66, cat: "DPA", diff: "Basic", type: "multi",
+        q: "ตามมาตรา 40 วรรคหนึ่ง Data Processor มีหน้าที่หลักตามกฎหมายในเรื่องใดบ้าง (เลือกคำตอบที่ถูกทั้งหมด)",
+        opts: [
+          "ดำเนินการเกี่ยวกับการเก็บรวบรวม ใช้ หรือเปิดเผยข้อมูลส่วนบุคคลตามคำสั่งที่ได้รับจาก Data Controller เท่านั้น เว้นแต่คำสั่งขัดต่อกฎหมาย",
+          "จัดให้มีมาตรการรักษาความมั่นคงปลอดภัยที่เหมาะสม และแจ้งให้ Data Controller ทราบถึงเหตุการละเมิดข้อมูลส่วนบุคคลที่เกิดขึ้น",
+          "จัดทำและเก็บรักษาบันทึกรายการของกิจกรรมการประมวลผลข้อมูลส่วนบุคคล (ROP ของผู้ประมวลผล) ไว้ตามหลักเกณฑ์ที่ กคส. กำหนด",
+          "เป็นผู้ตัดสินใจกำหนดวัตถุประสงค์ใหม่ในการนำข้อมูลไปทำตลาดร่วมกับพันธมิตรทางธุรกิจของตนเองโดยอิสระ"
+        ],
+        ans: [0, 1, 2],
+        exp: "เฉลย ก, ข, ค ถูกต้องตรงตามมาตรา 40 (1), (2) และ (3) ส่วน ง ผิดเพราะการตัดสินใจกำหนดวัตถุประสงค์ใหม่ด้วยตนเองเป็นอำนาจของ Data Controller หาก Data Processor ทำเองจะฝ่าฝืนมาตรา 40 (1)"
+      },
+      {
+        id: 67, cat: "DPA", diff: "Basic", type: "multi",
+        q: "ความสัมพันธ์ระหว่างคู่สัญญาในข้อใดที่จำเป็นต้องจัดทำข้อตกลงการประมวลผลข้อมูลส่วนบุคคล (DPA) ตามมาตรา 40 วรรคสาม (เลือกคำตอบที่ถูกทั้งหมด)",
+        opts: [
+          "กรมส่งเสริมการปกครองท้องถิ่นว่าจ้างบริษัทไอทีเอกชนให้ดูแลระบบคลาวด์และฐานข้อมูลผู้รับเบี้ยยังชีพตามคำสั่งของกรม",
+          "โรงพยาบาลของรัฐว่าจ้างบริษัทภายนอกรับทำลายเอกสารเวชระเบียนที่ครบกำหนดอายุการเก็บรักษาภายใต้คำสั่งควบคุมของโรงพยาบาล",
+          "สำนักงานเขตส่งข้อมูลภาษีที่ดินให้กรมสรรพากรตามที่กฎหมายกำหนดให้แต่ละหน่วยงานใช้อำนาจหน้าที่ของตนเอง",
+          "มหาวิทยาลัยของรัฐว่าจ้างบริษัทจัดทำระบบประมวลผลเงินเดือนบุคลากร (Payroll Outsourcing) ในนามของมหาวิทยาลัย"
+        ],
+        ans: [0, 1, 3],
+        exp: "เฉลย ก, ข, ง ถูกต้อง เพราะทั้งสามกรณีเป็นการที่ Data Controller มอบหมายให้บุคคลภายนอกประมวลผล (จัดเก็บ ทำลาย หรือคำนวณเงินเดือน) ตามคำสั่งหรือในนามของตน จึงเป็นความสัมพันธ์ Controller - Processor ที่ต้องมี DPA ส่วน ค เป็นการเปิดเผยข้อมูลระหว่าง Controller กับ Controller ตามอำนาจกฎหมายของแต่ละหน่วยงาน จึงไม่ใช่กรณี DPA ตามมาตรา 40"
+      },
+      {
+        id: 68, cat: "DPA", diff: "Application", type: "single",
+        q: "กรมแห่งหนึ่งว่าจ้างบริษัทซอฟต์แวร์พัฒนาและดูแลระบบลงทะเบียนรับสิทธิ์ภาครัฐ โดยมี DPA กำหนดชัดเจนให้ประมวลผลเพื่อการยืนยันสิทธิ์เท่านั้น ต่อมาบริษัทซอฟต์แวร์แอบนำเบอร์โทรศัพท์ของผู้ลงทะเบียนไปส่ง SMS ขายประกันของบริษัทในเครือตนเอง ข้อใดวินิจฉัยผลทางกฎหมายได้ถูกต้อง",
+        opts: [
+          "บริษัทซอฟต์แวร์ยังคงมีฐานะเป็นเพียง Data Processor และได้รับความคุ้มครองไม่ต้องรับโทษปรับทางปกครองใดๆ",
+          "บริษัทซอฟต์แวร์ตกอยู่ในฐานะเป็น Data Controller สำหรับการนำเบอร์โทรศัพท์ไปส่ง SMS ขายประกันนอกเหนือคำสั่งนั้น และต้องรับผิดฐานประมวลผลโดยไม่มีฐานทางกฎหมายตาม PDPA",
+          "การกระทำดังกล่าวชอบด้วยกฎหมายภายใต้ฐานการปฏิบัติตามสัญญาจ้างพัฒนาระบบที่ทำไว้กับกรม",
+          "เฉพาะประชาชนที่ตัดสินใจซื้อประกันจาก SMS เท่านั้นที่มีสิทธิร้องเรียนต่อคณะกรรมการผู้เชี่ยวชาญได้"
+        ],
+        ans: [1],
+        exp: "เฉลย ข ถูกต้องตามมาตรา 40 วรรคสอง เมื่อบริษัทซอฟต์แวร์นำข้อมูลไปใช้นอกเหนือคำสั่งของกรม ย่อมถือว่าบริษัทเป็น Data Controller สำหรับการส่ง SMS การตลาดนั้นเอง และมีความผิดทั้งทางปกครองและอาจถูกเรียกร้องค่าเสียหายทางแพ่ง รวมถึงผิดสัญญา DPA ต่อกรมด้วย"
+      },
+      {
+        id: 69, cat: "DPA", diff: "Application", type: "single",
+        q: "องค์การมหาชนแห่งหนึ่งทำสัญญาจ้างบริษัทคอลเซ็นเตอร์รับสายตอบคำถามผู้รับบริการ เวลา 09.00 น. ของวันจันทร์ บริษัทคอลเซ็นเตอร์ตรวจพบว่าฐานข้อมูลประวัติผู้โทรติดต่อถูกแฮกเกอร์เจาะระบบดึงข้อมูลออกไป บริษัทและองค์การมหาชนต้องดำเนินการตามลำดับอย่างไรจึงจะถูกต้องที่สุด",
+        opts: [
+          "บริษัทคอลเซ็นเตอร์ต้องแจ้งตรงไปยังประชาชนทุกคนภายใน 24 ชั่วโมง โดยไม่ต้องแจ้งองค์การมหาชนผู้ว่าจ้าง",
+          "บริษัทคอลเซ็นเตอร์ต้องแจ้งเหตุละเมิดแก่องค์การมหาชนตาม DPA โดยไม่ชักช้า (ภายใน 72 ชม. นับแต่บริษัททราบเหตุ) เพื่อให้องค์การมหาชนตรวจสอบประเมินความเสี่ยงและแจ้ง สคส. ภายใน 72 ชม. นับแต่องค์การมหาชนทราบเหตุ",
+          "องค์การมหาชนต้องรอให้สัญญาจ้างสิ้นสุดในปลายปีก่อนจึงจะเริ่มประเมินความเสี่ยงของเหตุละเมิดได้",
+          "ไม่ต้องมีฝ่ายใดแจ้งเหตุต่อ สคส. เพราะเหตุเกิดที่ระบบของผู้รับจ้างภายนอก ไม่ใช่เซิร์ฟเวอร์ภายในอาคารขององค์การมหาชน"
+        ],
+        ans: [1],
+        exp: "เฉลย ข ถูกต้องตามมาตรา 40 (2) มาตรา 37 (4) และประกาศ กคส. ข้อ 8 (รวมถึงสไลด์ Day 1 หน้า 15) Data Processor มีหน้าที่แจ้งเหตุละเมิดให้ Data Controller ทราบโดยไม่ชักช้าภายใน 72 ชั่วโมงนับแต่ตนทราบเหตุ และ Data Controller มีหน้าที่ประเมินความเสี่ยงและแจ้ง สคส. ภายใน 72 ชั่วโมงนับแต่ได้รับแจ้ง/ทราบเหตุ"
+      },
+      {
+        id: 70, cat: "DPA", diff: "Application", type: "single",
+        q: "เทศบาลตำบลว่าจ้างบริษัทจัดส่งเอกสารนำใบแจ้งประเมินภาษีใส่ซองปิดผนึกไปส่งตามที่อยู่ของประชาชน โดยต้องการจัดทำข้อตกลง DPA แนบท้ายสัญญาจ้าง ข้อกำหนดใดต่อไปนี้ไม่เหมาะสมและขัดต่อหลักการของ DPA",
+        opts: [
+          "กำหนดขอบเขตให้บริษัทใช้ข้อมูลชื่อ-ที่อยู่เฉพาะเพื่อการจัดส่งใบแจ้งประเมินภาษีตามคำสั่งของเทศบาลเท่านั้น",
+          "กำหนดให้บริษัทต้องมีมาตรการรักษาความมั่นคงปลอดภัยและห้ามนำไปจ้างช่วงต่อ (Sub-processor) โดยไม่ได้รับอนุญาตจากเทศบาล",
+          "กำหนดยกสิทธิ์ให้บริษัทสามารถคัดลอกรายชื่อและที่อยู่ผู้เสียภาษีเก็บไว้ใช้ทำธุรกิจขายตรงของบริษัทต่อได้หลังสิ้นสุดสัญญา",
+          "กำหนดให้บริษัทต้องส่งคืนหรือลบทำลายข้อมูลส่วนบุคคลทั้งหมดเมื่อสิ้นสุดสัญญาจ้างเว้นแต่กฎหมายกำหนดให้เก็บรักษาไว้"
+        ],
+        ans: [2],
+        exp: "เฉลย ค ถูกต้อง (คือไม่เหมาะสมและขัดต่อกฎหมาย) เพราะ DPA มีขึ้นเพื่อควบคุมให้ Data Processor ประมวลผลเฉพาะตามคำสั่งและวัตถุประสงค์ของ Data Controller เท่านั้น การอนุญาตให้คัดลอกไปขายตรงขัดต่อมาตรา 21, 27 และ 40 อย่างร้ายแรง ส่วน ก ข และ ง เป็นข้อกำหนดมาตรฐานที่ควรมีใน DPA"
+      },
+      {
+        id: 71, cat: "DPA", diff: "Deep", type: "single",
+        q: "ในกรณีที่หน่วยงานภาครัฐสองแห่งตกลงแบ่งปันข้อมูลส่วนบุคคลระหว่างกัน เช่น กรมพัฒนาสังคมฯ ส่งรายชื่อกลุ่มเปราะบางให้กระทรวงแรงงานนำไปจัดทำโครงการฝึกอาชีพตามอำนาจหน้าที่ตามกฎหมายของกระทรวงแรงงานเอง เหตุใดกรณีนี้จึงไม่ใช้ DPA ตามมาตรา 40 แต่ใช้ข้อตกลงการแบ่งปันข้อมูล (Data Sharing Agreement: DSA)",
+        opts: [
+          "เพราะกฎหมายห้ามหน่วยงานภาครัฐทำสัญญาหรือข้อตกลงใดๆ ที่มีชื่อภาษาอังกฤษโดยเด็ดขาด",
+          "เพราะกระทรวงแรงงานเป็นผู้กำหนดวัตถุประสงค์และวิธีการประมวลผลข้อมูลในโครงการฝึกอาชีพตามอำนาจหน้าที่ของตนเอง จึงมีสถานะเป็น Data Controller อีกรายหนึ่ง ไม่ใช่ Data Processor ที่ทำตามคำสั่งของกรมพัฒนาสังคมฯ",
+          "เพราะข้อมูลของกลุ่มเปราะบางไม่ใช่ข้อมูลส่วนบุคคลตามนิยามของมาตรา 6 แห่ง พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคลฯ",
+          "เพราะ DPA ใช้บังคับเฉพาะกรณีส่งข้อมูลออกนอกทวีปเอเชียเท่านั้น"
+        ],
+        ans: [1],
+        exp: "เฉลย ข ถูกต้องตามหลักการจำแนกบทบาทในสไลด์ Day 1 (หน้า 16: ถ้าเป็นการแลกเปลี่ยนหรือส่งต่อระหว่างผู้ควบคุมข้อมูลกับผู้ควบคุมข้อมูล จะไม่ใช่ DPA ตามมาตรา 40) เมื่อผู้รับข้อมูลมีอำนาจตัดสินใจกำหนดวัตถุประสงค์เองตามภารกิจกฎหมายของตน ย่อมเป็น Controller-to-Controller จึงควรจัดทำบันทึกข้อตกลงการเปิดเผย/แบ่งปันข้อมูล (DSA) และตรวจสอบฐานการเปิดเผยตามมาตรา 27"
+      },
+      {
+        id: 72, cat: "DPA", diff: "Deep", type: "single",
+        q: "หากบริษัทผู้รับจ้างซึ่งเป็น Data Processor ไม่ปฏิบัติตามหน้าที่ในมาตรา 40 (เช่น ไม่จัดให้มีมาตรการรักษาความมั่นคงปลอดภัยที่เหมาะสม หรือไม่ปฏิบัติตามคำสั่งของ Data Controller) โดยไม่มีเหตุอันควร ต้องระวางโทษปรับทางปกครองตามมาตรา 86 อย่างไร",
+        opts: [
+          "ไม่มีโทษปรับทางปกครองแก่ Data Processor เลย เพราะกฎหมายลงโทษเฉพาะ Data Controller เท่านั้น",
+          "ต้องระวางโทษปรับทางปกครองไม่เกินหนึ่งแสนบาท",
+          "ต้องระวางโทษปรับทางปกครองไม่เกินสามล้านบาท",
+          "ต้องระวางโทษจำคุกไม่เกินห้าปีโดยไม่มีโทษปรับทางปกครอง"
+        ],
+        ans: [2],
+        exp: "เฉลย ค ถูกต้องตามมาตรา 86 แห่ง พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 ซึ่งบัญญัติว่า ผู้ประมวลผลข้อมูลส่วนบุคคลผู้ใดไม่ปฏิบัติตามมาตรา 40 โดยไม่มีเหตุอันควร ต้องระวางโทษปรับทางปกครองไม่เกินสามล้านบาท (และหากไม่ตั้ง DPO ตามมาตรา 41 มีโทษปรับไม่เกินหนึ่งล้านบาทตามมาตรา 85)"
+      },
+      {
+        id: 73, cat: "DPA", diff: "Deep", type: "multi",
+        q: "เมื่อ Data Processor ขออนุญาตจ้างผู้ประมวลผลช่วง (Sub-processor) เพื่อช่วยดูแลระบบจัดเก็บข้อมูลของหน่วยงานรัฐ หลักการควบคุมความเสี่ยงใน DPA ที่สอดคล้องกับมาตรา 37 (2) และมาตรา 40 ควรกำหนดไว้อย่างไร (เลือกคำตอบที่ถูกทั้งหมด)",
+        opts: [
+          "Data Processor ต้องได้รับความเห็นชอบเป็นหนังสือ (แบบทั่วไปหรือเฉพาะรายตามที่ตกลง) จาก Data Controller ก่อนแต่งตั้ง Sub-processor",
+          "ต้องกำหนดให้ Sub-processor ผูกพันตามหน้าที่และมาตรฐานการรักษาความมั่นคงปลอดภัยไม่ต่ำกว่าที่ระบุไว้ใน DPA ฉบับหลัก",
+          "หาก Sub-processor บกพร่องจนเกิดการรั่วไหล Data Processor คู่สัญญาหลักยังคงต้องร่วมรับผิดชอบต่อ Data Controller ตามข้อตกลง",
+          "เมื่อมีการตั้ง Sub-processor แล้ว Data Controller จะหลุดพ้นจากหน้าที่ต่อเจ้าของข้อมูลตาม PDPA ทั้งหมดทันที"
+        ],
+        ans: [0, 1, 2],
+        exp: "เฉลย ก, ข, ค ถูกต้องตามหลักการกำกับดูแลห่วงโซ่การประมวลผลตามมาตรา 37 (2) และมาตรา 40 ส่วน ง ผิดเพราะแม้จะจ้าง Processor หรือ Sub-processor แต่ Data Controller ยังคงเป็นผู้รับผิดชอบหลักต่อเจ้าของข้อมูลส่วนบุคคลตามกฎหมายอยู่เสมอ"
+      },
+
+      // ==================== หมวด 6: Rights (ข้อ 74 - 88 | Basic 7, App 4, Deep 4 | Single 11, Multi 4) ====================
+      {
+        id: 74, cat: "Rights", diff: "Basic", type: "single",
+        q: "เมื่อเจ้าของข้อมูลส่วนบุคคลยื่นคำร้องขอเข้าถึงและขอรับสำเนาข้อมูลส่วนบุคคลตามมาตรา 30 และไม่ใช่กรณีที่อาจปฏิเสธคำขอได้ Data Controller ต้องดำเนินการตามคำขอภายในระยะเวลาใด",
+        opts: [
+          "โดยไม่ชักช้า แต่ต้องไม่เกิน 7 วันนับแต่วันที่ได้รับคำขอ",
+          "โดยไม่ชักช้า แต่ต้องไม่เกิน 15 วันนับแต่วันที่ได้รับคำขอ",
+          "โดยไม่ชักช้า แต่ต้องไม่เกิน 30 วันนับแต่วันที่ได้รับคำขอ",
+          "โดยไม่ชักช้า แต่ต้องไม่เกิน 90 วันนับแต่วันที่ได้รับคำขอ"
+        ],
+        ans: [2],
+        exp: "เฉลย ค ถูกต้องตรงตามมาตรา 30 วรรคสี่ ให้ผู้ควบคุมข้อมูลดำเนินการตามคำขอโดยไม่ชักช้า แต่ต้องไม่เกิน 30 วันนับแต่วันที่ได้รับคำขอ"
+      },
+      {
+        id: 75, cat: "Rights", diff: "Basic", type: "single",
+        q: "สิทธิในการขอรับหรือขอให้ส่งหรือโอนข้อมูลส่วนบุคคลไปยังผู้ควบคุมข้อมูลอื่นด้วยวิธีการอัตโนมัติ (Right to Data Portability) ตามมาตรา 31 สามารถใช้ได้กับข้อมูลที่ประมวลผลบนฐานใดเป็นหลัก",
+        opts: [
+          "ฐานการปฏิบัติตามกฎหมาย (Legal Obligation) และฐานภารกิจของรัฐ (Public Task) เท่านั้น",
+          "ฐานความยินยอม (Consent) หรือฐานการปฏิบัติตามสัญญา (Contract) และต้องอยู่ในรูปแบบที่อ่านหรือใช้งานได้ด้วยเครื่องมืออัตโนมัติ",
+          "ฐานป้องกันหรือระงับอันตรายต่อชีวิต (Vital Interest) สำหรับเอกสารกระดาษที่เขียนด้วยลายมือเท่านั้น",
+          "ใช้ได้กับทุกฐานทางกฎหมายรวมถึงการใช้อำนาจสืบสวนสอบสวนของพนักงานเจ้าหน้าที่ทุกกรณี"
+        ],
+        ans: [1],
+        exp: "เฉลย ข ถูกต้องตามมาตรา 31 วรรคหนึ่งและวรรคสาม สิทธิโอนย้ายข้อมูลใช้ได้เฉพาะข้อมูลที่อยู่ในรูปแบบอ่าน/ใช้งานโดยอัตโนมัติได้ และเป็นข้อมูลที่ให้ไว้บนฐานความยินยอมหรือฐานสัญญา (มาตรา 24 (3)) โดยมาตรา 31 วรรคสี่ระบุชัดเจนว่าใช้กับการปฏิบัติหน้าที่เพื่อประโยชน์สาธารณะหรือปฏิบัติหน้าที่ตามกฎหมายไม่ได้"
+      },
+      {
+        id: 76, cat: "Rights", diff: "Basic", type: "single",
+        q: "ตามมาตรา 30 วรรคสอง Data Controller สามารถปฏิเสธคำขอเข้าถึงและขอรับสำเนาข้อมูลส่วนบุคคลของเจ้าของข้อมูลได้เฉพาะในกรณีใด",
+        opts: [
+          "เมื่อเจ้าหน้าที่ผู้รับผิดชอบมีภาระงานประจำจำนวนมากจนไม่สะดวกค้นหาเอกสารให้",
+          "เมื่อเป็นการปฏิเสธตามกฎหมายหรือคำสั่งศาล และการเข้าถึงนั้นจะส่งผลกระทบที่อาจก่อให้เกิดความเสียหายต่อสิทธิและเสรีภาพของบุคคลอื่น",
+          "เมื่อเจ้าของข้อมูลยื่นคำขอเข้าถึงข้อมูลของตนเองเป็นครั้งแรกในรอบปีปฏิทิน",
+          "เมื่อข้อมูลส่วนบุคคลนั้นถูกจัดเก็บไว้ในระบบคลาวด์เซิร์ฟเวอร์มาแล้วเกินกว่า 6 เดือน"
+        ],
+        ans: [1],
+        exp: "เฉลย ข ถูกต้องตรงตามมาตรา 30 วรรคสอง จะปฏิเสธคำขอได้เฉพาะในกรณีที่เป็นการปฏิเสธตามกฎหมายหรือคำสั่งศาล และการเข้าถึงและขอรับสำเนานั้นจะส่งผลกระทบที่อาจก่อให้เกิดความเสียหายต่อสิทธิและเสรีภาพของบุคคลอื่น"
+      },
+      {
+        id: 77, cat: "Rights", diff: "Basic", type: "single",
+        q: "สิทธิของเจ้าของข้อมูลในข้อใดที่ปรากฏเป็นบทบัญญัติเฉพาะใน GDPR (Article 22) แต่ไม่ได้บัญญัติแยกเป็นสิทธิเฉพาะไว้โดยตรงใน พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 ของไทย ตามเอกสารอบรม",
+        opts: [
+          "สิทธิในการขอเข้าถึงและขอรับสำเนาข้อมูลส่วนบุคคล (Right of Access)",
+          "สิทธิในการขอให้แก้ไขข้อมูลส่วนบุคคลให้ถูกต้องเป็นปัจจุบัน (Right to Rectification)",
+          "สิทธิเกี่ยวกับการไม่ตกอยู่ภายใต้การตัดสินใจด้วยระบบอัตโนมัติเพียงอย่างเดียว เช่น AI Profiling (Automated Individual Decision-Making)",
+          "สิทธิในการถอนความยินยอมที่ได้ให้ไว้แก่ผู้ควบคุมข้อมูล (Right to Withdraw Consent)"
+        ],
+        ans: [2],
+        exp: "เฉลย ค ถูกต้องตามสไลด์ Final Day หน้า 3 และหน้า 11 ซึ่งเน้นย้ำว่า พ.ร.บ. ไทยไม่มีมาตราเฉพาะเรื่องสิทธิคัดค้านการตัดสินใจอัตโนมัติด้วย AI เพียงลำพังเหมือน GDPR Article 22 (แต่ในไทยยังต้องแจ้งหากมีระบบอัตโนมัติในชั้นขอความยินยอม และใช้สิทธิคัดค้านตามเงื่อนไขมาตรา 32 ได้ในบางกรณี)"
+      },
+      {
+        id: 78, cat: "Rights", diff: "Basic", type: "single",
+        q: "ตามระเบียบ กคส. ว่าด้วยการยื่น การไม่รับเรื่อง การยุติเรื่อง การพิจารณา และระยะเวลาในการพิจารณาคำร้องเรียน พ.ศ. 2565 ข้อ 20 คณะกรรมการผู้เชี่ยวชาญต้องพิจารณาเรื่องร้องเรียนให้แล้วเสร็จภายในระยะเวลาใดโดยหลัก",
+        opts: [
+          "ภายใน 15 วันนับแต่วันที่ผู้ร้องเรียนส่งอีเมลเข้ามาที่สำนักงาน",
+          "ภายใน 30 วันนับแต่วันที่เกิดเหตุละเมิดข้อมูลส่วนบุคคล",
+          "ภายใน 90 วันนับแต่วันที่มีการประชุมเป็นครั้งแรก เว้นแต่มีเหตุสุดวิสัยหรือเหตุจำเป็นอื่น",
+          "ภายใน 365 วันนับแต่วันที่ศาลปกครองมีคำสั่งรับคำฟ้อง"
+        ],
+        ans: [2],
+        exp: "เฉลย ค ถูกต้องตามระเบียบ กคส. ว่าด้วยการพิจารณาคำร้องเรียนฯ พ.ศ. 2565 ข้อ 20 (สไลด์ Final Day หน้า 30) คือภายใน 90 วันนับแต่วันที่มีการประชุมเป็นครั้งแรก เว้นแต่มีเหตุสุดวิสัยหรือเหตุอื่น และไม่ว่าผลเป็นอย่างไรต้องแจ้งผู้ร้องเรียนพร้อมเหตุผลตามข้อ 21"
+      },
+      {
+        id: 79, cat: "Rights", diff: "Basic", type: "multi",
+        q: "ตามมาตรา 34 เจ้าของข้อมูลส่วนบุคคลมีสิทธิขอให้ Data Controller “ระงับการใช้ข้อมูลส่วนบุคคล” (Right to Restrict Processing) ได้ในสถานการณ์ใดบ้าง (เลือกคำตอบที่ถูกทั้งหมด)",
+        opts: [
+          "เมื่อ Data Controller อยู่ระหว่างการตรวจสอบตามที่เจ้าของข้อมูลร้องขอให้แก้ไขข้อมูลให้ถูกต้องตามมาตรา 36",
+          "เมื่อเป็นข้อมูลส่วนบุคคลที่ต้องลบหรือทำลายเพราะประมวลผลโดยไม่ชอบด้วยกฎหมาย แต่เจ้าของข้อมูลขอให้ระงับการใช้แทน",
+          "เมื่อข้อมูลหมดความจำเป็นในการเก็บรักษาตามวัตถุประสงค์แล้ว แต่เจ้าของข้อมูลมีความจำเป็นต้องขอให้เก็บรักษาไว้เพื่อใช้ในการก่อตั้งหรือใช้สิทธิเรียกร้องตามกฎหมาย",
+          "เมื่อ Data Controller อยู่ระหว่างการพิสูจน์เหตุอันชอบด้วยกฎหมายที่สำคัญยิ่งกว่าเพื่อปฏิเสธการคัดค้านของเจ้าของข้อมูลตามมาตรา 32"
+        ],
+        ans: [0, 1, 2, 3],
+        exp: "เฉลย ก, ข, ค, ง ถูกต้องครบทั้ง 4 กรณีตามที่บัญญัติไว้ในมาตรา 34 (1), (2), (3) และ (4) แห่ง พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562"
+      },
+      {
+        id: 80, cat: "Rights", diff: "Basic", type: "multi",
+        q: "ข้อใดกล่าวถูกต้องเกี่ยวกับการใช้สิทธิขอให้ลบหรือทำลายข้อมูลส่วนบุคคล (Right to Erasure) ตามมาตรา 33 (เลือกคำตอบที่ถูกทั้งหมด)",
+        opts: [
+          "การทำให้ข้อมูลส่วนบุคคลเป็นข้อมูลที่ไม่สามารถระบุตัวบุคคลที่เป็นเจ้าของข้อมูลได้ (Anonymization) ถือเป็นวิธีการหนึ่งที่ทำได้เทียบเท่าการลบหรือทำลายตามมาตรา 33 วรรคหนึ่ง",
+          "เจ้าของข้อมูลขอให้ลบได้เมื่อถอนความยินยอมแล้ว และ Data Controller ไม่มีอำนาจตามกฎหมายอื่นที่จะประมวลผลข้อมูลนั้นต่อไป",
+          "Data Controller ปฏิเสธการลบได้หากเป็นการเก็บรักษาไว้เพื่อการปฏิบัติหน้าที่ในการดำเนินภารกิจเพื่อประโยชน์สาธารณะตามมาตรา 24 (4) หรือเพื่อปฏิบัติตามกฎหมาย",
+          "ประชาชนสามารถใช้สิทธิมาตรา 33 สั่งให้กรมสรรพากรลบประวัติการยื่นภาษีที่ยังอยู่ในอายุความตรวจสอบตามประมวลรัษฎากรได้เสมอ"
+        ],
+        ans: [0, 1, 2],
+        exp: "เฉลย ก, ข, ค ถูกต้องตามมาตรา 33 วรรคหนึ่ง (ลบ ทำลาย หรือทำให้ไม่สามารถระบุตัวบุคคลได้), มาตรา 33 (2) และข้อยกเว้นไม่ลบตามมาตรา 33 วรรคสอง ส่วน ง ผิดเพราะการเก็บตามประมวลรัษฎากรเป็นหน้าที่ตามกฎหมายและภารกิจรัฐ จึงเข้าข้อยกเว้นมาตรา 33 วรรคสองที่ปฏิเสธคำขอลบได้"
+      },
+      {
+        id: 81, cat: "Rights", diff: "Application", type: "single",
+        q: "ผู้รับบริการรายหนึ่งยื่นคำร้องต่อโรงพยาบาลของรัฐเพื่อขอแก้ไขชื่อ-นามสกุลและที่อยู่ปัจจุบันในเวชระเบียนให้ตรงกับหลักฐานทะเบียนราษฎรฉบับใหม่ พร้อมแนบเอกสารยืนยันตัวตนครบถ้วน โรงพยาบาลควรดำเนินการอย่างไรตามมาตรา 35 และมาตรา 36",
+        opts: [
+          "ปฏิเสธคำร้องทันทีเพราะเวชระเบียนของหน่วยงานรัฐห้ามแก้ไขข้อความใดๆ นับแต่วันที่เปิดประวัติครั้งแรก",
+          "ตรวจสอบตัวตนและดำเนินการแก้ไขข้อมูลให้ถูกต้อง เป็นปัจจุบัน สมบูรณ์ และไม่ก่อให้เกิดความเข้าใจผิด หากมีเหตุจำเป็นปฏิเสธต้องบันทึกคำร้องพร้อมเหตุผลไว้ใน ROP",
+          "เรียกเก็บค่าธรรมเนียมการแก้ไขตัวอักษรละหนึ่งพันบาทก่อนรับคำร้องเข้าสู่ระบบสารบรรณ",
+          "สั่งลบประวัติการรักษาพยาบาลทั้งหมดของผู้ป่วยทิ้งแทนการแก้ไขที่อยู่เพื่อความรวดเร็ว"
+        ],
+        ans: [1],
+        exp: "เฉลย ข ถูกต้องตามมาตรา 35 และมาตรา 36 Data Controller มีหน้าที่ดำเนินการให้ข้อมูลถูกต้อง เป็นปัจจุบัน สมบูรณ์ และไม่ก่อให้เกิดความเข้าใจผิด (ซึ่งแม้ไม่มีคำร้องหากตรวจพบเองก็ต้องทำให้ถูกต้องด้วย) และหากปฏิเสธคำร้องต้องบันทึกเหตุผลไว้ในรายการตามมาตรา 39"
+      },
+      {
+        id: 82, cat: "Rights", diff: "Application", type: "single",
+        q: "ประชาชนยื่นคำขอตามมาตรา 31 ให้สำนักงานประกันสังคมโอนข้อมูลประวัติการส่งเงินสมทบตามกฎหมายประกันสังคมของตนในรูปแบบอัตโนมัติไปยังแอปพลิเคชันวางแผนการเงินของบริษัทเอกชนแห่งหนึ่ง สำนักงานประกันสังคมปฏิเสธได้หรือไม่",
+        opts: [
+          "ปฏิเสธไม่ได้ เพราะข้อมูลอยู่ในระบบคอมพิวเตอร์ที่อ่านด้วยเครื่องมืออัตโนมัติได้แล้วจึงต้องโอนให้ทุกกรณี",
+          "ปฏิเสธได้ตามมาตรา 31 วรรคสี่ เพราะเป็นการประมวลผลเพื่อปฏิบัติหน้าที่ตามกฎหมายหรือภารกิจเพื่อประโยชน์สาธารณะ โดยต้องบันทึกการปฏิเสธพร้อมเหตุผลไว้ใน ROP ตามมาตรา 39",
+          "ปฏิเสธได้โดยสามารถฉีกคำร้องทิ้งทันทีไม่ต้องแจ้งผู้ร้องและไม่ต้องบันทึกเหตุผลใดๆ ไว้ใน ROP",
+          "ปฏิเสธไม่ได้ เว้นแต่สำนักงานประกันสังคมจะจ่ายเงินชดเชยให้แก่ผู้ประกันตนรายนั้นก่อน"
+        ],
+        ans: [1],
+        exp: "เฉลย ข ถูกต้องตามมาตรา 31 วรรคสามและวรรคสี่ สิทธิการโอนข้อมูลใช้กับการปฏิบัติหน้าที่เพื่อประโยชน์สาธารณะหรือปฏิบัติหน้าที่ตามกฎหมายไม่ได้ แต่เมื่อปฏิเสธด้วยเหตุดังกล่าว กฎหมายกำหนดให้ต้องบันทึกการปฏิเสธคำขอพร้อมเหตุผลไว้ในรายการตามมาตรา 39 ด้วย"
+      },
+      {
+        id: 83, cat: "Rights", diff: "Application", type: "single",
+        q: "ศูนย์วิจัยของมหาวิทยาลัยรัฐนำข้อมูลส่วนบุคคลของประชาชนมาประมวลผลบนฐานภารกิจของรัฐตามมาตรา 24 (4) ต่อมาประชาชนรายหนึ่งยื่นใช้สิทธิ “คัดค้าน” การประมวลผลตามมาตรา 32 (1) มหาวิทยาลัยจะยังคงประมวลผลข้อมูลของบุคคลนั้นต่อไปได้เฉพาะเมื่อพิสูจน์ข้อเท็จจริงใดได้",
+        opts: [
+          "พิสูจน์ได้ว่ามหาวิทยาลัยได้สำรองไฟล์ข้อมูลไว้ในฮาร์ดดิสก์ภายนอกเรียบร้อยแล้ว",
+          "พิสูจน์ได้ว่ามีเหตุอันชอบด้วยกฎหมายที่สำคัญยิ่งกว่า หรือเป็นไปเพื่อก่อตั้ง ปฏิบัติตาม ใช้ หรือยกขึ้นต่อสู้สิทธิเรียกร้องตามกฎหมาย",
+          "พิสูจน์ได้ว่าการประมวลผลนั้นมีวัตถุประสงค์เพื่อการตลาดแบบตรงในการขายคอร์สอบรมระยะสั้น",
+          "พิสูจน์ได้ว่าผู้ยื่นคัดค้านไม่ได้สำเร็จการศึกษาจากมหาวิทยาลัยแห่งนั้น"
+        ],
+        ans: [1],
+        exp: "เฉลย ข ถูกต้องตรงตามมาตรา 32 (1) (ก) และ (ข) กรณีคัดค้านฐานมาตรา 24 (4) หรือ (5) ผู้ควบคุมข้อมูลจะประมวลผลต่อได้เฉพาะเมื่อพิสูจน์ได้ว่ามีเหตุอันชอบด้วยกฎหมายที่สำคัญยิ่งกว่า (Compelling legitimate grounds) หรือเพื่อสิทธิเรียกร้องตามกฎหมาย และหากปฏิเสธคำคัดค้านต้องบันทึกเหตุผลใน ROP"
+      },
+      {
+        id: 84, cat: "Rights", diff: "Application", type: "multi",
+        q: "เมื่อเจ้าหน้าที่ผู้รับผิดชอบด้านคำร้องขอใช้สิทธิ (DSAR) ของหน่วยงานภาครัฐได้รับคำร้องจากเจ้าของข้อมูล ขั้นตอนปฏิบัติมาตรฐานที่ถูกต้องตามแนวปฏิบัติและกฎหมายควรประกอบด้วยข้อใดบ้าง (เลือกคำตอบที่ถูกทั้งหมด)",
+        opts: [
+          "ตรวจสอบยืนยันตัวตนของผู้ยื่นคำร้อง (และตรวจสอบอำนาจกระทำการแทนกรณีเป็นผู้แทน) เพื่อป้องกันการเปิดเผยข้อมูลผิดคน",
+          "ตรวจสอบความถูกต้องของคำขอและพิจารณาว่าข้อมูลนั้นประมวลผลอยู่บนฐานทางกฎหมายใดเพื่อดูเงื่อนไขและเหตุปฏิเสธตามกฎหมาย",
+          "ดำเนินการพิจารณาและแจ้งผลการดำเนินการตามสิทธิให้ผู้ร้องทราบภายในกรอบเวลาไม่เกิน 30 วันนับแต่วันที่ได้รับคำขอ",
+          "เรียกเก็บค่าธรรมเนียมขั้นต่ำคำร้องละ 5,000 บาทจากประชาชนทุกรายเพื่อจำกัดจำนวนผู้มาใช้สิทธิ"
+        ],
+        ans: [0, 1, 2],
+        exp: "เฉลย ก, ข, ค ถูกต้องตามแผนผังขั้นตอนการรับคำร้องขอใช้สิทธิ (TDPG 3.0 / สไลด์ Final Day หน้า 10) คือ รับคำร้อง -> ตรวจสอบตัวตน -> พิจารณาความถูกต้องและฐานกฎหมาย -> ดำเนินการและแจ้งผลภายใน 30 วัน ส่วน ง ผิดเพราะการใช้สิทธิโดยหลักต้องไม่สร้างภาระค่าใช้จ่ายอันเป็นอุปสรรคแก่เจ้าของข้อมูล"
+      },
+      {
+        id: 85, cat: "Rights", diff: "Deep", type: "single",
+        q: "สังเกตบทบัญญัติมาตรา 32 วรรคสาม ที่กำหนดว่ากรณีผู้ควบคุมข้อมูลปฏิเสธการคัดค้านด้วยเหตุผลตาม (1)(ก) หรือ (ข) หรือ (3) ให้บันทึกเหตุผลไว้ในรายการตามมาตรา 39 เหตุใดกฎหมายจึงไม่ได้ระบุให้มีกรณีปฏิเสธการคัดค้านตามมาตรา 32 (2) (การตลาดแบบตรง) ไว้ในวรรคสามเลย",
+        opts: [
+          "เพราะผู้ร่างกฎหมายพิมพ์ตกหล่นเลขอนุมาตรา (2) ไปโดยไม่ได้ตั้งใจ",
+          "เพราะสิทธิคัดค้านการประมวลผลเพื่อวัตถุประสงค์เกี่ยวกับการตลาดแบบตรงตามมาตรา 32 (2) เป็นสิทธิเด็ดขาด (Absolute Right) ที่ผู้ควบคุมข้อมูลไม่อาจยกเหตุผลใดมาปฏิเสธได้ เมื่อคัดค้านแล้วต้องหยุดและแยกส่วนข้อมูลออกทันที",
+          "เพราะกิจกรรมการตลาดแบบตรงไม่อยู่ภายใต้บังคับของ พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562",
+          "เพราะการคัดค้านการตลาดแบบตรงต้องไปยื่นฟ้องต่อศาลทรัพย์สินทางปัญญาแทนการยื่นต่อผู้ควบคุมข้อมูล"
+        ],
+        ans: [1],
+        exp: "เฉลย ข ถูกต้องตามตัวบทมาตรา 32 (2) ประกอบวรรคสองและวรรคสาม (และคำอธิบายในสไลด์ Final Day หน้า 7) ในมาตรา 32 (1) และ (3) กฎหมายมีคำว่า 'เว้นแต่...' เปิดช่องให้ผู้ควบคุมพิสูจน์เหตุปฏิเสธได้ แต่มาตรา 32 (2) เรื่องการตลาดแบบตรงไม่มีข้อยกเว้นให้ปฏิเสธได้เลย จึงไม่มีกรณีปฏิเสธตาม (2) ให้ต้องบันทึกใน ROP"
+      },
+      {
+        id: 86, cat: "Rights", diff: "Deep", type: "single",
+        q: "ในกรณีที่หน่วยงานได้ทำให้ข้อมูลส่วนบุคคลเปิดเผยต่อสาธารณะไปแล้ว (เช่น โพสต์ขึ้นเว็บไซต์สาธารณะโดยไม่ชอบ) และต่อมาเจ้าของข้อมูลใช้สิทธิขอให้ลบตามมาตรา 33 วรรคหนึ่ง มาตรา 33 วรรคสามกำหนดภาระหน้าที่เพิ่มเติมแก่ Data Controller ไว้อย่างไร",
+        opts: [
+          "เพียงแต่ลบไฟล์ออกจากหน้าเว็บไซต์ของตนเองก็ถือว่าพ้นหน้าที่ตามกฎหมายครบถ้วนสมบูรณ์แล้ว",
+          "Data Controller ต้องเป็นผู้รับผิดชอบดำเนินการทั้งในทางเทคโนโลยีและค่าใช้จ่ายเพื่อให้เป็นไปตามคำขอนั้น โดยแจ้ง Data Controller อื่นๆ ที่นำข้อมูลไปเผยแพร่ต่อเพื่อให้ได้รับคำตอบในการดำเนินการตามคำขอด้วย",
+          "ให้เป็นภาระของเจ้าของข้อมูลส่วนบุคคลต้องออกค่าใช้จ่ายจ้างทนายความไล่แจ้งเว็บไซต์อื่นๆ ด้วยตนเองทั้งหมด",
+          "ให้สำนักงาน สคส. เป็นผู้รับผิดชอบค่าใช้จ่ายทางเทคโนโลยีแทนผู้ควบคุมข้อมูลทั้งหมดโดยใช้เงินกองทุนประเดิม"
+        ],
+        ans: [1],
+        exp: "เฉลย ข ถูกต้องตรงตามมาตรา 33 วรรคสาม (Right to be forgotten เมื่อข้อมูลเปิดเผยต่อสาธารณะแล้ว) ผู้ควบคุมข้อมูลต้องรับผิดชอบทั้งทางเทคโนโลยีและค่าใช้จ่าย และต้องแจ้งผู้ควบคุมข้อมูลอื่นเพื่อให้ได้รับคำตอบในการดำเนินการตามคำขอลบนั้นด้วย"
+      },
+      {
+        id: 87, cat: "Rights", diff: "Deep", type: "single",
+        q: "เมื่อเปรียบเทียบ “เหตุแห่งการปฏิเสธคำร้องขอใช้สิทธิของเจ้าของข้อมูล” ตามตารางแนวปฏิบัติ TDPG 3.0 ข้อใดวิเคราะห์ความแตกต่างของสิทธิในการถอนความยินยอม (มาตรา 19 วรรคห้า) กับสิทธิอื่นๆ ได้ถูกต้อง",
+        opts: [
+          "ผู้ควบคุมข้อมูลสามารถอ้างเหตุคำขอฟุ่มเฟือยเพื่อบังคับห้ามไม่ให้เจ้าของข้อมูลถอนความยินยอมในการรับโฆษณาได้เสมอ",
+          "การถอนความยินยอมเป็นสิทธิที่เจ้าของข้อมูลทำได้เมื่อใดก็ได้และต้องทำได้ง่ายเช่นเดียวกับการให้ความยินยอม (เว้นแต่มีข้อจำกัดสิทธิโดยกฎหมายหรือสัญญาที่ให้ประโยชน์แก่เจ้าของข้อมูล) โดยผู้ควบคุมจะยกเหตุประโยชน์โดยชอบด้วยกฎหมายมาปฏิเสธการถอนความยินยอมไม่ได้",
+          "เมื่อถอนความยินยอมแล้ว การประมวลผลทุกอย่างที่เคยทำไปก่อนหน้านั้นจะตกเป็นโมฆะและผิดกฎหมายย้อนหลังตั้งแต่วันแรกทันที",
+          "การถอนความยินยอมใช้ได้เฉพาะกรณีที่ข้อมูลถูกโอนไปยังต่างประเทศแล้วเท่านั้น"
+        ],
+        ans: [1],
+        exp: "เฉลย ข ถูกต้องตามมาตรา 19 วรรคห้า และตารางเหตุแห่งการปฏิเสธ (สไลด์ Final Day หน้า 5 และหน้า 12) การเพิกถอนความยินยอมไม่อาจถูกปฏิเสธด้วยเหตุคำขอไม่สมเหตุสมผลหรือประโยชน์โดยชอบด้วยกฎหมายเหมือนสิทธิอื่น (มีเพียงข้อจำกัดโดยกฎหมายหรือสัญญาที่ให้ประโยชน์แก่เจ้าของข้อมูล) ส่วน ค ผิดเพราะการถอนความยินยอมไม่ส่งผลกระทบต่อการประมวลผลที่ได้ให้ความยินยอมไปแล้วโดยชอบ"
+      },
+      {
+        id: 88, cat: "Rights", diff: "Deep", type: "multi",
+        q: "ตามมาตรา 74 และระเบียบ กคส. ว่าด้วยการพิจารณาคำร้องเรียนฯ พ.ศ. 2565 ข้อ 14 กรณีใดบ้างที่คณะกรรมการผู้เชี่ยวชาญมีอำนาจสั่ง “ไม่รับเรื่อง” หรือ “ยุติเรื่อง” หรือดำเนินการตามขั้นตอนกฎหมายได้ถูกต้อง (เลือกคำตอบที่ถูกทั้งหมด)",
+        opts: [
+          "สั่งไม่รับเรื่อง เมื่อคำร้องมีเอกสารหลักฐานไม่ครบถ้วน เป็นเหตุเดียวกันที่เคยยื่นต่อ สคส. แล้ว หรือเป็นเรื่องที่มีผู้มีอำนาจพิจารณาอยู่แล้วตามกฎหมายอื่น",
+          "สั่งยุติเรื่อง เมื่อพิจารณาหรือตรวจสอบแล้วรับฟังได้ว่าเรื่องร้องเรียนนั้นไม่มีมูลตามคำร้อง",
+          "ดำเนินการไกล่เกลี่ยเมื่อเป็นกรณีที่อาจไกล่เกลี่ยได้และคู่กรณีประสงค์จะให้ไกล่เกลี่ย แต่หากไกล่เกลี่ยไม่สำเร็จ คณะกรรมการผู้เชี่ยวชาญมีอำนาจออกคำสั่งให้ผู้ควบคุมแก้ไขหรือระงับความเสียหายภายในเวลาที่กำหนด",
+          "คำสั่งของคณะกรรมการผู้เชี่ยวชาญตามมาตรา 74 หากผู้ควบคุมข้อมูลไม่ยอมปฏิบัติตาม คณะกรรมการผู้เชี่ยวชาญไม่มีอำนาจบังคับทางปกครองใดๆ ต้องให้ผู้เสียหายไปเริ่มฟ้องคดีอาญาเองเท่านั้น"
+        ],
+        ans: [0, 1, 2],
+        exp: "เฉลย ก, ข, ค ถูกต้องตามมาตรา 74 วรรคหนึ่ง-วรรคสาม และระเบียบฯ ข้อ 14 (สไลด์ Final Day หน้า 28) ส่วน ง ผิดเพราะมาตรา 74 วรรคสี่ให้อำนาจนำกฎหมายวิธีปฏิบัติราชการทางปกครองมาใช้บังคับโดยอนุโลม โดยคณะกรรมการผู้เชี่ยวชาญมีอำนาจสั่งยึด อายัด หรือขายทอดตลาดทรัพย์สินเพื่อบังคับตามคำสั่งได้"
+      },
+
+      // ==================== หมวด 7: Transfer (ข้อ 89 - 100 | Basic 6, App 3, Deep 3 | Single 9, Multi 3) ====================
+      {
+        id: 89, cat: "Transfer", diff: "Basic", type: "single",
+        q: "หลักการพื้นฐานในการส่งหรือโอนข้อมูลส่วนบุคคลไปยังต่างประเทศตามมาตรา 28 วรรคหนึ่ง กำหนดเงื่อนไขหลักไว้อย่างไร",
+        opts: [
+          "ห้ามส่งหรือโอนข้อมูลส่วนบุคคลออกนอกราชอาณาจักรไทยในทุกกรณีโดยไม่มีข้อยกเว้น",
+          "ส่งหรือโอนได้อย่างเสรีไปยังทุกประเทศทั่วโลกโดยไม่ต้องตรวจสอบมาตรฐานใดๆ หากส่งผ่านระบบอิเล็กทรอนิกส์",
+          "ประเทศปลายทางหรือองค์การระหว่างประเทศที่รับข้อมูลต้องมีมาตรฐานการคุ้มครองข้อมูลส่วนบุคคลที่เพียงพอตามหลักเกณฑ์ที่ กคส. ประกาศกำหนด เว้นแต่จะเข้าข้อยกเว้นตามกฎหมาย",
+          "ต้องได้รับพระบรมราชานุญาตและตราเป็นพระราชบัญญัติเฉพาะรายทุกครั้งก่อนส่งไฟล์ข้อมูลไปต่างประเทศ"
+        ],
+        ans: [2],
+        exp: "เฉลย ค ถูกต้องตรงตามมาตรา 28 วรรคหนึ่ง ประเทศปลายทางหรือองค์การระหว่างประเทศที่รับข้อมูลต้องมีมาตรฐานการคุ้มครองข้อมูลส่วนบุคคลที่เพียงพอ (Adequacy) ตามที่ กคส. กำหนด เว้นแต่เข้าข้อยกเว้นตามมาตรา 28 (1)-(6) หรือมีมาตรการตามมาตรา 29"
+      },
+      {
+        id: 90, cat: "Transfer", diff: "Basic", type: "single",
+        q: "หากมีปัญหาเกี่ยวกับมาตรฐานการคุ้มครองข้อมูลส่วนบุคคลที่เพียงพอของประเทศปลายทางหรือองค์การระหว่างประเทศที่รับข้อมูล ตามมาตรา 28 วรรคสอง กำหนดให้เสนอต่อองค์กรใดเป็นผู้วินิจฉัย",
+        opts: [
+          "คณะกรรมการคุ้มครองข้อมูลส่วนบุคคล (กคส.)",
+          "ศาลยุติธรรมแผนกคดีระหว่างประเทศ",
+          "กระทรวงการต่างประเทศร่วมกับสภาความมั่นคงแห่งชาติ",
+          "ผู้ตรวจการแผ่นดิน"
+        ],
+        ans: [0],
+        exp: "เฉลย ก ถูกต้องตามมาตรา 28 วรรคสอง ให้เสนอต่อคณะกรรมการ (กคส.) เป็นผู้วินิจฉัย และคำวินิจฉัยอาจขอให้ทบทวนได้เมื่อมีหลักฐานใหม่ทำให้เชื่อได้ว่าประเทศปลายทางมีการพัฒนาจนมีมาตรฐานที่เพียงพอแล้ว"
+      },
+      {
+        id: 91, cat: "Transfer", diff: "Basic", type: "single",
+        q: "การส่งหรือโอนข้อมูลส่วนบุคคลไปยังผู้ควบคุมหรือผู้ประมวลผลซึ่งอยู่ต่างประเทศและอยู่ในเครือกิจการหรือเครือธุรกิจเดียวกัน โดยใช้นโยบายในการคุ้มครองข้อมูลส่วนบุคคล (Binding Corporate Rules: BCR) ตามมาตรา 29 วรรคหนึ่ง จะได้รับยกเว้นไม่ต้องปฏิบัติตามมาตรา 28 เมื่อผ่านขั้นตอนใด",
+        opts: [
+          "เมื่อกรรมการผู้จัดการของบริษัทแม่ในต่างประเทศลงนามประกาศใช้ภายในบริษัทเองเรียบร้อยแล้ว",
+          "เมื่อนโยบาย BCR ดังกล่าวได้รับการตรวจสอบและรับรองจากสำนักงานคณะกรรมการคุ้มครองข้อมูลส่วนบุคคล (สคส.)",
+          "เมื่อบริษัทได้นำไปจดทะเบียนเครื่องหมายการค้าต่อกรมทรัพย์สินทางปัญญาแล้ว",
+          "เมื่อบริษัทจ่ายเงินวางประกันความเสียหายไว้กับธนาคารพาณิชย์ในประเทศจำนวนหนึ่งแสนบาท"
+        ],
+        ans: [1],
+        exp: "เฉลย ข ถูกต้องตรงตามมาตรา 29 วรรคหนึ่ง นโยบายในการคุ้มครองข้อมูลส่วนบุคคล (BCR) ของเครือกิจการเดียวกันต้องได้รับการตรวจสอบและรับรองจากสำนักงาน (สคส.) ก่อน จึงจะส่งหรือโอนไปต่างประเทศตามนโยบายนั้นได้โดยได้รับยกเว้นตามมาตรา 28"
+      },
+      {
+        id: 92, cat: "Transfer", diff: "Basic", type: "single",
+        q: "ในกรณีที่ต้องการโอนข้อมูลไปยังประเทศปลายทางที่ยังไม่มีมาตรฐานการคุ้มครองที่เพียงพอ โดยอาศัยฐานความยินยอมตามมาตรา 28 (2) เงื่อนไขสำคัญที่กฎหมายบังคับให้ต้องแจ้งแก่เจ้าของข้อมูลก่อนขอความยินยอมคืออะไร",
+        opts: [
+          "แจ้งอัตราแลกเปลี่ยนสกุลเงินของประเทศปลายทางในวันที่ทำการโอนข้อมูล",
+          "แจ้งให้เจ้าของข้อมูลส่วนบุคคลทราบถึงมาตรฐานการคุ้มครองข้อมูลส่วนบุคคลที่ไม่เพียงพอของประเทศปลายทางหรือองค์การระหว่างประเทศที่รับข้อมูลแล้ว",
+          "แจ้งรายชื่อพนักงานไอทีทุกคนของประเทศปลายทางพร้อมประวัติการศึกษา",
+          "แจ้งให้เจ้าของข้อมูลเดินทางไปรับสำเนาข้อมูลด้วยตนเองที่สถานทูตของประเทศปลายทาง"
+        ],
+        ans: [1],
+        exp: "เฉลย ข ถูกต้องตรงตามมาตรา 28 (2) การขอความยินยอมเพื่อโอนไปประเทศที่มาตรฐานไม่เพียงพอ ต้องเป็น Informed Consent ที่แจ้งให้เจ้าของข้อมูลทราบถึงความเสี่ยงเรื่องมาตรฐานการคุ้มครองข้อมูลที่ไม่เพียงพอของประเทศปลายทางนั้นแล้ว"
+      },
+      {
+        id: 93, cat: "Transfer", diff: "Basic", type: "multi",
+        q: "ตามมาตรา 28 วรรคหนึ่ง ข้อยกเว้นที่ทำให้ Data Controller สามารถส่งหรือโอนข้อมูลส่วนบุคคลไปยังประเทศปลายทางที่ยังไม่ได้รับการรับรองมาตรฐานเพียงพอ (โดยไม่ต้องมี BCR หรือ SCCs) ได้แก่กรณีใดบ้าง (เลือกคำตอบที่ถูกทั้งหมด)",
+        opts: [
+          "เป็นการปฏิบัติตามกฎหมาย หรือเป็นการจำเป็นเพื่อการดำเนินภารกิจเพื่อประโยชน์สาธารณะที่สำคัญ",
+          "เป็นการจำเป็นเพื่อการปฏิบัติตามสัญญาซึ่งเจ้าของข้อมูลส่วนบุคคลเป็นคู่สัญญา หรือเพื่อใช้ในการดำเนินการตามคำขอของเจ้าของข้อมูลก่อนเข้าทำสัญญานั้น",
+          "เพื่อป้องกันหรือระงับอันตรายต่อชีวิต ร่างกาย หรือสุขภาพของเจ้าของข้อมูลหรือบุคคลอื่น เมื่อเจ้าของข้อมูลไม่สามารถให้ความยินยอมในขณะนั้นได้",
+          "เพื่อลดต้นทุนค่าเช่าเซิร์ฟเวอร์ประจำปีขององค์กรในการทำโฆษณาเชิงพาณิชย์ทั่วไปโดยไม่แจ้งเจ้าของข้อมูล"
+        ],
+        ans: [0, 1, 2],
+        exp: "เฉลย ก, ข, ค ถูกต้องตรงตามมาตรา 28 (1), (6), (3) และ (5) ส่วน ง ไม่ใช่ข้อยกเว้นตามมาตรา 28 (หากเป็นการใช้บริการคลาวด์ต่างประเทศทั่วไปโดยประเทศปลายทางยังไม่มี Adequacy ต้องจัดให้มีมาตรการคุ้มครองที่เหมาะสมตามมาตรา 29 วรรคสาม เช่น SCCs)"
+      },
+      {
+        id: 94, cat: "Transfer", diff: "Basic", type: "multi",
+        q: "ในกรณีที่ยังไม่มีคำวินิจฉัยเรื่องมาตรฐานเพียงพอตามมาตรา 28 และไม่ใช่กรณี BCR ในเครือธุรกิจ มาตรา 29 วรรคสามอนุญาตให้โอนข้อมูลไปต่างประเทศได้เมื่อจัดให้มี “มาตรการคุ้มครองที่เหมาะสม” (Appropriate Safeguards) ซึ่งต้องมีคุณลักษณะสำคัญตามกฎหมายอย่างไร (เลือกคำตอบที่ถูกทั้งหมด)",
+        opts: [
+          "สามารถบังคับตามสิทธิของเจ้าของข้อมูลส่วนบุคคลได้",
+          "มีมาตรการเยียวยาทางกฎหมายที่มีประสิทธิภาพตามหลักเกณฑ์และวิธีการที่คณะกรรมการประกาศกำหนด",
+          "เป็นไปตามรูปแบบเครื่องมือทางกฎหมาย เช่น ข้อสัญญามาตรฐาน (Standard Contractual Clauses: SCCs) หรือหลักเกณฑ์ที่ กคส. กำหนด",
+          "เป็นข้อตกลงปากเปล่าอย่างไม่เป็นทางการระหว่างเจ้าหน้าที่ผู้ส่งไฟล์กับผู้รับไฟล์ในต่างประเทศ"
+        ],
+        ans: [0, 1, 2],
+        exp: "เฉลย ก, ข, ค ถูกต้องตามมาตรา 29 วรรคสาม และประกาศ กคส. เกี่ยวกับการโอนข้อมูลไปต่างประเทศ (เช่น SCCs) ซึ่งหัวใจสำคัญคือต้องบังคับตามสิทธิของเจ้าของข้อมูลได้และมีมาตรการเยียวยาทางกฎหมายที่มีประสิทธิภาพ ส่วน ง ผิดเพราะข้อตกลงปากเปล่าไม่มีสภาพบังคับที่เพียงพอ"
+      },
+      {
+        id: 95, cat: "Transfer", diff: "Application", type: "single",
+        q: "มหาวิทยาลัยของรัฐในประเทศไทยต้องโอนข้อมูลชื่อ นามสกุล และผลการเรียนของนักศึกษาไทยที่สมัครโครงการแลกเปลี่ยน ไปให้มหาวิทยาลัยคู่สัญญาในประเทศที่ยังไม่ได้รับการประกาศว่ามีมาตรฐานเพียงพอ เพื่อดำเนินการรับเข้าศึกษาตามคำขอของนักศึกษาผู้นั้น มหาวิทยาลัยสามารถอ้างข้อยกเว้นใดตามมาตรา 28 ได้โดยตรง",
+        opts: [
+          "อ้างมาตรา 28 (3) เป็นการจำเป็นเพื่อการปฏิบัติตามสัญญาซึ่งเจ้าของข้อมูลเป็นคู่สัญญา หรือเพื่อใช้ดำเนินการตามคำขอของเจ้าของข้อมูลก่อนเข้าทำสัญญานั้น",
+          "อ้างมาตรา 29 วรรคหนึ่ง เรื่อง BCR เพราะมหาวิทยาลัยรัฐไทยและมหาวิทยาลัยต่างชาติถือเป็นบริษัทในเครือธุรกิจเดียวกัน",
+          "อ้างมาตรา 4 (1) เรื่องกิจกรรมส่วนตนในครอบครัวของอธิการบดีมหาวิทยาลัย",
+          "ไม่สามารถโอนข้อมูลไปได้โดยเด็ดขาดจนกว่าประเทศปลายทางจะแก้ไขรัฐธรรมนูญให้เหมือนประเทศไทย"
+        ],
+        ans: [0],
+        exp: "เฉลย ก ถูกต้อง เพราะนักศึกษาเป็นผู้ยื่นสมัครและร้องขอให้ส่งข้อมูลเพื่อเข้าทำสัญญา/รับสิทธิ์ศึกษาแลกเปลี่ยนในต่างประเทศด้วยตนเอง จึงเป็นการโอนที่จำเป็นตามสัญญาหรือคำขอก่อนเข้าทำสัญญาตามมาตรา 28 (3) ส่วน ข ผิดเพราะไม่ใช่องค์กรในเครือธุรกิจเดียวกัน"
+      },
+      {
+        id: 96, cat: "Transfer", diff: "Application", type: "single",
+        q: "หน่วยงานภาครัฐแห่งหนึ่งต้องการใช้บริการระบบ Cloud Storage ของผู้ให้บริการที่มีศูนย์ข้อมูล (Data Center) ตั้งอยู่ในต่างประเทศซึ่งยังไม่มีคำวินิจฉัยตามมาตรา 28 เพื่อสำรองฐานข้อมูลผู้รับบริการเป็นประจำทุกวัน แนวทางดำเนินการใดถูกต้องตามกฎหมายมากที่สุด",
+        opts: [
+          "ใช้ฐานข้อยกเว้นระงับอันตรายต่อชีวิตตามมาตรา 28 (5) สำหรับการสำรองข้อมูลประจำวันทุกรายการ",
+          "ตรวจสอบเงื่อนไขและจัดทำข้อสัญญามาตรฐาน (Standard Contractual Clauses: SCCs) หรือมาตรการคุ้มครองที่เหมาะสมตามมาตรา 29 วรรคสาม ควบคู่กับข้อตกลง DPA และมาตรการเข้ารหัสข้อมูล",
+          "ขอให้ผู้รับบริการทุกคนเซ็นสละสิทธิการคุ้มครองข้อมูลส่วนบุคคลทั้งหมดก่อนใช้บริการของหน่วยงาน",
+          "ส่งข้อมูลขึ้น Cloud ต่างประเทศได้ทันทีโดยไม่ต้องทำข้อตกลงใดๆ เพราะเป็นเพียงการฝากไฟล์สำรองไม่ได้เปิดอ่านที่ต่างประเทศ"
+        ],
+        ans: [1],
+        exp: "เฉลย ข ถูกต้องตามมาตรา 29 วรรคสาม และแนวปฏิบัติเกี่ยวกับการโอนข้อมูลข้ามพรหมแดน (รวมถึงสไลด์ Day 1 หน้า 12) การโอนข้อมูลไปเก็บบน Cloud ในต่างประเทศเป็นการส่งหรือโอนไปต่างประเทศเป็นประจำ จึงต้องใช้กลไก Appropriate Safeguards เช่น SCCs ควบคู่กับ DPA และมาตรการความปลอดภัย ไม่ใช่ใช้ข้อยกเว้นเฉพาะกิจตามมาตรา 28"
+      },
+      {
+        id: 97, cat: "Transfer", diff: "Application", type: "single",
+        q: "นักท่องเที่ยวชาวไทยประสบอุบัติเหตุรุนแรงขณะเดินทางในต่างประเทศและอยู่ในอาการโคม่าไม่สามารถสื่อสารได้ โรงพยาบาลในต่างประเทศจึงประสานมายังโรงพยาบาลรัฐในไทยเพื่อขอข้อมูลประวัติการผ่าตัดและโรคประจำตัวของผู้ป่วยรายนั้นอย่างเร่งด่วน โรงพยาบาลรัฐในไทยส่งข้อมูลไปให้ได้หรือไม่ตามมาตราใด",
+        opts: [
+          "ส่งไม่ได้เด็ดขาด เพราะข้อมูลสุขภาพเป็นข้อมูลอ่อนไหวและประเทศปลายทางยังไม่ได้ทำ BCR ร่วมกับโรงพยาบาลไทย",
+          "ส่งได้ โดยอาศัยข้อยกเว้นการโอนไปต่างประเทศตามมาตรา 28 (5) ประกอบมาตรา 26 (1) เพื่อป้องกันหรือระงับอันตรายต่อชีวิต ร่างกาย หรือสุขภาพเมื่อเจ้าของข้อมูลไม่สามารถให้ความยินยอมในขณะนั้นได้",
+          "ส่งได้เฉพาะเมื่อญาติผู้ป่วยนำคำสั่งศาลฎีกามายื่นแสดงต่อผู้อำนวยการโรงพยาบาลแล้วเท่านั้น",
+          "ส่งได้ตามฐานการตลาดแบบตรงระหว่างประเทศเพื่อส่งเสริมการท่องเที่ยวเชิงสุขภาพ"
+        ],
+        ans: [1],
+        exp: "เฉลย ข ถูกต้อง เพราะต้องพิจารณา 2 ชั้นควบคู่กัน ชั้นแรกคือฐานประมวลผล/เปิดเผยข้อมูลสุขภาพตามมาตรา 26 (1) และชั้นที่สองคือข้อยกเว้นการโอนไปต่างประเทศตามมาตรา 28 (5) ซึ่งทั้งสองมาตราต่างรองรับกรณีช่วยชีวิตเมื่อเจ้าของข้อมูลไม่อาจให้ความยินยอมได้"
+      },
+      {
+        id: 98, cat: "Transfer", diff: "Deep", type: "single",
+        q: "ในกรณีที่หน่วยงานเป็นผู้นำข้อมูลส่วนบุคคลอ่อนไหวตามมาตรา 26 (เช่น ข้อมูลสุขภาพหรือข้อมูลชีวภาพ) ส่งหรือโอนไปยังต่างประเทศโดยฝ่าฝืนมาตรา 28 และไม่เป็นไปตามมาตรา 29 พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 กำหนดเพดานโทษปรับทางปกครองสูงสุดและโทษอาญาไว้อย่างไร",
+        opts: [
+          "มีเฉพาะโทษตักเตือนเป็นหนังสือเท่านั้น ไม่มีโทษปรับทางปกครองและไม่มีโทษอาญา",
+          "โทษปรับทางปกครองไม่เกินห้าล้านบาท (มาตรา 84) และหากน่าจะทำให้ผู้อื่นเกิดความเสียหาย เสียชื่อเสียง หรือเพื่อแสวงหาประโยชน์ที่มิควรได้โดยชอบด้วยกฎหมาย อาจมีโทษอาญาจำคุกไม่เกิน 6 เดือนถึง 1 ปี หรือปรับไม่เกินห้าแสนถึงหนึ่งล้านบาท หรือทั้งจำทั้งปรับ (มาตรา 79)",
+          "โทษปรับทางปกครองไม่เกินห้าแสนบาทเท่ากันทุกประเภทข้อมูล และไม่มีโทษอาญาไม่ว่าจะมีเจตนาแสวงหาประโยชน์โดยมิชอบหรือไม่ก็ตาม",
+          "โทษจำคุกตลอดชีวิตสถานเดียวโดยไม่สามารถยอมความได้ในทุกกรณี"
+        ],
+        ans: [1],
+        exp: "เฉลย ข ถูกต้องตามบทกำหนดโทษในมาตรา 84 (ปรับทางปกครองสูงสุดไม่เกิน 5 ล้านบาทสำหรับการโอนข้อมูลมาตรา 26 ฝ่าฝืนมาตรา 28/29 ซึ่งสูงกว่าข้อมูลทั่วไปที่มาตรา 83 ปรับไม่เกิน 3 ล้านบาท) และมาตรา 79 วรรคหนึ่ง-วรรคสอง ซึ่งกำหนดโทษอาญาสำหรับการไม่ปฏิบัติตามมาตรา 28 อันเกี่ยวกับข้อมูลมาตรา 26"
+      },
+      {
+        id: 99, cat: "Transfer", diff: "Deep", type: "single",
+        q: "ข้อใดอธิบายหลักเกณฑ์ลำดับชั้น (Three-tier Mechanism) ของกลไกการโอนข้อมูลส่วนบุคคลไปยังต่างประเทศตามมาตรา 28 และมาตรา 29 ได้ถูกต้องตามโครงสร้างของกฎหมาย",
+        opts: [
+          "ต้องขอความยินยอมตามมาตรา 28 (2) เป็นลำดับแรกเสมอ หากขอไม่ได้จึงค่อยตรวจดูว่าประเทศปลายทางมีมาตรฐานเพียงพอหรือไม่",
+          "ลำดับแรกพิจารณาว่าประเทศปลายทางมีมาตรฐานเพียงพอ (Adequacy) ตามมาตรา 28 หรือไม่ หากยังไม่มี ให้พิจารณาจัดให้มีมาตรการคุ้มครองที่เหมาะสมตามมาตรา 29 (เช่น BCR หรือ SCCs) และในกรณีเฉพาะกิจอาจอาศัยข้อยกเว้นเฉพาะกรณี (Derogations) ตามมาตรา 28 (1)-(6)",
+          "ลำดับแรกให้ใช้ BCR กับทุกองค์กรภายนอกที่ไม่ใช่เครือเดียวกัน หากทำไม่ได้ให้ยกเลิกโครงการทั้งหมดทันที",
+          "กฎหมายให้เลือกใช้มาตรา 23 (Privacy Notice) เพียงอย่างเดียวแทนการปฏิบัติตามมาตรา 28 และ 29 ได้ทั้งหมด"
+        ],
+        ans: [1],
+        exp: "เฉลย ข ถูกต้องตามโครงสร้างสากลและมาตรา 28-29 ของไทย คือ 1) Adequacy Decision (ม.28 วรรคแรก) -> 2) Appropriate Safeguards เช่น BCR หรือ SCCs (ม.29) สำหรับการโอนที่เป็นระบบ/ต่อเนื่อง -> 3) Specific Derogations ข้อยกเว้นเฉพาะกรณี (ม.28 (1)-(6)) และทั้งหมดนี้ยังคงต้องมีฐานการประมวลผลที่ชอบด้วยกฎหมายและแจ้งใน Privacy Notice ตาม ม.23 ด้วย"
+      },
+      {
+        id: 100, cat: "Transfer", diff: "Deep", type: "multi",
+        q: "หากหน่วยงานภาครัฐทำโครงการวิจัยร่วมกับสถาบันวิจัยระดับนานาชาติและต้องส่งชุดข้อมูลส่วนบุคคลของผู้เข้าร่วมวิจัยไปวิเคราะห์ในต่างประเทศ หน่วยงานต้องตรวจสอบความสอดคล้องทางกฎหมายครบในประเด็นใดบ้างก่อนส่งออกข้อมูล (เลือกคำตอบที่ถูกทั้งหมด)",
+        opts: [
+          "ตรวจสอบว่าสามารถทำข้อมูลให้เป็นข้อมูลนิรนาม (Anonymization) ก่อนส่งได้หรือไม่ หากใช้ข้อมูลนิรนามได้เพียงพอก็ไม่จำเป็นต้องส่งข้อมูลส่วนบุคคลออกไป",
+          "หากจำเป็นต้องส่งข้อมูลส่วนบุคคล ต้องมีทั้งฐานการประมวลผล/เปิดเผยที่ชอบด้วยกฎหมาย (มาตรา 24 หรือ 26 และ 27) และมีกลไกรองรับการโอนไปต่างประเทศที่ชอบด้วยมาตรา 28 หรือมาตรา 29",
+          "ต้องแจ้งข้อมูลเกี่ยวกับการส่งหรือโอนข้อมูลไปยังต่างประเทศไว้ใน Privacy Notice ตามมาตรา 23 และบันทึกกิจกรรมรวมถึงมาตรการรักษาความปลอดภัยไว้ใน ROP ตามมาตรา 39",
+          "เมื่อส่งข้อมูลพ้นพรมแดนไทยไปแล้ว หน่วยงานรัฐผู้ส่งข้อมูลจะพ้นจากหน้าที่และความรับผิดตาม PDPA ทั้งหมดทันทีโดยไม่ต้องคำนึงถึงความปลอดภัยของปลายทาง"
+        ],
+        ans: [0, 1, 2],
+        exp: "เฉลย ก, ข, ค ถูกต้องตามหลักการบูรณาการทุกหมวดของ PDPA ตั้งแต่หลัก Data Minimization (ม.22), ฐานทางกฎหมาย (ม.24/26/27), การแจ้ง Privacy Notice (ม.23), การจัดทำ ROP และความปลอดภัย (ม.37/39) ไปจนถึงเงื่อนไขการโอนข้ามแดน (ม.28/29) ส่วน ง ผิดเพราะผู้ส่งข้อมูลในฐานะ Data Controller ในไทยยังคงต้องรับผิดชอบหากโอนข้อมูลออกไปโดยฝ่าฝืนมาตรา 28 หรือ 29"
+      }
+    ];
+
+    // State ของการทำข้อสอบ
+    const state = {
+      answers: {}, // { [questionId]: number[] }
+      submitted: false,
+      catFilter: "ALL",
+      diffFilter: "ALL",
+      typeFilter: "ALL"
+    };
+
+    const questionListEl = document.getElementById("questionList");
+    const qJumpGridEl = document.getElementById("qJumpGrid");
+    const progressTextEl = document.getElementById("progressText");
+    const progressFillEl = document.getElementById("progressFill");
+    const scoreBannerEl = document.getElementById("scoreBanner");
+    const scoreBigTextEl = document.getElementById("scoreBigText");
+    const scoreSubTextEl = document.getElementById("scoreSubText");
+    const answerKeyLockedEl = document.getElementById("answerKeyLocked");
+    const answerKeyListEl = document.getElementById("answerKeyList");
+
+    const catFilterEl = document.getElementById("catFilter");
+    const diffFilterEl = document.getElementById("diffFilter");
+    const typeFilterEl = document.getElementById("typeFilter");
+
+    // ตรวจสอบว่าข้อนั้นได้คะแนนหรือไม่ (Multiple answer ต้องเลือกถูกครบทุกข้อและห้ามมีข้อผิด)
+    function isQuestionCorrect(q) {
+      const picked = state.answers[q.id] || [];
+      if (picked.length !== q.ans.length) return false;
+      const sortedPicked = [...picked].sort((a, b) => a - b);
+      const sortedAns = [...q.ans].sort((a, b) => a - b);
+      return sortedPicked.every((val, idx) => val === sortedAns[idx]);
+    }
+
+    function getAnsweredCount() {
+      return Object.values(state.answers).filter(arr => Array.isArray(arr) && arr.length > 0).length;
+    }
+
+    function updateProgressUI() {
+      const count = getAnsweredCount();
+      progressTextEl.textContent = `ตอบแล้ว ${count} / ${QUESTIONS.length} ข้อ`;
+      progressFillEl.style.width = `${(count / QUESTIONS.length) * 100}%`;
+    }
+
+    function renderJumpGrid() {
+      qJumpGridEl.innerHTML = "";
+      QUESTIONS.forEach(q => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "q-jump";
+        btn.textContent = q.id;
+        btn.title = `ข้อที่ ${q.id} (${q.cat} - ${q.diff})`;
+
+        const hasAns = state.answers[q.id] && state.answers[q.id].length > 0;
+        if (state.submitted) {
+          btn.classList.add(isQuestionCorrect(q) ? "graded-correct" : "graded-wrong");
+        } else if (hasAns) {
+          btn.classList.add("answered");
+        }
+
+        btn.addEventListener("click", () => {
+          // หากตัวกรองซ่อนข้อนี้อยู่ ให้รีเซ็ตตัวกรองก่อนเพื่อเลื่อนไปหาได้ทันที
+          const card = document.getElementById(`q-card-${q.id}`);
+          if (!card) {
+            state.catFilter = "ALL";
+            state.diffFilter = "ALL";
+            state.typeFilter = "ALL";
+            catFilterEl.value = "ALL";
+            diffFilterEl.value = "ALL";
+            typeFilterEl.value = "ALL";
+            renderQuestions();
+          }
+          const target = document.getElementById(`q-card-${q.id}`);
+          if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+
+        qJumpGridEl.appendChild(btn);
+      });
+    }
+
+    function handleSelectOption(q, optIdx) {
+      if (state.submitted) return;
+
+      const current = state.answers[q.id] ? [...state.answers[q.id]] : [];
+      if (q.type === "single") {
+        state.answers[q.id] = [optIdx];
+      } else {
+        const pos = current.indexOf(optIdx);
+        if (pos >= 0) {
+          current.splice(pos, 1);
+        } else {
+          current.push(optIdx);
+        }
+        state.answers[q.id] = current;
+      }
+
+      updateProgressUI();
+      updateSingleCardUI(q);
+      renderJumpGrid();
+    }
+
+    function updateSingleCardUI(q) {
+      const card = document.getElementById(`q-card-${q.id}`);
+      if (!card) return;
+      const picked = state.answers[q.id] || [];
+      const optBtns = card.querySelectorAll(".option-btn");
+      optBtns.forEach((btn, idx) => {
+        btn.classList.toggle("selected", picked.includes(idx));
+      });
+    }
+
+    function renderQuestions() {
+      questionListEl.innerHTML = "";
+
+      const filtered = QUESTIONS.filter(q => {
+        if (state.catFilter !== "ALL" && q.cat !== state.catFilter) return false;
+        if (state.diffFilter !== "ALL" && q.diff !== state.diffFilter) return false;
+        if (state.typeFilter !== "ALL" && q.type !== state.typeFilter) return false;
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        const empty = document.createElement("div");
+        empty.className = "empty-state";
+        empty.textContent = "ไม่พบข้อสอบที่ตรงกับเงื่อนไขตัวกรองที่เลือก กรุณาเปลี่ยนตัวกรองทางด้านซ้าย";
+        questionListEl.appendChild(empty);
+        return;
+      }
+
+      filtered.forEach(q => {
+        const card = document.createElement("article");
+        card.className = "q-card";
+        card.id = `q-card-${q.id}`;
+
+        const picked = state.answers[q.id] || [];
+        const correct = isQuestionCorrect(q);
+
+        if (state.submitted) {
+          card.classList.add(correct ? "graded-correct" : "graded-wrong");
+        }
+
+        // Meta Header: 1. หมายเลขข้อและหมวด 2. ระดับความยาก 3. ประเภทข้อสอบ
+        const meta = document.createElement("div");
+        meta.className = "q-meta";
+
+        const numSpan = document.createElement("span");
+        numSpan.className = "q-num";
+        numSpan.textContent = `ข้อที่ ${q.id}`;
+        meta.appendChild(numSpan);
+
+        const catBadge = document.createElement("span");
+        catBadge.className = "badge badge-cat";
+        catBadge.textContent = `หมวด ${q.cat}`;
+        catBadge.title = CATEGORY_LABELS[q.cat];
+        meta.appendChild(catBadge);
+
+        const diffBadge = document.createElement("span");
+        diffBadge.className = `badge badge-diff-${q.diff}`;
+        diffBadge.textContent = `ความยาก: ${q.diff}`;
+        meta.appendChild(diffBadge);
+
+        const typeBadge = document.createElement("span");
+        typeBadge.className = `badge ${q.type === "single" ? "badge-type-single" : "badge-type-multi"}`;
+        typeBadge.textContent = q.type === "single" ? "คำตอบเดียว" : "หลายคำตอบ";
+        meta.appendChild(typeBadge);
+
+        if (state.submitted) {
+          const resBadge = document.createElement("span");
+          resBadge.className = `badge badge-result ${correct ? "ok" : "fail"}`;
+          resBadge.textContent = correct ? "ได้ 1 คะแนน (ถูกต้อง)" : (picked.length === 0 ? "0 คะแนน (ไม่ได้ตอบ)" : "0 คะแนน (ไม่ถูกต้อง)");
+          meta.appendChild(resBadge);
+        }
+
+        card.appendChild(meta);
+
+        // 4. โจทย์
+        const stem = document.createElement("p");
+        stem.className = "q-stem";
+        stem.textContent = q.q;
+        card.appendChild(stem);
+
+        // ตัวเลือก
+        const optsWrap = document.createElement("div");
+        optsWrap.className = "options-list";
+
+        q.opts.forEach((optText, idx) => {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "option-btn";
+          const isPicked = picked.includes(idx);
+          const isAns = q.ans.includes(idx);
+
+          if (!state.submitted && isPicked) {
+            btn.classList.add("selected");
+          }
+
+          if (state.submitted) {
+            btn.disabled = true;
+            if (isAns) {
+              btn.classList.add("reveal-correct");
+            } else if (isPicked && !isAns) {
+              btn.classList.add("reveal-wrong-pick");
+            }
+          }
+
+          const ind = document.createElement("span");
+          ind.className = `opt-indicator ${q.type === "single" ? "radio" : "checkbox"}`;
+          ind.textContent = CHOICE_LETTERS[idx];
+
+          const txt = document.createElement("span");
+          const keySpan = document.createElement("span");
+          keySpan.className = "opt-label-key";
+          keySpan.textContent = `${CHOICE_LETTERS[idx]}.`;
+          txt.appendChild(keySpan);
+          txt.appendChild(document.createTextNode(optText));
+
+          btn.appendChild(ind);
+          btn.appendChild(txt);
+
+          btn.addEventListener("click", () => handleSelectOption(q, idx));
+          optsWrap.appendChild(btn);
+        });
+
+        card.appendChild(optsWrap);
+        questionListEl.appendChild(card);
+      });
+    }
+
+    function renderAnswerKeySection() {
+      if (!state.submitted) {
+        answerKeyLockedEl.style.display = "block";
+        answerKeyListEl.classList.remove("visible");
+        answerKeyListEl.innerHTML = "";
+        return;
+      }
+
+      answerKeyLockedEl.style.display = "none";
+      answerKeyListEl.classList.add("visible");
+      answerKeyListEl.innerHTML = "";
+
+      QUESTIONS.forEach(q => {
+        const item = document.createElement("div");
+        item.className = "ak-item";
+
+        const correctLetters = q.ans.map(i => CHOICE_LETTERS[i]).join(", ");
+        const picked = state.answers[q.id] || [];
+        const pickedLetters = picked.length > 0 ? picked.slice().sort((a, b) => a - b).map(i => CHOICE_LETTERS[i]).join(", ") : "ไม่ได้เลือกคำตอบ";
+        const ok = isQuestionCorrect(q);
+
+        const head = document.createElement("div");
+        head.className = "ak-item-head";
+        head.innerHTML = `
+          <span class="q-num">ข้อ ${q.id}</span>
+          <span class="badge badge-cat">${q.cat}</span>
+          <span class="badge badge-diff-${q.diff}">${q.diff}</span>
+          <span class="badge ${q.type === "single" ? "badge-type-single" : "badge-type-multi"}">${q.type === "single" ? "คำตอบเดียว" : "หลายคำตอบ"}</span>
+          <span class="ak-correct-ans">เฉลย: ${correctLetters}</span>
+          <span class="ak-user-ans">(คำตอบของคุณ: ${pickedLetters} — ${ok ? "ได้ 1 คะแนน" : "0 คะแนน"})</span>
+        `;
+
+        const exp = document.createElement("p");
+        exp.className = "ak-exp";
+        exp.textContent = q.exp;
+
+        item.appendChild(head);
+        item.appendChild(exp);
+        answerKeyListEl.appendChild(item);
+      });
+    }
+
+    function gradeExam() {
+      state.submitted = true;
+      let totalScore = 0;
+      QUESTIONS.forEach(q => {
+        if (isQuestionCorrect(q)) totalScore += 1;
+      });
+
+      scoreBannerEl.classList.add("visible");
+      scoreBigTextEl.textContent = `คะแนนรวม ${totalScore} / ${QUESTIONS.length} คะแนน (${totalScore}%)`;
+      const answered = getAnsweredCount();
+      scoreSubTextEl.textContent = `ตอบไปทั้งหมด ${answered} ข้อ | ตอบถูกครบถ้วน ${totalScore} ข้อ | ตอบผิดหรือไม่ครบ ${QUESTIONS.length - totalScore} ข้อ`;
+
+      renderQuestions();
+      renderJumpGrid();
+      renderAnswerKeySection();
+      scoreBannerEl.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+
+    // Modal Helper
+    const confirmModalEl = document.getElementById("confirmModal");
+    const modalTitleEl = document.getElementById("modalTitle");
+    const modalMessageEl = document.getElementById("modalMessage");
+    const modalCancelBtn = document.getElementById("modalCancelBtn");
+    const modalConfirmBtn = document.getElementById("modalConfirmBtn");
+    let pendingConfirmAction = null;
+
+    function openConfirmModal(title, message, onConfirm) {
+      modalTitleEl.textContent = title;
+      modalMessageEl.textContent = message;
+      pendingConfirmAction = onConfirm;
+      confirmModalEl.classList.add("open");
+    }
+
+    function closeConfirmModal() {
+      confirmModalEl.classList.remove("open");
+      pendingConfirmAction = null;
+    }
+
+    modalCancelBtn.addEventListener("click", closeConfirmModal);
+    modalConfirmBtn.addEventListener("click", () => {
+      const fn = pendingConfirmAction;
+      closeConfirmModal();
+      if (typeof fn === "function") fn();
+    });
+    confirmModalEl.addEventListener("click", (e) => {
+      if (e.target === confirmModalEl) closeConfirmModal();
+    });
+
+    function requestSubmit() {
+      if (state.submitted) {
+        document.getElementById("answerKeySection").scrollIntoView({ behavior: "smooth" });
+        return;
+      }
+      const answered = getAnsweredCount();
+      const remaining = QUESTIONS.length - answered;
+      const msg = remaining > 0
+        ? `คุณตอบข้อสอบไปแล้ว ${answered} ข้อ ยังไม่ได้ตอบอีก ${remaining} ข้อ ต้องการส่งคำตอบเพื่อตรวจคะแนนและเปิดดูส่วนเฉลยท้ายข้อสอบเลยหรือไม่?`
+        : `คุณตอบครบทั้ง 100 ข้อเรียบร้อยแล้ว ยืนยันการส่งคำตอบเพื่อตรวจคะแนนและดูเฉลยหรือไม่?`;
+      openConfirmModal("ยืนยันการส่งคำตอบ", msg, gradeExam);
+    }
+
+    document.getElementById("submitBtn").addEventListener("click", requestSubmit);
+    document.getElementById("unlockKeyBtn").addEventListener("click", requestSubmit);
+
+    document.getElementById("resetBtn").addEventListener("click", () => {
+      openConfirmModal(
+        "เริ่มทำข้อสอบใหม่",
+        "ต้องการล้างคำตอบที่เลือกไว้ทั้งหมดและซ่อนส่วนเฉลยเพื่อเริ่มทำข้อสอบใหม่ตั้งแต่ต้นหรือไม่?",
+        () => {
+          state.answers = {};
+          state.submitted = false;
+          scoreBannerEl.classList.remove("visible");
+          updateProgressUI();
+          renderQuestions();
+          renderJumpGrid();
+          renderAnswerKeySection();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+      );
+    });
+
+    catFilterEl.addEventListener("change", (e) => {
+      state.catFilter = e.target.value;
+      renderQuestions();
+    });
+
+    diffFilterEl.addEventListener("change", (e) => {
+      state.diffFilter = e.target.value;
+      renderQuestions();
+    });
+
+    typeFilterEl.addEventListener("change", (e) => {
+      state.typeFilter = e.target.value;
+      renderQuestions();
+    });
+
+    // Initial Render
+    updateProgressUI();
+    renderJumpGrid();
+    renderQuestions();
+    renderAnswerKeySection();
+  </script>
+</body>
+</html>
